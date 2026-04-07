@@ -21,7 +21,6 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.image import AsyncImage
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
-from kivy.uix.scrollview import ScrollView
 from kivy.uix.slider import Slider
 
 from calculators import calculate_profile_defense_plan, calculate_upgrade_plan
@@ -43,6 +42,7 @@ if platform not in {"android", "ios"}:
 KV_FILE = "empirecalc_modern.kv"
 PROFILE_FILE_NAME = "profiles.json"
 MAIN_CASTLE_IMAGE_FILE = Path(r"C:\Users\Dima\Desktop\castle.jpg")
+ACCOUNT_SELECTOR_PLACEHOLDER = "Выбери локальный аккаунт"
 ACCOUNT_CASTLE_NAMES = (
     "Основной замок",
     "Аванпост 1",
@@ -63,6 +63,7 @@ ACCOUNT_AVATAR_LABELS = {
     "falcon": "Сокол",
     "wolf": "Волк",
 }
+WALL_POPUP_QUICK_PICK_LIMIT = 3
 DEFENSE_TOOL_ZONE_VALUES = ["all", "left", "center", "right", "courtyard"]
 DEFENSE_TOOL_ZONE_LABELS = {
     "all": "Все участки",
@@ -75,22 +76,32 @@ GOVERNOR_SKILL_SPECS = {
     "flank_bonus": {
         "raw_prefixes": ("defenseboostflank",),
         "label": "Фланги в обороне",
+        "input_id": "skill_flank_bonus_level",
+        "label_id": "skill_flank_bonus_label",
     },
     "center_bonus": {
         "raw_prefixes": ("defenseboostfront",),
         "label": "Центр в обороне",
+        "input_id": "skill_center_bonus_level",
+        "label_id": "skill_center_bonus_label",
     },
     "courtyard_bonus": {
         "raw_prefixes": ("defenseboostyard",),
         "label": "Двор в обороне",
+        "input_id": "skill_courtyard_bonus_level",
+        "label_id": "skill_courtyard_bonus_label",
     },
     "wall_limit_percent_bonus": {
         "raw_prefixes": ("unitamountwall",),
         "label": "Лимит стены, %",
+        "input_id": "skill_wall_limit_percent_bonus_level",
+        "label_id": "skill_wall_limit_percent_bonus_label",
     },
     "courtyard_size_bonus": {
         "raw_prefixes": ("courtyardsize",),
         "label": "Размер двора",
+        "input_id": "skill_courtyard_size_bonus_level",
+        "label_id": "skill_courtyard_size_bonus_label",
     },
 }
 
@@ -103,6 +114,16 @@ def default_governor() -> dict[str, str]:
     return {
         "general_id": "",
         "general_name": "",
+        "general_level": "",
+        "general_star_level": "",
+        "defense_ability_slot_1_group_id": "",
+        "defense_ability_slot_1_level": "",
+        "defense_ability_slot_2_group_id": "",
+        "defense_ability_slot_2_level": "",
+        "defense_ability_slot_3_group_id": "",
+        "defense_ability_slot_3_level": "",
+        "defense_ability_slot_4_group_id": "",
+        "defense_ability_slot_4_level": "",
         "melee_bonus": "",
         "ranged_bonus": "",
         "flank_bonus": "",
@@ -141,6 +162,7 @@ def default_castle_record(name: str) -> dict[str, Any]:
     return {
         "name": name,
         "display_name": name,
+        "kingdom": "",
         "wall_units_base": "",
         "defensive_resources_note": "",
         "governor": default_governor(),
@@ -167,13 +189,27 @@ class WallUnitRow(ButtonBehavior, BoxLayout):
     image_source = StringProperty("")
 
 
+class GovernorSkillTile(ButtonBehavior, BoxLayout):
+    selected = BooleanProperty(False)
+    locked = BooleanProperty(False)
+    interactive = BooleanProperty(False)
+    skill_type = StringProperty("unknown")
+    title_text = StringProperty("")
+    badge_text = StringProperty("")
+    footer_text = StringProperty("")
+    image_source = StringProperty("")
+
+
 class EmpireCalcApp(App):
     main_tab = StringProperty("profile")
+    account_values = ListProperty([])
     castle_values = ListProperty([])
     unit_values = ListProperty([])
     attack_unit_values = ListProperty([])
     defense_tool_values = ListProperty([])
     governor_general_values = ListProperty([GOVERNOR_GENERAL_NONE])
+    governor_general_level_values = ListProperty([])
+    governor_general_star_values = ListProperty([])
     wave_values = ListProperty(["1"])
     attack_wave_count = StringProperty("1")
     profile_output = StringProperty("Создай аккаунт и выбери замок.")
@@ -187,6 +223,18 @@ class EmpireCalcApp(App):
     attack_unit_picker_image_source = StringProperty("")
     upgrade_output = StringProperty("Нет расчёта.")
     defense_output = StringProperty("Нет расчёта.")
+    governor_skill_tree_points = StringProperty("Выбери генерала, чтобы открыть древо навыков.")
+    governor_skill_detail_title = StringProperty("Навыки наместника")
+    governor_skill_detail_subtitle = StringProperty("Выбери узел в древе навыков")
+    governor_skill_detail_description = StringProperty("Здесь появится описание выбранного навыка и доступный уровень прокачки.")
+    governor_skill_detail_level_text = StringProperty("Уровень навыка: -")
+    governor_skill_detail_icon_source = StringProperty("")
+    governor_skill_detail_editable = BooleanProperty(False)
+    governor_skill_detail_can_increase = BooleanProperty(False)
+    governor_skill_detail_can_decrease = BooleanProperty(False)
+    governor_skill_detail_slot_action_visible = BooleanProperty(False)
+    governor_skill_detail_slot_action_enabled = BooleanProperty(False)
+    governor_skill_detail_slot_action_text = StringProperty("Выбрать для слота")
     active_account_name = StringProperty("")
     active_account_avatar_source = StringProperty("")
     active_account_avatar_label = StringProperty("Локальный аккаунт")
@@ -195,6 +243,8 @@ class EmpireCalcApp(App):
     active_castle_card_subtitle = StringProperty("Замок / аванпост / мир")
     active_castle_card_summary = StringProperty("Открой аккаунт, затем выбери карточку профиля ниже.")
     active_castle_card_image_source = StringProperty("")
+    current_profile_kingdom_text = StringProperty("")
+    current_profile_kingdom_visible = BooleanProperty(False)
     wall_scene_caption = StringProperty("Стена замка: фронт")
     wall_scene_totals = StringProperty("На стене 0 солдат")
     wall_left_summary = StringProperty("Пусто")
@@ -222,6 +272,12 @@ class EmpireCalcApp(App):
         self.attack_unit_index: dict[str, dict[str, Any]] = {}
         self.attack_unit_display_index: dict[str, dict[str, Any]] = {}
         self._suspend_castle_events = False
+        self._suspend_governor_general_progress_events = False
+        self._suspend_governor_skill_events = False
+        self._governor_tree_selected_group_id = ""
+        self._governor_tree_nodes_by_group: dict[str, dict[str, Any]] = {}
+        self._governor_selected_defense_slots: dict[int, str] = {}
+        self._governor_selected_defense_slot_levels: dict[int, int] = {}
         return Builder.load_file(KV_FILE)
 
     def on_start(self):
@@ -230,6 +286,7 @@ class EmpireCalcApp(App):
         self.load_general_catalog()
         self.update_wave_values(self.attack_wave_count)
         self.load_profile_store()
+        self.refresh_account_values()
         active_account = str(self.profile_store.get("active_account") or "").strip()
         if active_account and active_account in self.profile_store.get("accounts", {}):
             self.activate_account(active_account)
@@ -271,11 +328,12 @@ class EmpireCalcApp(App):
             self.update_defense_tool_preview(self.defense_tool_values[0])
         else:
             self.update_defense_tool_preview("")
-        self.profile_output = "Открой аккаунт, затем выбери или добавь профиль замка."
+        self.profile_output = "Выбери локальный аккаунт из списка или создай новый, затем выбери или добавь профиль замка."
         self.defense_output = "Заполни профиль, атаку и нажми 'Проверить оборону'."
         self.upgrade_output = "Заполни уровни и нажми 'Посчитать улучшение'."
         self.refresh_active_account_state()
         self.refresh_governor_general_summary()
+        self.refresh_governor_skill_tree()
         self.refresh_wall_scene()
 
     def profiles_path(self) -> Path:
@@ -344,6 +402,9 @@ class EmpireCalcApp(App):
                         visible_units = getattr(self, "_wall_popup_visible_units", [])
                         if any(str(item.get("image_url") or "").strip() == str(url or "").strip() for item in visible_units):
                             self.refresh_wall_popup_ui()
+                    general = self.governor_general_record()
+                    if general and any(str(item.get("icon_url") or "").strip() == str(url or "").strip() for item in general.get("skills") or []):
+                        self.refresh_governor_skill_tree()
             finally:
                 self._image_downloads.discard(key)
 
@@ -376,6 +437,27 @@ class EmpireCalcApp(App):
     def save_profile_store(self):
         path = self.profiles_path()
         path.write_text(json.dumps(self.profile_store, ensure_ascii=False, indent=2), encoding="utf-8")
+        self.refresh_account_values()
+
+    def refresh_account_values(self):
+        accounts = self.profile_store.get("accounts", {}) if isinstance(self.profile_store, dict) else {}
+        names = sorted(
+            [str(name).strip() for name in accounts.keys() if str(name).strip()],
+            key=str.casefold,
+        )
+        self.account_values = names
+        spinner = getattr(self, "_account_manage_spinner", None)
+        if spinner is None:
+            return
+        spinner.values = names
+        active_name = str(self.active_account_name or "").strip()
+        if active_name and active_name in names:
+            spinner.text = active_name
+        elif names:
+            current_text = str(spinner.text or "").strip()
+            spinner.text = current_text if current_text in names else names[0]
+        else:
+            spinner.text = ACCOUNT_SELECTOR_PLACEHOLDER
 
     def safe_float(self, value: Any, default: float = 0.0) -> float:
         try:
@@ -423,6 +505,107 @@ class EmpireCalcApp(App):
         self.general_index_by_id = {str(item.get("general_id") or "").strip(): item for item in self.general_catalog if str(item.get("general_id") or "").strip()}
         self.governor_general_values = [GOVERNOR_GENERAL_NONE] + [str(item.get("name") or "") for item in self.general_catalog if str(item.get("name") or "").strip()]
 
+    def governor_general_max_level(self, general: dict[str, Any] | None) -> int:
+        if not general:
+            return 0
+        return max(0, self.safe_int(general.get("max_level"), 0))
+
+    def governor_general_max_star_level(self, general: dict[str, Any] | None) -> int:
+        if not general:
+            return 0
+        return max(0, self.safe_int(general.get("max_star_level"), 0))
+
+    def governor_general_max_tier(self, general: dict[str, Any] | None) -> int:
+        if not general:
+            return 0
+        tiers: list[int] = []
+        tiers.extend(self.safe_int(item.get("tier"), 0) for item in general.get("skills") or [] if isinstance(item, dict))
+        tiers.extend(self.safe_int(item.get("tier"), 0) for item in general.get("abilities") or [] if isinstance(item, dict))
+        return max([tier for tier in tiers if tier > 0], default=0)
+
+    def governor_tier_unlock_step(self, general: dict[str, Any] | None) -> int:
+        max_level = self.governor_general_max_level(general)
+        max_tier = self.governor_general_max_tier(general)
+        if max_level <= 0 or max_tier <= 0:
+            return 1
+        return max(1, (max_level + max_tier - 1) // max_tier)
+
+    def governor_tier_unlock_level(self, tier: int, general: dict[str, Any] | None) -> int:
+        if tier <= 1:
+            return 1
+        step = self.governor_tier_unlock_step(general)
+        return 1 + (max(1, tier) - 1) * step
+
+    def governor_unlocked_tier(self, governor: dict[str, Any] | None = None) -> int:
+        source = governor or self.governor_profile_from_form()
+        general = self.governor_general_record(source)
+        max_tier = self.governor_general_max_tier(general)
+        if max_tier <= 0:
+            return 0
+        level = self.governor_selected_general_level(source)
+        step = self.governor_tier_unlock_step(general)
+        unlocked = 1 + max(0, level - 1) // step
+        return min(max_tier, max(1, unlocked))
+
+    def governor_selected_general_level(self, governor: dict[str, Any] | None = None) -> int:
+        source = governor or self.governor_profile_from_form()
+        general = self.governor_general_record(source)
+        max_level = self.governor_general_max_level(general)
+        if max_level <= 0:
+            return 0
+        selected = self.safe_int(source.get("general_level"), 1)
+        return min(max(selected, 1), max_level)
+
+    def governor_selected_general_star_level(self, governor: dict[str, Any] | None = None) -> int:
+        source = governor or self.governor_profile_from_form()
+        general = self.governor_general_record(source)
+        max_level = self.governor_general_max_star_level(general)
+        if max_level <= 0:
+            return 0
+        selected = self.safe_int(source.get("general_star_level"), 0)
+        return min(max(selected, 0), max_level)
+
+    def governor_general_progress_totals(self, general: dict[str, Any] | None, target_level: int) -> tuple[int, int]:
+        if not general or target_level <= 0:
+            return 0, 0
+        costs = ((general.get("costs") or {}).get("levels") or []) if isinstance(general, dict) else []
+        total_shards = 0
+        total_xp = 0
+        for row in costs:
+            level = self.safe_int((row or {}).get("level"), 0)
+            if level <= 0 or level > target_level:
+                continue
+            total_shards += self.safe_int((row or {}).get("shards"), 0)
+            total_xp += self.safe_int((row or {}).get("xp"), 0)
+        return total_shards, total_xp
+
+    def refresh_governor_general_progress_controls(self, governor: dict[str, Any] | None = None):
+        general = self.governor_general_record(governor)
+        level_spinner = self.root.ids.governor_general_level if self.root and "governor_general_level" in self.root.ids else None
+        star_spinner = self.root.ids.governor_general_star_level if self.root and "governor_general_star_level" in self.root.ids else None
+
+        max_level = self.governor_general_max_level(general)
+        max_star_level = self.governor_general_max_star_level(general)
+        self.governor_general_level_values = [str(level) for level in range(1, max_level + 1)] if max_level > 0 else []
+        self.governor_general_star_values = [str(level) for level in range(0, max_star_level + 1)] if max_star_level > 0 else ["0"]
+
+        self._suspend_governor_general_progress_events = True
+        if level_spinner is not None:
+            level_spinner.disabled = max_level <= 0
+            level_spinner.text = str(self.governor_selected_general_level(governor)) if max_level > 0 else "Уровень"
+        if star_spinner is not None:
+            star_spinner.disabled = max_star_level <= 0
+            star_spinner.text = str(self.governor_selected_general_star_level(governor)) if max_star_level > 0 else "Звёзды"
+        self._suspend_governor_general_progress_events = False
+
+    def on_governor_general_progress_changed(self, *_args):
+        if getattr(self, "_suspend_governor_general_progress_events", False):
+            return
+        self.refresh_governor_skill_controls()
+        self.refresh_governor_skill_tree()
+        self.refresh_governor_general_summary()
+        self.refresh_wall_scene()
+
     def governor_general_record(self, governor: dict[str, Any] | None = None) -> dict[str, Any] | None:
         source = governor or self.governor_profile_from_form()
         general_name = str(source.get("general_name") or "").strip()
@@ -460,12 +643,535 @@ class EmpireCalcApp(App):
             return 0.0
         return self.safe_float(effects.split("&", 1)[1], 0.0)
 
+    def governor_available_skill_points(self, governor: dict[str, Any] | None = None) -> int:
+        return max(0, self.governor_selected_general_level(governor))
+
+    def governor_skill_point_cost(self, general: dict[str, Any] | None, field_name: str) -> int:
+        skill = self.governor_skill_entry(general, field_name)
+        if not skill:
+            return 0
+        return max(1, self.safe_int(skill.get("cost_skill_points"), 1))
+
+    def governor_skill_tier(self, general: dict[str, Any] | None, field_name: str) -> int:
+        skill = self.governor_skill_entry(general, field_name)
+        if not skill:
+            return 0
+        return max(0, self.safe_int(skill.get("tier"), 0))
+
+    def governor_skill_field_name(self, skill: dict[str, Any] | None) -> str | None:
+        if not skill:
+            return None
+        raw_name = str(skill.get("raw_name") or skill.get("name") or "").strip().lower()
+        for field_name, spec in GOVERNOR_SKILL_SPECS.items():
+            prefixes = tuple(str(item).lower() for item in spec.get("raw_prefixes") or ())
+            if any(raw_name.startswith(prefix) for prefix in prefixes):
+                return field_name
+        return None
+
+    def governor_skill_allowed_max_level(self, field_name: str, governor: dict[str, Any] | None = None) -> int:
+        source = governor or self.governor_profile_from_form()
+        general = self.governor_general_record(source)
+        max_level = self.governor_skill_max_level(general, field_name)
+        if max_level <= 0:
+            return 0
+        skill_tier = self.governor_skill_tier(general, field_name)
+        if skill_tier > self.governor_unlocked_tier(source):
+            return 0
+        used_other_points = self.governor_selected_skill_points_used(source, excluding_field=field_name)
+        point_cost = self.governor_skill_point_cost(general, field_name)
+        remaining_points = max(0, self.governor_available_skill_points(source) - used_other_points)
+        allowed_max_by_points = remaining_points // point_cost if point_cost > 0 else 0
+        return min(max_level, allowed_max_by_points)
+
+    def governor_skill_type_label(self, skill: dict[str, Any] | None, field_name: str | None = None) -> str:
+        if field_name:
+            return "Защитный навык"
+        if not skill:
+            return "Навык"
+        if bool(skill.get("is_ability_like")):
+            return "Особая способность"
+        skill_type = str(skill.get("skill_type") or "unknown").strip().lower()
+        if skill_type == "attack":
+            return "Атакующий навык"
+        if skill_type == "defense":
+            return "Защитный навык"
+        return "Служебный навык"
+
+    def governor_skill_footer_text(self, skill: dict[str, Any], field_name: str | None, source: dict[str, Any]) -> str:
+        if field_name:
+            selected_level = self.governor_skill_selected_level(field_name, source)
+            max_level = self.governor_skill_max_level(self.governor_general_record(source), field_name)
+            return f"{selected_level}/{max_level}"
+        if bool(skill.get("is_ability_like")):
+            return "особ."
+        return self.governor_skill_type_label(skill, field_name)
+
+    def governor_skill_icon_source(self, skill: dict[str, Any], eager: bool = True) -> str:
+        url = str(skill.get("icon_url") or "").strip()
+        if not url:
+            return ""
+        target = self.cached_image_path(url)
+        if target and target.exists():
+            return str(target)
+        if eager:
+            return self.resolve_image_source(url)
+        return ""
+
+    def governor_defense_slot_key(self, slot_index: int) -> str:
+        return f"defense_ability_slot_{int(slot_index)}_group_id"
+
+    def governor_defense_slot_level_key(self, slot_index: int) -> str:
+        return f"defense_ability_slot_{int(slot_index)}_level"
+
+    def governor_selected_defense_slot_group(self, slot_index: int, governor: dict[str, Any] | None = None) -> str:
+        source = governor or self.governor_profile_from_form()
+        key = self.governor_defense_slot_key(slot_index)
+        value = str(source.get(key) or self._governor_selected_defense_slots.get(int(slot_index), "") or "").strip()
+        return value
+
+    def governor_selected_defense_slot_level(self, slot_index: int, governor: dict[str, Any] | None = None) -> int:
+        source = governor or {}
+        key = self.governor_defense_slot_level_key(slot_index)
+        stored_level = self.safe_int(source.get(key), self._governor_selected_defense_slot_levels.get(int(slot_index), 0))
+        return max(0, stored_level)
+
+    def governor_sync_slot_selection_state(self, governor: dict[str, Any] | None = None):
+        source = governor or {}
+        self._governor_selected_defense_slots = {
+            slot_index: self.governor_selected_defense_slot_group(slot_index, source)
+            for slot_index in range(1, 5)
+            if self.governor_selected_defense_slot_group(slot_index, source)
+        }
+        self._governor_selected_defense_slot_levels = {
+            slot_index: self.governor_selected_defense_slot_level(slot_index, source)
+            for slot_index in range(1, 5)
+            if self.governor_selected_defense_slot_level(slot_index, source) > 0
+        }
+
+    def set_governor_defense_slot_selection(self, slot_index: int, group_id: str, level: int = 1):
+        slot_index = int(slot_index)
+        normalized_group = str(group_id or "").strip()
+        if normalized_group:
+            self._governor_selected_defense_slots[slot_index] = normalized_group
+            self._governor_selected_defense_slot_levels[slot_index] = max(1, int(level))
+        else:
+            self._governor_selected_defense_slots.pop(slot_index, None)
+            self._governor_selected_defense_slot_levels.pop(slot_index, None)
+
+    def set_governor_slot_ability_level(self, slot_index: int, group_id: str, level: int, max_level: int):
+        slot_index = int(slot_index)
+        target_level = min(max(0, int(level)), max(0, int(max_level)))
+        if target_level <= 0:
+            self.set_governor_defense_slot_selection(slot_index, "", 0)
+            return
+        self.set_governor_defense_slot_selection(slot_index, group_id, target_level)
+
+    def toggle_selected_governor_tree_slot_skill(self):
+        node = self.selected_governor_tree_node()
+        if not node:
+            return
+        slot_index = self.safe_int(node.get("slot_index"), 0)
+        group_id = str(node.get("group_id") or "")
+        if slot_index <= 0 or not group_id:
+            return
+        if bool(node.get("locked")):
+            return
+        current_group = self.governor_selected_defense_slot_group(slot_index)
+        current_level = self.safe_int(node.get("selected_level"), 0)
+        max_level = self.safe_int(node.get("max_level"), 1)
+        if current_group == group_id and current_level > 0:
+            self.set_governor_defense_slot_selection(slot_index, "", 0)
+        else:
+            self.set_governor_slot_ability_level(slot_index, group_id, 1, max_level)
+        self.refresh_governor_skill_tree()
+        self.refresh_governor_general_summary()
+        self.refresh_wall_scene()
+
+    def governor_tree_abilities(self, general: dict[str, Any] | None) -> list[dict[str, Any]]:
+        if not general:
+            return []
+        abilities = [dict(item) for item in general.get("abilities") or [] if isinstance(item, dict)]
+        abilities.sort(
+            key=lambda item: (
+                self.safe_int(item.get("tier"), 0),
+                self.safe_int(item.get("defense_slot_index"), 99),
+                str(item.get("name") or ""),
+            )
+        )
+        return abilities
+
+    def governor_ability_level_entry(self, ability: dict[str, Any] | None, level: int) -> dict[str, Any] | None:
+        if not ability:
+            return None
+        for item in ability.get("levels") or []:
+            if self.safe_int((item or {}).get("level"), 0) == int(level):
+                return item
+        return None
+
+    def governor_selected_ability_effect_values(self, ability: dict[str, Any] | None, level: int, effect_type: str) -> list[str]:
+        level_entry = self.governor_ability_level_entry(ability, level)
+        if level_entry:
+            key = "attack_effect_values" if effect_type == "attack" else "defense_effect_values"
+            values = level_entry.get(key)
+            if isinstance(values, list) and values:
+                return [str(item) for item in values]
+        key = "attack_effect_values" if effect_type == "attack" else "defense_effect_values"
+        values = (ability or {}).get(key)
+        return [str(item) for item in values] if isinstance(values, list) else []
+
+    def governor_tree_skills(self, general: dict[str, Any] | None) -> list[dict[str, Any]]:
+        if not general:
+            return []
+        skills = [dict(skill) for skill in general.get("skills") or [] if isinstance(skill, dict) and not bool(skill.get("is_ability_like"))]
+        skills.sort(
+            key=lambda item: (
+                self.safe_int(item.get("tier"), 0),
+                0 if bool(item.get("is_ability_like")) else 1,
+                -self.safe_int(item.get("group_id"), 0),
+                str(item.get("name") or ""),
+            )
+        )
+        return skills
+
+    def build_governor_tree_nodes(self, governor: dict[str, Any] | None = None) -> list[dict[str, Any]]:
+        source = governor or self.governor_profile_from_form()
+        general = self.governor_general_record(source)
+        rows: list[dict[str, Any]] = []
+        self._governor_tree_nodes_by_group = {}
+        self.governor_sync_slot_selection_state(source)
+        unlocked_tier = self.governor_unlocked_tier(source)
+
+        for ability in self.governor_tree_abilities(general):
+            group_id = str(ability.get("group_id") or "")
+            slot_index = self.safe_int(ability.get("defense_slot_index"), 0)
+            if slot_index <= 0:
+                continue
+            tier = max(1, self.safe_int(ability.get("tier"), 1))
+            is_unlocked = tier <= unlocked_tier
+            ability_max_level = max(1, len(ability.get("levels") or []))
+            selected_level = self.governor_selected_defense_slot_level(slot_index, source) if self.governor_selected_defense_slot_group(slot_index, source) == group_id else 0
+            selected_level = min(selected_level, ability_max_level)
+            selected_in_slot = is_unlocked and selected_level > 0
+            description = str(ability.get("defense_description") or ability.get("attack_description") or "").strip()
+            node = {
+                "group_id": group_id,
+                "tier": tier,
+                "skill": {
+                    "name": str(ability.get("name") or "Способность"),
+                    "description": description,
+                    "icon_url": str(ability.get("icon_url") or ""),
+                    "skill_type": str(ability.get("ability_type") or "ability"),
+                    "is_ability_like": True,
+                },
+                "field_name": None,
+                "slot_index": slot_index,
+                "title_text": str(ability.get("name") or "Способность"),
+                "badge_text": f"{selected_level}/{ability_max_level}",
+                "footer_text": f"Слот {slot_index}",
+                "image_source": self.governor_skill_icon_source(ability, eager=True),
+                "selected_level": selected_level,
+                "max_level": ability_max_level,
+                "allowed_max": ability_max_level if is_unlocked else 0,
+                "interactive": True,
+                "locked": not is_unlocked,
+                "skill_type": "ability",
+                "is_ability_like": True,
+                "selected_in_slot": selected_in_slot,
+                "description": description,
+                "unlock_level": self.governor_tier_unlock_level(tier, general),
+                "source_ability": ability,
+            }
+            rows.append(node)
+            self._governor_tree_nodes_by_group[group_id] = node
+
+        for skill in self.governor_tree_skills(general):
+            field_name = self.governor_skill_field_name(skill)
+            group_id = str(skill.get("group_id") or skill.get("raw_group_id") or skill.get("skill_id") or "")
+            max_level = max(0, self.safe_int(skill.get("max_level"), 0))
+            selected_level = self.governor_skill_selected_level(field_name, source) if field_name else 0
+            allowed_max = self.governor_skill_allowed_max_level(field_name, source) if field_name else 0
+            locked = bool(field_name) and allowed_max <= 0 and selected_level <= 0
+            interactive = bool(field_name)
+            node = {
+                "group_id": group_id,
+                "tier": max(1, self.safe_int(skill.get("tier"), 1)),
+                "skill": skill,
+                "field_name": field_name,
+                "title_text": str(skill.get("name") or "Навык"),
+                "badge_text": f"{selected_level}/{max_level}" if interactive else f"{max_level}",
+                "footer_text": self.governor_skill_footer_text(skill, field_name, source),
+                "image_source": self.governor_skill_icon_source(skill, eager=True),
+                "selected_level": selected_level,
+                "max_level": max_level,
+                "allowed_max": allowed_max,
+                "interactive": interactive,
+                "locked": locked,
+                "slot_index": 0,
+                "skill_type": str(skill.get("skill_type") or ("defense" if field_name else "unknown")),
+                "is_ability_like": bool(skill.get("is_ability_like")),
+                "selected_in_slot": False,
+                "description": str(skill.get("description") or ""),
+                "unlock_level": self.governor_tier_unlock_level(max(1, self.safe_int(skill.get("tier"), 1)), general),
+            }
+            rows.append(node)
+            if group_id:
+                self._governor_tree_nodes_by_group[group_id] = node
+        return rows
+
+    def selected_governor_tree_node(self) -> dict[str, Any] | None:
+        group_id = str(getattr(self, "_governor_tree_selected_group_id", "") or "")
+        return self._governor_tree_nodes_by_group.get(group_id)
+
+    def select_governor_tree_skill(self, group_id: str):
+        self._governor_tree_selected_group_id = str(group_id or "")
+        self.refresh_governor_skill_tree()
+
+    def governor_tree_selected_field_name(self) -> str | None:
+        selected_node = self.selected_governor_tree_node()
+        return None if not selected_node else str(selected_node.get("field_name") or "") or None
+
+    def set_governor_skill_level(self, field_name: str, level: int):
+        if not self.root or not field_name:
+            return
+        spec = GOVERNOR_SKILL_SPECS.get(field_name) or {}
+        spinner_id = str(spec.get("input_id") or "")
+        if not spinner_id or spinner_id not in self.root.ids:
+            return
+        allowed_max = self.governor_skill_allowed_max_level(field_name)
+        target_level = min(max(0, int(level)), allowed_max)
+        self._suspend_governor_skill_events = True
+        self.root.ids[spinner_id].text = str(target_level)
+        self._suspend_governor_skill_events = False
+        self.refresh_governor_skill_controls()
+        self.refresh_governor_skill_tree()
+        self.refresh_governor_general_summary()
+        self.refresh_wall_scene()
+
+    def adjust_selected_governor_tree_skill(self, delta: int):
+        node = self.selected_governor_tree_node()
+        if not node:
+            return
+        field_name = self.governor_tree_selected_field_name()
+        if field_name:
+            current_level = self.governor_skill_selected_level(field_name)
+            self.set_governor_skill_level(field_name, current_level + int(delta))
+            return
+        slot_index = self.safe_int(node.get("slot_index"), 0)
+        group_id = str(node.get("group_id") or "")
+        if slot_index <= 0 or not group_id or bool(node.get("locked")):
+            return
+        current_level = self.safe_int(node.get("selected_level"), 0)
+        max_level = self.safe_int(node.get("max_level"), 1)
+        self.set_governor_slot_ability_level(slot_index, group_id, current_level + int(delta), max_level)
+        self.refresh_governor_skill_tree()
+        self.refresh_governor_general_summary()
+        self.refresh_wall_scene()
+
+    def maximize_selected_governor_tree_skill(self):
+        node = self.selected_governor_tree_node()
+        if not node:
+            return
+        field_name = self.governor_tree_selected_field_name()
+        if field_name:
+            self.set_governor_skill_level(field_name, self.governor_skill_allowed_max_level(field_name))
+            return
+        slot_index = self.safe_int(node.get("slot_index"), 0)
+        group_id = str(node.get("group_id") or "")
+        if slot_index <= 0 or not group_id or bool(node.get("locked")):
+            return
+        self.set_governor_slot_ability_level(slot_index, group_id, self.safe_int(node.get("max_level"), 1), self.safe_int(node.get("max_level"), 1))
+        self.refresh_governor_skill_tree()
+        self.refresh_governor_general_summary()
+        self.refresh_wall_scene()
+
+    def reset_selected_governor_tree_skill(self):
+        node = self.selected_governor_tree_node()
+        if not node:
+            return
+        field_name = self.governor_tree_selected_field_name()
+        if field_name:
+            self.set_governor_skill_level(field_name, 0)
+            return
+        slot_index = self.safe_int(node.get("slot_index"), 0)
+        group_id = str(node.get("group_id") or "")
+        if slot_index <= 0 or not group_id:
+            return
+        self.set_governor_slot_ability_level(slot_index, group_id, 0, self.safe_int(node.get("max_level"), 1))
+        self.refresh_governor_skill_tree()
+        self.refresh_governor_general_summary()
+        self.refresh_wall_scene()
+
+    def refresh_governor_skill_detail(self, selected_node: dict[str, Any] | None = None, governor: dict[str, Any] | None = None):
+        source = governor or self.governor_profile_from_form()
+        node = selected_node or self.selected_governor_tree_node()
+        if not node:
+            self.governor_skill_tree_points = "Выбери генерала, чтобы открыть древо навыков."
+            self.governor_skill_detail_title = "Навыки наместника"
+            self.governor_skill_detail_subtitle = "Выбери узел в древе навыков"
+            self.governor_skill_detail_description = "Здесь появится описание выбранного навыка и доступный уровень прокачки."
+            self.governor_skill_detail_level_text = "Уровень навыка: -"
+            self.governor_skill_detail_icon_source = ""
+            self.governor_skill_detail_editable = False
+            self.governor_skill_detail_can_increase = False
+            self.governor_skill_detail_can_decrease = False
+            self.governor_skill_detail_slot_action_visible = False
+            self.governor_skill_detail_slot_action_enabled = False
+            self.governor_skill_detail_slot_action_text = "Выбрать для слота"
+            return
+
+        skill = node.get("skill") or {}
+        field_name = str(node.get("field_name") or "") or None
+        slot_index = self.safe_int(node.get("slot_index"), 0)
+        description = str(node.get("description") or skill.get("description") or "").strip() or "Описание навыка в источнике не найдено."
+        selected_level = self.governor_skill_selected_level(field_name, source) if field_name else 0
+        allowed_max = self.governor_skill_allowed_max_level(field_name, source) if field_name else 0
+        max_level = self.safe_int(node.get("max_level"), 0)
+        effect_value = self.governor_skill_value_per_level(skill)
+        if field_name:
+            total_effect = round(effect_value * selected_level, 2)
+            suffix = "" if field_name == "courtyard_size_bonus" else "%"
+            if allowed_max <= 0 and self.safe_int(node.get("tier"), 0) > self.governor_unlocked_tier(source):
+                description = f"{description}\n\nЭтот тир пока закрыт. Откроется на уровне генерала {self.safe_int(node.get('unlock_level'), 1)}."
+            else:
+                description = f"{description}\n\nТекущий эффект: {total_effect}{suffix}\nОчки на уровень: {self.governor_skill_point_cost(self.governor_general_record(source), field_name)}\nДоступный максимум сейчас: {allowed_max}"
+            self.governor_skill_detail_slot_action_visible = False
+            self.governor_skill_detail_slot_action_enabled = False
+            self.governor_skill_detail_slot_action_text = "Выбрать для слота"
+            subtitle = self.governor_skill_type_label(skill, field_name)
+        else:
+            if slot_index > 0:
+                equipped_group = self.governor_selected_defense_slot_group(slot_index, source)
+                ability_defense_values = self.governor_selected_ability_effect_values(node.get("source_ability"), selected_level or 1, "defense")
+                if bool(node.get("locked")):
+                    equipped_text = f"Этот слотный навык ещё закрыт. Откроется на уровне генерала {self.safe_int(node.get('unlock_level'), 1)}."
+                else:
+                    equipped_text = "Сейчас установлена в слот." if equipped_group == str(node.get("group_id") or "") else ("Слот сейчас свободен." if not equipped_group else "При выборе заменит текущую способность в этом слоте.")
+                if ability_defense_values:
+                    description = f"{description}\n\nЗащита на текущем уровне: {', '.join(ability_defense_values)}\n\n{equipped_text}"
+                else:
+                    description = f"{description}\n\n{equipped_text}"
+                self.governor_skill_detail_slot_action_visible = True
+                self.governor_skill_detail_slot_action_enabled = not bool(node.get("locked"))
+                self.governor_skill_detail_slot_action_text = "Снять из слота" if equipped_group == str(node.get("group_id") or "") else f"Поставить в слот {slot_index}"
+                subtitle = f"Тир {self.safe_int(node.get('tier'), 0)} · Слот {slot_index}"
+            else:
+                description = f"{description}\n\nЭтот узел показан для полноты дерева и не участвует в расчёте обороны."
+                self.governor_skill_detail_slot_action_visible = False
+                self.governor_skill_detail_slot_action_enabled = False
+                self.governor_skill_detail_slot_action_text = "Выбрать для слота"
+                subtitle = f"Тир {self.safe_int(node.get('tier'), 0)} · {self.governor_skill_type_label(skill, field_name)}"
+
+        self.governor_skill_tree_points = f"Очки навыков: {self.governor_selected_skill_points_used(source)}/{self.governor_available_skill_points(source)} · Открыт тир {self.governor_unlocked_tier(source)}/{self.governor_general_max_tier(self.governor_general_record(source))}"
+        self.governor_skill_detail_title = str(node.get("title_text") or "Навык")
+        self.governor_skill_detail_subtitle = subtitle
+        self.governor_skill_detail_description = description
+        self.governor_skill_detail_level_text = f"Уровень навыка: {selected_level}/{max_level}"
+        self.governor_skill_detail_icon_source = str(node.get("image_source") or "")
+        self.governor_skill_detail_editable = bool(field_name) or slot_index > 0
+        self.governor_skill_detail_can_increase = (bool(field_name) and selected_level < allowed_max) or (slot_index > 0 and not bool(node.get("locked")) and selected_level < max_level)
+        self.governor_skill_detail_can_decrease = (bool(field_name) and selected_level > 0) or (slot_index > 0 and selected_level > 0)
+
+    def refresh_governor_skill_tree(self, governor: dict[str, Any] | None = None):
+        if not self.root or "governor_skill_tree_rows" not in self.root.ids:
+            return
+        source = governor or self.governor_profile_from_form()
+        general = self.governor_general_record(source)
+        container = self.root.ids.governor_skill_tree_rows
+        container.clear_widgets()
+        nodes = self.build_governor_tree_nodes(source)
+        if not general or not nodes:
+            empty = Factory.BodyText(size_hint_y=None, height=dp(44))
+            empty.text = "Выбери генерала, чтобы увидеть его древо навыков."
+            container.add_widget(empty)
+            self._governor_tree_selected_group_id = ""
+            self.refresh_governor_skill_detail(None, source)
+            return
+
+        if str(getattr(self, "_governor_tree_selected_group_id", "") or "") not in self._governor_tree_nodes_by_group:
+            preferred = next((node for node in nodes if node.get("interactive")), nodes[0])
+            self._governor_tree_selected_group_id = str(preferred.get("group_id") or "")
+
+        rows_by_tier: dict[int, list[dict[str, Any]]] = {}
+        for node in nodes:
+            rows_by_tier.setdefault(self.safe_int(node.get("tier"), 1), []).append(node)
+
+        for tier in sorted(rows_by_tier):
+            row = BoxLayout(size_hint_y=None, height=dp(92), spacing=dp(8))
+            tier_badge = Label(
+                text=str(tier),
+                size_hint_x=None,
+                width=dp(26),
+                color=(0.97, 0.83, 0.52, 1),
+                bold=True,
+                font_size=dp(18),
+            )
+            row.add_widget(tier_badge)
+            skills_box = BoxLayout(spacing=dp(6))
+            for node in rows_by_tier[tier]:
+                tile = GovernorSkillTile(
+                    selected=str(node.get("group_id") or "") == str(getattr(self, "_governor_tree_selected_group_id", "") or ""),
+                    locked=bool(node.get("locked")) and not bool(node.get("selected_in_slot")),
+                    interactive=bool(node.get("interactive")),
+                    skill_type="ability" if bool(node.get("is_ability_like")) else str(node.get("skill_type") or "unknown"),
+                    title_text=str(node.get("title_text") or ""),
+                    badge_text=str(node.get("badge_text") or ""),
+                    footer_text=(f"{node.get('footer_text')} · выбрано" if bool(node.get("selected_in_slot")) else str(node.get("footer_text") or "")),
+                    image_source=str(node.get("image_source") or ""),
+                )
+                tile.bind(on_release=lambda _instance, value=str(node.get("group_id") or ""): self.select_governor_tree_skill(value))
+                skills_box.add_widget(tile)
+            row.add_widget(skills_box)
+            container.add_widget(row)
+
+        self.refresh_governor_skill_detail(self.selected_governor_tree_node(), source)
+
     def governor_skill_level_key(self, field_name: str) -> str:
         return f"skill_{field_name}_level"
 
     def governor_skill_selected_level(self, field_name: str, governor: dict[str, Any] | None = None) -> int:
         source = governor or self.governor_profile_from_form()
         return max(0, self.safe_int(source.get(self.governor_skill_level_key(field_name)), 0))
+
+    def governor_selected_skill_points_used(self, governor: dict[str, Any] | None = None, excluding_field: str | None = None) -> int:
+        source = governor or self.governor_profile_from_form()
+        general = self.governor_general_record(source)
+        total = 0
+        for field_name in GOVERNOR_SKILL_SPECS:
+            if excluding_field and field_name == excluding_field:
+                continue
+            max_level = self.governor_skill_max_level(general, field_name)
+            if max_level <= 0:
+                continue
+            selected_level = min(self.governor_skill_selected_level(field_name, source), max_level)
+            total += selected_level * self.governor_skill_point_cost(general, field_name)
+        return total
+
+    def refresh_governor_skill_controls(self, governor: dict[str, Any] | None = None):
+        if not self.root:
+            return
+        ids = self.root.ids
+        source = governor or self.governor_profile_from_form()
+        general = self.governor_general_record(source)
+
+        self._suspend_governor_skill_events = True
+        for field_name, spec in GOVERNOR_SKILL_SPECS.items():
+            spinner_id = str(spec.get("input_id") or "")
+            spinner = ids.get(spinner_id) if spinner_id in ids else None
+            skill = self.governor_skill_entry(general, field_name)
+            if spinner is None:
+                continue
+            max_level = self.governor_skill_max_level(general, field_name)
+            if max_level <= 0 or not skill:
+                spinner.values = ["0"]
+                spinner.text = "0"
+                spinner.disabled = True
+                continue
+            allowed_max = self.governor_skill_allowed_max_level(field_name, source)
+            current_level = min(self.governor_skill_selected_level(field_name, source), allowed_max)
+            spinner.values = [str(level) for level in range(0, allowed_max + 1)] if allowed_max > 0 else ["0"]
+            spinner.text = str(current_level)
+            spinner.disabled = False if skill else True
+        self._suspend_governor_skill_events = False
 
     def governor_auto_skill_values(self, governor: dict[str, Any] | None = None) -> dict[str, float]:
         source = governor or self.governor_profile_from_form()
@@ -489,6 +1195,16 @@ class EmpireCalcApp(App):
         rarity_name = str(general.get("rarity_name") or "").strip()
         if rarity_name:
             lines.append(f"Редкость: {rarity_name}")
+        selected_level = self.governor_selected_general_level(source)
+        max_level = self.governor_general_max_level(general)
+        if max_level > 0:
+            lines.append(f"Уровень: {selected_level}/{max_level}")
+            shards_total, xp_total = self.governor_general_progress_totals(general, selected_level)
+            lines.append(f"Прокачка до этого уровня: {shards_total} осколков · {xp_total} XP")
+        max_star_level = self.governor_general_max_star_level(general)
+        if max_star_level > 0:
+            lines.append(f"Звёзды: {self.governor_selected_general_star_level(source)}/{max_star_level}")
+        lines.append(f"Очки защитных навыков: {self.governor_selected_skill_points_used(source)}/{self.governor_available_skill_points(source)}")
         auto_values = self.governor_auto_skill_values(source)
         skill_lines = []
         for field_name, spec in GOVERNOR_SKILL_SPECS.items():
@@ -520,19 +1236,45 @@ class EmpireCalcApp(App):
                 ids.governor_general_name.text = GOVERNOR_GENERAL_NONE
             if "governor_general_id" in ids:
                 ids.governor_general_id.text = ""
+            if "governor_general_level" in ids:
+                ids.governor_general_level.text = "Уровень"
+            if "governor_general_star_level" in ids:
+                ids.governor_general_star_level.text = "Звёзды"
+            self._governor_selected_defense_slots = {}
+            self._governor_selected_defense_slot_levels = {}
+            self.refresh_governor_general_progress_controls()
+            self.refresh_governor_skill_controls()
+            self.refresh_governor_skill_tree()
             self.refresh_governor_general_summary()
             return
         general = self.general_index_by_name.get(selected_name)
         if not general:
+            self.refresh_governor_general_progress_controls()
+            self.refresh_governor_skill_controls()
+            self.refresh_governor_skill_tree()
             self.refresh_governor_general_summary()
             return
         if "governor_general_name" in ids:
             ids.governor_general_name.text = str(general.get("name") or "")
         if "governor_general_id" in ids:
             ids.governor_general_id.text = str(general.get("general_id") or "")
+        if "governor_general_level" in ids:
+            ids.governor_general_level.text = "1"
+        if "governor_general_star_level" in ids:
+            ids.governor_general_star_level.text = "0"
+        self._governor_selected_defense_slots = {}
+        self._governor_selected_defense_slot_levels = {}
+        self.refresh_governor_general_progress_controls()
+        self.refresh_governor_skill_controls()
+        self.refresh_governor_skill_tree()
         self.refresh_governor_general_summary()
 
     def on_governor_skill_input_changed(self, *_args):
+        if getattr(self, "_suspend_governor_skill_events", False):
+            return
+        self.refresh_governor_general_progress_controls()
+        self.refresh_governor_skill_controls()
+        self.refresh_governor_skill_tree()
         self.refresh_governor_general_summary()
         self.refresh_wall_scene()
 
@@ -544,6 +1286,16 @@ class EmpireCalcApp(App):
         return {
             "general_id": str(ids.governor_general_id.text or "").strip() if "governor_general_id" in ids else "",
             "general_name": general_name,
+            "general_level": ids.governor_general_level.text if "governor_general_level" in ids and str(ids.governor_general_level.text or "").strip().isdigit() else "",
+            "general_star_level": ids.governor_general_star_level.text if "governor_general_star_level" in ids and str(ids.governor_general_star_level.text or "").strip().isdigit() else "",
+            "defense_ability_slot_1_group_id": self._governor_selected_defense_slots.get(1, ""),
+            "defense_ability_slot_1_level": str(self._governor_selected_defense_slot_levels.get(1, 0) or ""),
+            "defense_ability_slot_2_group_id": self._governor_selected_defense_slots.get(2, ""),
+            "defense_ability_slot_2_level": str(self._governor_selected_defense_slot_levels.get(2, 0) or ""),
+            "defense_ability_slot_3_group_id": self._governor_selected_defense_slots.get(3, ""),
+            "defense_ability_slot_3_level": str(self._governor_selected_defense_slot_levels.get(3, 0) or ""),
+            "defense_ability_slot_4_group_id": self._governor_selected_defense_slots.get(4, ""),
+            "defense_ability_slot_4_level": str(self._governor_selected_defense_slot_levels.get(4, 0) or ""),
             "melee_bonus": ids.governor_melee_bonus.text,
             "ranged_bonus": ids.governor_ranged_bonus.text,
             "flank_bonus": ids.governor_flank_bonus.text if "governor_flank_bonus" in ids else "",
@@ -723,10 +1475,9 @@ class EmpireCalcApp(App):
         preview_card.add_widget(preview_image)
         preview_card.add_widget(preview)
 
-        list_scroll = ScrollView(do_scroll_x=False, size_hint=(1, 1), bar_width=dp(6))
-        tool_list = GridLayout(cols=1, size_hint_y=None, spacing=dp(6), padding=[0, 0, 0, dp(6)])
-        tool_list.bind(minimum_height=tool_list.setter("height"))
-        list_scroll.add_widget(tool_list)
+        picker_label = Factory.FieldName(text="Орудие по фильтру")
+        tool_spinner = Factory.AppSpinner(text="Выбери орудие", values=[])
+        tool_spinner.bind(text=self.on_defense_tool_popup_spinner_changed)
 
         controls = BoxLayout(size_hint_y=None, height=dp(44), spacing=dp(8))
         zone_spinner = Factory.AppSpinner(text="all", values=DEFENSE_TOOL_ZONE_VALUES)
@@ -750,7 +1501,8 @@ class EmpireCalcApp(App):
 
         content.add_widget(search_input)
         content.add_widget(preview_card)
-        content.add_widget(list_scroll)
+        content.add_widget(picker_label)
+        content.add_widget(tool_spinner)
         content.add_widget(controls)
         content.add_widget(slider)
         content.add_widget(buttons)
@@ -767,12 +1519,14 @@ class EmpireCalcApp(App):
         self._defense_tool_add_search = search_input
         self._defense_tool_add_preview = preview
         self._defense_tool_add_preview_image = preview_image
-        self._defense_tool_add_list = tool_list
+        self._defense_tool_add_spinner = tool_spinner
         self._defense_tool_add_zone = zone_spinner
         self._defense_tool_add_count = count_input
         self._defense_tool_add_slider = slider
         self._defense_tool_add_apply_button = apply_button
         self._defense_tool_add_syncing = False
+        self._defense_tool_spinner_syncing = False
+        self._defense_tool_popup_visible_names: list[str] = []
         return popup
 
     def on_defense_tool_popup_dismiss(self, *_args):
@@ -782,6 +1536,12 @@ class EmpireCalcApp(App):
 
     def on_defense_tool_popup_search_changed(self, _instance, _value: str):
         self.refresh_defense_tool_popup_ui()
+
+    def on_defense_tool_popup_spinner_changed(self, _instance, value: str):
+        if getattr(self, "_defense_tool_spinner_syncing", False):
+            return
+        if value and value in getattr(self, "_defense_tool_popup_visible_names", []):
+            self.select_defense_tool_popup_tool(value)
 
     def filtered_defense_tool_popup_tools(self) -> list[dict[str, Any]]:
         search_value = str(getattr(self, "_defense_tool_add_search", None).text or "").strip().lower() if getattr(self, "_defense_tool_add_search", None) is not None else ""
@@ -862,10 +1622,20 @@ class EmpireCalcApp(App):
         if getattr(self, "_defense_tool_add_popup", None) is None:
             return
         visible_tools = self.filtered_defense_tool_popup_tools()
-        visible_names = {str(tool.get("display_name") or tool.get("name") or "") for tool in visible_tools}
-        if visible_tools and getattr(self, "_defense_tool_selected_name", "") not in visible_names:
-            first_name = str(visible_tools[0].get("display_name") or visible_tools[0].get("name") or "")
+        visible_names = [str(tool.get("display_name") or tool.get("name") or "") for tool in visible_tools]
+        self._defense_tool_popup_visible_names = visible_names
+        if visible_names and getattr(self, "_defense_tool_selected_name", "") not in visible_names:
+            first_name = visible_names[0]
             self.update_defense_tool_preview(first_name)
+        elif not visible_names:
+            self._defense_tool_selected_name = ""
+
+        spinner = getattr(self, "_defense_tool_add_spinner", None)
+        if spinner is not None:
+            self._defense_tool_spinner_syncing = True
+            spinner.values = visible_names
+            spinner.text = self._defense_tool_selected_name if self._defense_tool_selected_name in visible_names else (visible_names[0] if visible_names else "Нет орудий")
+            self._defense_tool_spinner_syncing = False
 
         selected_tool = self.defense_tool_display_index.get(getattr(self, "_defense_tool_selected_name", "")) or self.defense_tool_index.get(getattr(self, "_defense_tool_selected_name", ""))
         if selected_tool:
@@ -876,26 +1646,6 @@ class EmpireCalcApp(App):
             self._defense_tool_add_preview.text = "Нет орудий под текущий фильтр поиска."
             if getattr(self, "_defense_tool_add_preview_image", None) is not None:
                 self._defense_tool_add_preview_image.source = ""
-
-        self._defense_tool_add_list.clear_widgets()
-        if not visible_tools:
-            empty = Factory.BodyText(size_hint_y=None, height=dp(46))
-            empty.text = "Нет подходящих оборонительных орудий. Попробуй изменить поиск."
-            self._defense_tool_add_list.add_widget(empty)
-            return
-
-        for tool in visible_tools[:220]:
-            display_name = str(tool.get("display_name") or tool.get("name") or "")
-            row = WallUnitRow(
-                selected=display_name == getattr(self, "_defense_tool_selected_name", ""),
-                title_text=display_name,
-                subtitle_text=self.defense_tool_popup_badge(tool),
-                detail_text=self.defense_tool_popup_detail_text(tool),
-                stats_text=self.defense_tool_popup_stats_text(tool),
-                image_source=self.defense_tool_image_source(tool, eager=True),
-            )
-            row.bind(on_release=lambda _instance, value=display_name: self.select_defense_tool_popup_tool(value))
-            self._defense_tool_add_list.add_widget(row)
 
     def edit_wall_unit_on_active_flank(self, unit_name: str):
         rows = self.parse_unit_lines(self.root.ids.unit_lines.text if self.root else "")
@@ -1162,6 +1912,17 @@ class EmpireCalcApp(App):
         record = castle or (self.current_account() or {}).get("castles", {}).get(castle_key, {})
         return str(record.get("display_name") or castle_key or record.get("name") or "Профиль")
 
+    def castle_kingdom_label(self, castle_key: str, castle: dict[str, Any] | None = None) -> str:
+        record = castle or (self.current_account() or {}).get("castles", {}).get(castle_key, {})
+        explicit = str(record.get("kingdom") or "").strip()
+        if explicit:
+            return explicit
+        value = str(castle_key or "").strip()
+        lower = value.lower()
+        if not value or lower == "основной замок" or "аванпост" in lower:
+            return ""
+        return value if value in ACCOUNT_CASTLE_NAMES else ""
+
     def castle_card_image_source(self, castle_key: str, castle: dict[str, Any] | None = None) -> str:
         record = castle or (self.current_account() or {}).get("castles", {}).get(castle_key, {})
         kind = self.castle_type_label(castle_key)
@@ -1192,6 +1953,8 @@ class EmpireCalcApp(App):
             self.active_castle_card_subtitle = "Всего солдат в замке: 0"
             self.active_castle_card_summary = "Открой аккаунт, затем выбери карточку профиля ниже."
             self.active_castle_card_image_source = ""
+            self.current_profile_kingdom_text = ""
+            self.current_profile_kingdom_visible = False
             return
         avatar_key = str(account.get("avatar_key") or "crown")
         self.active_account_avatar_label = f"{account.get('name') or self.active_account_name} · {ACCOUNT_AVATAR_LABELS.get(avatar_key, 'Аккаунт')}"
@@ -1202,12 +1965,35 @@ class EmpireCalcApp(App):
             self.active_castle_card_subtitle = "Всего солдат в замке: 0"
             self.active_castle_card_summary = "У аккаунта нет активного профиля."
             self.active_castle_card_image_source = ""
+            self.current_profile_kingdom_text = ""
+            self.current_profile_kingdom_visible = False
             return
         total_units, base_power, bonus_power = self.castle_power_breakdown(castle)
         self.active_castle_card_title = self.castle_display_name(self.active_castle_name, castle)
         self.active_castle_card_subtitle = f"Всего солдат в замке: {self.format_compact_number(total_units)}"
         self.active_castle_card_summary = f"Боевая мощь солдат в замке: {self.format_compact_number(base_power)} + {self.format_compact_number(bonus_power)}"
         self.active_castle_card_image_source = self.castle_card_image_source(self.active_castle_name, castle)
+        kingdom_label = self.castle_kingdom_label(self.active_castle_name, castle)
+        self.current_profile_kingdom_text = kingdom_label
+        self.current_profile_kingdom_visible = bool(kingdom_label)
+
+    def open_castle_dropdown(self):
+        if not self.active_account_name:
+            self.refresh_profile_output("Сначала открой аккаунт, затем выбери замок.")
+            return
+        if not self.root or "castle_spinner" not in self.root.ids:
+            return
+        spinner = self.root.ids.castle_spinner
+        spinner.values = self.castle_values
+        if self.active_castle_name in self.castle_values:
+            spinner.text = self.active_castle_name
+        elif self.castle_values:
+            spinner.text = self.castle_values[0]
+        toggle_dropdown = getattr(spinner, "_toggle_dropdown", None)
+        if callable(toggle_dropdown):
+            toggle_dropdown()
+            return
+        spinner.dispatch("on_release")
 
     def open_profile_menu(self):
         popup = self.ensure_profile_menu_popup()
@@ -1289,8 +2075,18 @@ class EmpireCalcApp(App):
 
     def open_account_manager_popup(self):
         popup = self.ensure_account_manager_popup()
+        self.refresh_account_values()
+        spinner = getattr(self, "_account_manage_spinner", None)
+        if spinner is not None:
+            spinner.values = self.account_values
+            if self.active_account_name and self.active_account_name in self.account_values:
+                spinner.text = self.active_account_name
+            elif self.account_values:
+                spinner.text = self.account_values[0]
+            else:
+                spinner.text = ACCOUNT_SELECTOR_PLACEHOLDER
         if getattr(self, "_account_manage_name_input", None) is not None:
-            self._account_manage_name_input.text = self.active_account_name
+            self._account_manage_name_input.text = ""
         popup.open()
 
     def ensure_account_manager_popup(self) -> Popup:
@@ -1299,9 +2095,12 @@ class EmpireCalcApp(App):
             return popup
 
         content = BoxLayout(orientation="vertical", spacing=dp(10), padding=dp(12))
-        intro = Factory.BodyText(text="Открой другой локальный аккаунт или создай новый. Аватар привяжется к активному аккаунту.")
+        intro = Factory.BodyText(text="Выбери сохранённый локальный аккаунт или создай новый. У каждого аккаунта отдельно сохраняются все профили, замки и поля.")
+        saved_label = Factory.FieldName(text="Сохранённые аккаунты")
+        account_spinner = Factory.AppSpinner(text=ACCOUNT_SELECTOR_PLACEHOLDER, values=self.account_values)
+        new_label = Factory.FieldName(text="Новый аккаунт")
         name_input = Factory.AppInput()
-        name_input.hint_text = "Имя аккаунта"
+        name_input.hint_text = "Например AbobaVaflya"
         buttons = BoxLayout(size_hint_y=None, height=dp(44), spacing=dp(8))
         cancel_button = Factory.SecondaryButton(text="Отмена")
         cancel_button.bind(on_release=lambda *_: self.close_account_manager_popup())
@@ -1310,6 +2109,9 @@ class EmpireCalcApp(App):
         buttons.add_widget(cancel_button)
         buttons.add_widget(apply_button)
         content.add_widget(intro)
+        content.add_widget(saved_label)
+        content.add_widget(account_spinner)
+        content.add_widget(new_label)
         content.add_widget(name_input)
         content.add_widget(buttons)
 
@@ -1317,11 +2119,12 @@ class EmpireCalcApp(App):
             title="Аккаунт",
             content=content,
             size_hint=(0.8, None),
-            height=dp(220),
+            height=dp(320),
             auto_dismiss=True,
             separator_height=0,
         )
         self._account_manage_popup = popup
+        self._account_manage_spinner = account_spinner
         self._account_manage_name_input = name_input
         return popup
 
@@ -1331,14 +2134,20 @@ class EmpireCalcApp(App):
             popup.dismiss()
 
     def apply_account_switch(self):
+        spinner = getattr(self, "_account_manage_spinner", None)
         name_input = getattr(self, "_account_manage_name_input", None)
-        account_name = str(name_input.text or "").strip() if name_input is not None else ""
+        entered_name = str(name_input.text or "").strip() if name_input is not None else ""
+        selected_name = str(spinner.text or "").strip() if spinner is not None else ""
+        if entered_name:
+            account_name = entered_name
+        elif selected_name in self.account_values:
+            account_name = selected_name
+        else:
+            account_name = ""
         if not account_name:
-            self.profile_output = "Введи имя аккаунта, чтобы открыть локальный профиль."
+            self.profile_output = "Выбери аккаунт из списка или введи имя нового аккаунта."
             return
-        if self.root and "account_name" in self.root.ids:
-            self.root.ids.account_name.text = account_name
-        self.create_or_open_account()
+        self.create_or_open_account(account_name)
         self.close_account_manager_popup()
 
     def open_about_popup(self):
@@ -1374,14 +2183,12 @@ class EmpireCalcApp(App):
 
         content = BoxLayout(orientation="vertical", spacing=dp(10), padding=dp(12))
         intro = Factory.BodyText(text="Выбери аватар для текущего аккаунта. Он будет показываться в меню профиля.")
-        scroll = ScrollView(do_scroll_x=False)
         grid = GridLayout(cols=1, size_hint_y=None, spacing=dp(8), padding=[0, 0, 0, dp(6)])
         grid.bind(minimum_height=grid.setter("height"))
-        scroll.add_widget(grid)
         close_button = Factory.SecondaryButton(text="Закрыть")
         close_button.bind(on_release=lambda *_: self.close_avatar_picker_popup())
         content.add_widget(intro)
-        content.add_widget(scroll)
+        content.add_widget(grid)
         content.add_widget(close_button)
 
         popup = Popup(
@@ -1449,10 +2256,10 @@ class EmpireCalcApp(App):
 
         content = BoxLayout(orientation="vertical", spacing=dp(10), padding=dp(12))
         intro = Factory.BodyText(text="Выбери замок, аванпост или мир текущего аккаунта. Здесь же можно быстро добавить новый профиль.")
-        scroll = ScrollView(do_scroll_x=False)
-        grid = GridLayout(cols=1, size_hint_y=None, spacing=dp(8), padding=[0, 0, 0, dp(6)])
-        grid.bind(minimum_height=grid.setter("height"))
-        scroll.add_widget(grid)
+        saved_label = Factory.FieldName(text="Профили аккаунта")
+        castle_spinner = Factory.AppSpinner(text="Выбери профиль", values=self.castle_values)
+        castle_spinner.bind(text=self.on_castle_selector_spinner_changed)
+        preview = Factory.OutputArea(size_hint_y=None, height=dp(150))
         add_box = BoxLayout(size_hint_y=None, height=dp(44), spacing=dp(8))
         add_input = Factory.AppInput()
         add_input.hint_text = "Новый замок / аванпост / мир"
@@ -1460,52 +2267,85 @@ class EmpireCalcApp(App):
         add_button.bind(on_release=lambda *_: self.add_castle_profile_from_popup())
         add_box.add_widget(add_input)
         add_box.add_widget(add_button)
+        buttons = BoxLayout(size_hint_y=None, height=dp(44), spacing=dp(8))
+        open_button = Factory.AppButton(text="Открыть профиль")
+        open_button.bind(on_release=lambda *_: self.apply_castle_selection_from_popup())
         close_button = Factory.SecondaryButton(text="Закрыть")
         close_button.bind(on_release=lambda *_: self.close_castle_selector_popup())
+        buttons.add_widget(open_button)
+        buttons.add_widget(close_button)
 
         content.add_widget(intro)
-        content.add_widget(scroll)
+        content.add_widget(saved_label)
+        content.add_widget(castle_spinner)
+        content.add_widget(preview)
         content.add_widget(add_box)
-        content.add_widget(close_button)
+        content.add_widget(buttons)
 
         popup = Popup(
             title="Профили замков",
             content=content,
-            size_hint=(0.92, 0.88),
+            size_hint=(0.92, None),
+            height=dp(420),
             auto_dismiss=True,
             separator_height=0,
         )
         self._castle_selector_popup = popup
-        self._castle_selector_list = grid
+        self._castle_selector_spinner = castle_spinner
+        self._castle_selector_preview = preview
         self._castle_selector_add_input = add_input
+        self._castle_selector_spinner_syncing = False
         return popup
 
     def refresh_castle_selector_popup(self):
-        container = getattr(self, "_castle_selector_list", None)
-        if container is None:
+        spinner = getattr(self, "_castle_selector_spinner", None)
+        preview = getattr(self, "_castle_selector_preview", None)
+        if spinner is None or preview is None:
             return
-        container.clear_widgets()
         account = self.current_account()
         if not account:
-            empty = Factory.BodyText(size_hint_y=None, height=dp(46))
-            empty.text = "Сначала открой аккаунт, чтобы управлять профилями замков."
-            container.add_widget(empty)
+            self._castle_selector_spinner_syncing = True
+            spinner.values = []
+            spinner.text = "Нет профилей"
+            self._castle_selector_spinner_syncing = False
+            preview.text = "Сначала открой аккаунт, чтобы управлять профилями замков."
             return
-        for castle_key in self.castle_values:
-            castle = account.setdefault("castles", {}).setdefault(castle_key, default_castle_record(castle_key))
-            title = self.castle_display_name(castle_key, castle)
-            detail = self.castle_card_summary_text(castle_key, castle)
-            subtitle = f"{self.castle_type_label(castle_key)} · {castle_key}"
-            row = WallUnitRow(
-                selected=castle_key == self.active_castle_name,
-                title_text=title,
-                subtitle_text=subtitle,
-                detail_text=detail,
-                stats_text="Активный" if castle_key == self.active_castle_name else "Открыть",
-                image_source=self.castle_card_image_source(castle_key, castle),
-            )
-            row.bind(on_release=lambda _instance, value=castle_key: self.select_castle_from_popup(value))
-            container.add_widget(row)
+        self._castle_selector_spinner_syncing = True
+        spinner.values = self.castle_values
+        if self.active_castle_name in self.castle_values:
+            spinner.text = self.active_castle_name
+        elif self.castle_values:
+            spinner.text = self.castle_values[0]
+        else:
+            spinner.text = "Нет профилей"
+        self._castle_selector_spinner_syncing = False
+        self.refresh_castle_selector_popup_preview(str(spinner.text or ""))
+
+    def on_castle_selector_spinner_changed(self, _instance, value: str):
+        if getattr(self, "_castle_selector_spinner_syncing", False):
+            return
+        self.refresh_castle_selector_popup_preview(value)
+
+    def refresh_castle_selector_popup_preview(self, castle_name: str):
+        preview = getattr(self, "_castle_selector_preview", None)
+        account = self.current_account()
+        if preview is None:
+            return
+        if not account or not castle_name:
+            preview.text = "Выбери профиль замка, аванпоста или мира."
+            return
+        castle = account.setdefault("castles", {}).setdefault(castle_name, default_castle_record(castle_name))
+        title = self.castle_display_name(castle_name, castle)
+        subtitle = f"{self.castle_type_label(castle_name)} · {castle_name}"
+        detail = self.castle_card_summary_text(castle_name, castle)
+        preview.text = f"{title}\n{subtitle}\n\n{detail}"
+
+    def apply_castle_selection_from_popup(self):
+        spinner = getattr(self, "_castle_selector_spinner", None)
+        castle_name = str(spinner.text or "").strip() if spinner is not None else ""
+        if not castle_name or castle_name not in self.castle_values:
+            return
+        self.select_castle_from_popup(castle_name)
 
     def add_castle_profile_from_popup(self):
         add_input = getattr(self, "_castle_selector_add_input", None)
@@ -1770,9 +2610,9 @@ class EmpireCalcApp(App):
 
         content = BoxLayout(orientation="vertical", spacing=dp(8), padding=dp(12))
         tabs = BoxLayout(size_hint_y=None, height=dp(46), spacing=dp(6))
-        melee_button = Factory.AppButton(text="Солдаты ближнего боя")
+        melee_button = Factory.AppButton(text="Ближний бой")
         melee_button.bind(on_release=lambda *_: self.set_wall_popup_role_filter("melee"))
-        ranged_button = Factory.SecondaryButton(text="Стрелок")
+        ranged_button = Factory.SecondaryButton(text="Стрелки")
         ranged_button.bind(on_release=lambda *_: self.set_wall_popup_role_filter("ranged"))
         tabs.add_widget(melee_button)
         tabs.add_widget(ranged_button)
@@ -1786,16 +2626,19 @@ class EmpireCalcApp(App):
         controls.add_widget(search_input)
         controls.add_widget(defense_toggle)
 
-        preview_card = BoxLayout(size_hint_y=None, height=dp(156), spacing=dp(10))
-        preview_image = AsyncImage(size_hint_x=None, width=dp(88), fit_mode="contain")
+        quick_label = Factory.FieldName(text="Быстрый выбор")
+        quick_list = GridLayout(cols=1, size_hint_y=None, spacing=dp(6), padding=[0, 0, 0, dp(4)])
+        quick_list.bind(minimum_height=quick_list.setter("height"))
+
+        picker_label = Factory.FieldName(text="Все найденные солдаты")
+        unit_spinner = Factory.AppSpinner(text="Выбери юнита", values=[])
+        unit_spinner.bind(text=self.on_wall_popup_spinner_changed)
+
+        preview_card = BoxLayout(size_hint_y=None, height=dp(128), spacing=dp(10))
+        preview_image = AsyncImage(size_hint_x=None, width=dp(76), fit_mode="contain")
         preview = Factory.OutputArea()
         preview_card.add_widget(preview_image)
         preview_card.add_widget(preview)
-
-        list_scroll = ScrollView(do_scroll_x=False, size_hint=(1, 1), bar_width=dp(6))
-        unit_list = GridLayout(cols=1, size_hint_y=None, spacing=dp(6), padding=[0, 0, 0, dp(6)])
-        unit_list.bind(minimum_height=unit_list.setter("height"))
-        list_scroll.add_widget(unit_list)
 
         count_input = Factory.AppInput(size_hint_y=None, height=dp(44))
         count_input.hint_text = "Количество солдат"
@@ -1815,8 +2658,11 @@ class EmpireCalcApp(App):
 
         content.add_widget(tabs)
         content.add_widget(controls)
+        content.add_widget(quick_label)
+        content.add_widget(quick_list)
+        content.add_widget(picker_label)
+        content.add_widget(unit_spinner)
         content.add_widget(preview_card)
-        content.add_widget(list_scroll)
         content.add_widget(count_input)
         content.add_widget(slider)
         content.add_widget(buttons)
@@ -1824,7 +2670,8 @@ class EmpireCalcApp(App):
         popup = Popup(
             title="Добавить солдат",
             content=content,
-            size_hint=(0.96, 0.92),
+            size_hint=(0.96, None),
+            height=dp(640),
             auto_dismiss=True,
             separator_height=0,
         )
@@ -1834,17 +2681,22 @@ class EmpireCalcApp(App):
         self._wall_add_ranged_button = ranged_button
         self._wall_add_search = search_input
         self._wall_add_defense_toggle = defense_toggle
+        self._wall_add_quick_label = quick_label
+        self._wall_add_quick_list = quick_list
+        self._wall_add_picker_label = picker_label
         self._wall_add_preview = preview
         self._wall_add_preview_image = preview_image
-        self._wall_add_list = unit_list
+        self._wall_add_spinner = unit_spinner
         self._wall_add_selected_button = None
         self._wall_add_count = count_input
         self._wall_add_slider = slider
         self._wall_add_apply_button = apply_button
         self._wall_add_syncing = False
+        self._wall_add_spinner_syncing = False
         self._wall_popup_role_filter = "melee"
         self._wall_popup_defense_only = True
         self._wall_popup_visible_units = []
+        self._wall_popup_visible_names: list[str] = []
         self._wall_selected_unit_name = self.unit_values[0] if self.unit_values else ""
         self._wall_edit_original_unit_name = None
         return popup
@@ -1865,6 +2717,12 @@ class EmpireCalcApp(App):
 
     def on_wall_popup_search_changed(self, _instance, _value: str):
         self.refresh_wall_popup_ui()
+
+    def on_wall_popup_spinner_changed(self, _instance, value: str):
+        if getattr(self, "_wall_add_spinner_syncing", False):
+            return
+        if value and value in getattr(self, "_wall_popup_visible_names", []):
+            self.select_wall_popup_unit(value)
 
     def filtered_wall_popup_units(self) -> list[dict[str, Any]]:
         search_value = str(getattr(self, "_wall_add_search", None).text or "").strip().lower() if getattr(self, "_wall_add_search", None) is not None else ""
@@ -1905,9 +2763,56 @@ class EmpireCalcApp(App):
 
         visible_units = self.filtered_wall_popup_units()
         self._wall_popup_visible_units = visible_units
+        self._wall_popup_visible_names = [str(unit.get("display_name") or unit.get("name") or "") for unit in visible_units]
         self.prefetch_wall_popup_images(visible_units)
-        if visible_units and self._wall_selected_unit_name not in {str(unit.get("display_name") or unit.get("name") or "") for unit in visible_units}:
+        if visible_units and self._wall_selected_unit_name not in self._wall_popup_visible_names:
             self._wall_selected_unit_name = str(visible_units[0].get("display_name") or visible_units[0].get("name") or "")
+        elif not visible_units:
+            self._wall_selected_unit_name = ""
+
+        quick_label = getattr(self, "_wall_add_quick_label", None)
+        if quick_label is not None:
+            if visible_units:
+                quick_label.text = f"Быстрый выбор · {min(len(visible_units), WALL_POPUP_QUICK_PICK_LIMIT)} из {len(visible_units)}"
+            else:
+                quick_label.text = "Быстрый выбор"
+
+        picker_label = getattr(self, "_wall_add_picker_label", None)
+        if picker_label is not None:
+            picker_label.text = f"Все найденные солдаты · {len(visible_units)}"
+
+        quick_list = getattr(self, "_wall_add_quick_list", None)
+        if quick_list is not None:
+            quick_list.clear_widgets()
+            if not visible_units:
+                empty = Factory.BodyText(size_hint_y=None, height=dp(42))
+                empty.text = "Нет подходящих солдат. Попробуй сменить тип или уточнить поиск."
+                quick_list.add_widget(empty)
+            else:
+                for unit in visible_units[:WALL_POPUP_QUICK_PICK_LIMIT]:
+                    display_name = str(unit.get("display_name") or unit.get("name") or "")
+                    row = WallUnitRow(
+                        selected=display_name == self._wall_selected_unit_name,
+                        title_text=display_name,
+                        subtitle_text=self.wall_popup_unit_badge(unit),
+                        detail_text=self.wall_popup_unit_detail_text(unit),
+                        stats_text=self.wall_popup_unit_stats_text(unit),
+                        image_source=self.wall_popup_unit_image_source(unit, eager=True),
+                    )
+                    row.height = dp(62)
+                    row.bind(on_release=lambda _instance, value=display_name: self.select_wall_popup_unit(value))
+                    quick_list.add_widget(row)
+                if len(visible_units) > WALL_POPUP_QUICK_PICK_LIMIT:
+                    more = Factory.BodyText(size_hint_y=None, height=dp(32))
+                    more.text = f"И ещё {len(visible_units) - WALL_POPUP_QUICK_PICK_LIMIT}. Используй список ниже или поиск."
+                    quick_list.add_widget(more)
+
+        spinner = getattr(self, "_wall_add_spinner", None)
+        if spinner is not None:
+            self._wall_add_spinner_syncing = True
+            spinner.values = self._wall_popup_visible_names
+            spinner.text = self._wall_selected_unit_name if self._wall_selected_unit_name in self._wall_popup_visible_names else (self._wall_popup_visible_names[0] if self._wall_popup_visible_names else "Нет юнитов")
+            self._wall_add_spinner_syncing = False
 
         selected_unit = self.unit_display_index.get(self._wall_selected_unit_name) or self.unit_index.get(self._wall_selected_unit_name)
         if selected_unit:
@@ -1918,26 +2823,6 @@ class EmpireCalcApp(App):
             self._wall_add_preview.text = "Нет юнитов под текущий фильтр. Попробуй сменить вкладку или отключить фильтр защитных."
             if getattr(self, "_wall_add_preview_image", None) is not None:
                 self._wall_add_preview_image.source = ""
-
-        self._wall_add_list.clear_widgets()
-        if not visible_units:
-            empty = Factory.BodyText(size_hint_y=None, height=dp(46))
-            empty.text = "Нет доступных юнитов для текущего фильтра."
-            self._wall_add_list.add_widget(empty)
-            return
-
-        for unit in visible_units[:220]:
-            display_name = str(unit.get("display_name") or unit.get("name") or "")
-            row = WallUnitRow(
-                selected=display_name == self._wall_selected_unit_name,
-                title_text=display_name,
-                subtitle_text=self.wall_popup_unit_badge(unit),
-                detail_text=self.wall_popup_unit_detail_text(unit),
-                stats_text=self.wall_popup_unit_stats_text(unit),
-                image_source=self.wall_popup_unit_image_source(unit, eager=True),
-            )
-            row.bind(on_release=lambda _instance, value=display_name: self.select_wall_popup_unit(value))
-            self._wall_add_list.add_widget(row)
 
     def on_wall_popup_count_changed(self, _instance, value: str):
         if getattr(self, "_wall_add_syncing", False):
@@ -2060,10 +2945,15 @@ class EmpireCalcApp(App):
         self.save_profile_store()
         self.refresh_castle_selector_popup()
 
-    def create_or_open_account(self):
-        account_name = self.root.ids.account_name.text.strip() if self.root and "account_name" in self.root.ids else ""
+    def create_or_open_account(self, account_name: str | None = None):
+        resolved_name = str(account_name or "").strip()
+        if not resolved_name and self.root and "account_name" in self.root.ids:
+            resolved_name = self.root.ids.account_name.text.strip()
+        if self.root and "account_name" in self.root.ids:
+            self.root.ids.account_name.text = resolved_name
+        account_name = resolved_name
         if not account_name:
-            self.profile_output = "Введи имя аккаунта, чтобы создать локальный профиль."
+            self.profile_output = "Выбери аккаунт из списка или введи имя нового аккаунта."
             return
         self.activate_account(account_name)
 
@@ -2111,7 +3001,8 @@ class EmpireCalcApp(App):
         current_castle = self.current_castle_record() or {}
         return {
             "name": self.active_castle_name or ids.castle_spinner.text or "Замок",
-            "display_name": str(current_castle.get("display_name") or self.active_castle_name or ids.castle_spinner.text or "Замок"),
+            "display_name": str(ids.current_profile_display_name.text or current_castle.get("display_name") or self.active_castle_name or ids.castle_spinner.text or "Замок") if "current_profile_display_name" in ids else str(current_castle.get("display_name") or self.active_castle_name or ids.castle_spinner.text or "Замок"),
+            "kingdom": str(current_castle.get("kingdom") or self.castle_kingdom_label(self.active_castle_name, current_castle) or ""),
             "wall_units_base": ids.wall_units_base.text,
             "defensive_resources_note": ids.defensive_resources_note.text,
             "governor": self.governor_profile_from_form(),
@@ -2137,6 +3028,7 @@ class EmpireCalcApp(App):
         if not account:
             return
         castle = account.setdefault("castles", {}).setdefault(castle_name, default_castle_record(castle_name))
+        castle.setdefault("kingdom", self.castle_kingdom_label(castle_name, castle))
         governor = castle.get("governor") or default_governor()
         commander = castle.get("commander") or default_commander()
         ids = self.root.ids
@@ -2146,6 +3038,9 @@ class EmpireCalcApp(App):
             desired_name = str(castle.get("display_name") or castle_name)
             if ids.current_profile_display_name.text != desired_name:
                 ids.current_profile_display_name.text = desired_name
+        kingdom_label = self.castle_kingdom_label(castle_name, castle)
+        self.current_profile_kingdom_text = kingdom_label
+        self.current_profile_kingdom_visible = bool(kingdom_label)
         ids.wall_units_base.text = str(castle.get("wall_units_base") or "")
         ids.defensive_resources_note.text = str(castle.get("defensive_resources_note") or "")
         ids.unit_lines.text = str(castle.get("units_text") or "")
@@ -2156,6 +3051,10 @@ class EmpireCalcApp(App):
             ids.governor_general_name.text = str(governor.get("general_name") or GOVERNOR_GENERAL_NONE)
         if "governor_general_id" in ids:
             ids.governor_general_id.text = str(governor.get("general_id") or "")
+        if "governor_general_level" in ids:
+            ids.governor_general_level.text = str(governor.get("general_level") or "")
+        if "governor_general_star_level" in ids:
+            ids.governor_general_star_level.text = str(governor.get("general_star_level") or "")
         ids.governor_melee_bonus.text = str(governor.get("melee_bonus") or "")
         ids.governor_ranged_bonus.text = str(governor.get("ranged_bonus") or "")
         if "governor_flank_bonus" in ids:
@@ -2181,6 +3080,9 @@ class EmpireCalcApp(App):
             ids.skill_wall_limit_percent_bonus_level.text = str(governor.get("skill_wall_limit_percent_bonus_level") or "")
         if "skill_courtyard_size_bonus_level" in ids:
             ids.skill_courtyard_size_bonus_level.text = str(governor.get("skill_courtyard_size_bonus_level") or "")
+        self.refresh_governor_general_progress_controls(governor)
+        self.refresh_governor_skill_controls(governor)
+        self.refresh_governor_skill_tree(governor)
         ids.commander_melee_bonus.text = str(commander.get("melee_bonus") or "")
         ids.commander_ranged_bonus.text = str(commander.get("ranged_bonus") or "")
         ids.commander_overall_bonus.text = str(commander.get("overall_bonus") or "")

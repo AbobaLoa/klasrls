@@ -267,6 +267,17 @@ def resolve_ability_effect_values(ability: dict[str, Any] | None, ability_effect
     return values
 
 
+def build_ability_level_payload(level_item: dict[str, Any], ability_effects_by_id: dict[str, dict[str, Any]]) -> dict[str, Any]:
+    return {
+        "ability_id": str(level_item.get("abilityid") or ""),
+        "level": int(str(level_item.get("level") or "0") or 0),
+        "ability_attack_effect_id": str(level_item.get("abilityattackeffectid") or ""),
+        "ability_defense_effect_id": str(level_item.get("abilitydefenseeffectid") or ""),
+        "attack_effect_values": resolve_ability_effect_values(level_item, ability_effects_by_id, "attack"),
+        "defense_effect_values": resolve_ability_effect_values(level_item, ability_effects_by_id, "defense"),
+    }
+
+
 def resolve_ability_description(group_id: str, ability: dict[str, Any] | None, effect_type: str, lang: dict[str, Any]) -> str:
     key = f"generals_abilities_desc_{effect_type}_{group_id}".lower()
     text = str(lang.get(key) or "")
@@ -487,15 +498,7 @@ def build_catalog() -> list[dict[str, Any]]:
                         "defense_effect_values": resolve_ability_effect_values(ability, ability_effects_by_id_global, "defense"),
                         "ability_attack_effect_id": str((ability or {}).get("abilityattackeffectid") or ""),
                         "ability_defense_effect_id": str((ability or {}).get("abilitydefenseeffectid") or ""),
-                        "levels": [
-                            {
-                                "ability_id": str(item.get("abilityid") or ""),
-                                "level": int(str(item.get("level") or "0") or 0),
-                                "ability_attack_effect_id": str(item.get("abilityattackeffectid") or ""),
-                                "ability_defense_effect_id": str(item.get("abilitydefenseeffectid") or ""),
-                            }
-                            for item in ability_levels
-                        ],
+                        "levels": [build_ability_level_payload(item, ability_effects_by_id_global) for item in ability_levels],
                     }
                 )
 

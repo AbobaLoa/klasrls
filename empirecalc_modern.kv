@@ -181,6 +181,68 @@
         color: 1, 1, 1, 1
         font_size: dp(12)
 
+<GovernorSkillTile>:
+    orientation: 'vertical'
+    size_hint_x: 1
+    size_hint_y: None
+    height: dp(92)
+    spacing: dp(4)
+    padding: [dp(6), dp(6), dp(6), dp(6)]
+    canvas.before:
+        Color:
+            rgba: (0.76, 0.6, 0.3, 1) if self.selected else (0.21, 0.24, 0.34, 0.78) if self.locked else (0.19, 0.24, 0.38, 1) if self.skill_type == 'defense' else (0.34, 0.22, 0.22, 1) if self.skill_type == 'attack' else (0.25, 0.22, 0.39, 1) if self.skill_type == 'ability' else (0.11, 0.17, 0.25, 1)
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [14,]
+        Color:
+            rgba: (0.97, 0.86, 0.55, 0.42) if self.selected else (1, 1, 1, 0.08)
+        Line:
+            rounded_rectangle: [self.x, self.y, self.width, self.height, dp(14)]
+            width: 1.1
+
+    BoxLayout:
+        size_hint_y: None
+        height: dp(34)
+        spacing: dp(4)
+
+        AsyncImage:
+            source: root.image_source if root.image_source else ''
+            fit_mode: 'contain'
+
+        Label:
+            text: root.badge_text
+            size_hint_x: None
+            width: dp(24)
+            color: 1, 1, 1, 1
+            bold: True
+            font_size: dp(11)
+            halign: 'center'
+            valign: 'middle'
+            text_size: self.size
+
+    Label:
+        text: root.title_text
+        text_size: self.width, None
+        halign: 'center'
+        valign: 'middle'
+        color: (0.92, 0.94, 0.98, 0.5) if root.locked else (0.98, 0.99, 1, 1)
+        bold: True
+        font_size: dp(10)
+        shorten: True
+        shorten_from: 'right'
+        max_lines: 2
+
+    Label:
+        text: root.footer_text
+        size_hint_y: None
+        height: dp(14)
+        text_size: self.width, None
+        halign: 'center'
+        valign: 'middle'
+        color: (0.83, 0.88, 0.95, 0.45) if root.locked else (0.84, 0.9, 0.98, 1)
+        font_size: dp(10)
+
 <SceneCaption@Label>:
     size_hint_y: None
     height: dp(22)
@@ -376,7 +438,6 @@ BoxLayout:
         size_hint_y: None
         height: 0
         opacity: 0
-        disabled: True
 
         AppInput:
             id: account_name
@@ -418,6 +479,30 @@ BoxLayout:
 
                     PanelCard:
                         SectionTitle:
+                            text: 'Профиль замка'
+
+                        FieldName:
+                            text: 'Название профиля'
+
+                        AppInput:
+                            id: current_profile_display_name
+                            hint_text: 'Например: Основа деф / Лёд / Песок'
+                            on_text: app.on_current_profile_name_changed(self.text)
+
+                        FieldName:
+                            text: 'Королевство'
+                            size_hint_y: None
+                            height: dp(20) if app.current_profile_kingdom_visible else 0
+                            opacity: 1 if app.current_profile_kingdom_visible else 0
+
+                        BodyText:
+                            text: app.current_profile_kingdom_text if app.current_profile_kingdom_visible else ''
+                            size_hint_y: None
+                            height: max(dp(24), self.texture_size[1] + dp(6)) if app.current_profile_kingdom_visible else 0
+                            opacity: 1 if app.current_profile_kingdom_visible else 0
+
+                    PanelCard:
+                        SectionTitle:
                             text: 'Наместник'
 
                         AppInput:
@@ -443,55 +528,183 @@ BoxLayout:
                             values: app.governor_general_values
                             on_text: app.on_governor_general_selected(self.text)
 
+                        FieldName:
+                            text: 'Прокачка генерала'
+
+                        BoxLayout:
+                            size_hint_y: None
+                            height: dp(44)
+                            spacing: dp(8)
+
+                            AppSpinner:
+                                id: governor_general_level
+                                text: 'Уровень'
+                                values: app.governor_general_level_values
+                                disabled: True
+                                on_text: app.on_governor_general_progress_changed()
+
+                            AppSpinner:
+                                id: governor_general_star_level
+                                text: 'Звёзды'
+                                values: app.governor_general_star_values
+                                disabled: True
+                                on_text: app.on_governor_general_progress_changed()
+
                         OutputArea:
                             text: app.governor_general_summary
                             size_hint_y: None
                             height: dp(154)
 
-                        FieldName:
-                            text: 'Навык: фланги в обороне, ур.'
+                        SectionTitle:
+                            text: 'Древо навыков'
 
-                        AppInput:
-                            id: skill_flank_bonus_level
-                            hint_text: 'Например: 12'
-                            input_filter: 'int'
-                            on_text: app.on_governor_skill_input_changed()
+                        BodyText:
+                            text: app.governor_skill_tree_points
 
-                        FieldName:
-                            text: 'Навык: центр в обороне, ур.'
+                        BoxLayout:
+                            size_hint_y: None
+                            height: dp(132)
+                            spacing: dp(10)
+                            padding: [dp(10), dp(10), dp(10), dp(10)]
+                            canvas.before:
+                                Color:
+                                    rgba: 0.07, 0.11, 0.18, 1
+                                RoundedRectangle:
+                                    pos: self.pos
+                                    size: self.size
+                                    radius: [14,]
 
-                        AppInput:
-                            id: skill_center_bonus_level
-                            hint_text: 'Например: 16'
-                            input_filter: 'int'
-                            on_text: app.on_governor_skill_input_changed()
+                            AsyncImage:
+                                source: app.governor_skill_detail_icon_source if app.governor_skill_detail_icon_source else ''
+                                size_hint_x: None
+                                width: dp(76)
+                                fit_mode: 'contain'
 
-                        FieldName:
-                            text: 'Навык: двор в обороне, ур.'
+                            BoxLayout:
+                                orientation: 'vertical'
+                                spacing: dp(4)
 
-                        AppInput:
-                            id: skill_courtyard_bonus_level
-                            hint_text: 'Например: 8'
-                            input_filter: 'int'
-                            on_text: app.on_governor_skill_input_changed()
+                                Label:
+                                    text: app.governor_skill_detail_title
+                                    size_hint_y: None
+                                    height: dp(20)
+                                    text_size: self.width, None
+                                    halign: 'left'
+                                    valign: 'middle'
+                                    color: 1, 0.98, 0.92, 1
+                                    bold: True
+                                    font_size: dp(14)
+                                    shorten: True
+                                    shorten_from: 'right'
 
-                        FieldName:
-                            text: 'Навык: лимит стены, %, ур.'
+                                Label:
+                                    text: app.governor_skill_detail_subtitle
+                                    size_hint_y: None
+                                    height: dp(18)
+                                    text_size: self.width, None
+                                    halign: 'left'
+                                    valign: 'middle'
+                                    color: 0.98, 0.9, 0.68, 1
+                                    font_size: dp(12)
+                                    shorten: True
+                                    shorten_from: 'right'
 
-                        AppInput:
-                            id: skill_wall_limit_percent_bonus_level
-                            hint_text: 'Например: 10'
-                            input_filter: 'int'
-                            on_text: app.on_governor_skill_input_changed()
+                                Label:
+                                    text: app.governor_skill_detail_level_text
+                                    size_hint_y: None
+                                    height: dp(18)
+                                    text_size: self.width, None
+                                    halign: 'left'
+                                    valign: 'middle'
+                                    color: 0.86, 0.92, 1, 1
+                                    font_size: dp(11)
 
-                        FieldName:
-                            text: 'Навык: размер двора, ур.'
+                                Label:
+                                    text: app.governor_skill_detail_description
+                                    text_size: self.width, None
+                                    halign: 'left'
+                                    valign: 'top'
+                                    color: 0.79, 0.86, 0.95, 1
+                                    font_size: dp(11)
 
-                        AppInput:
-                            id: skill_courtyard_size_bonus_level
-                            hint_text: 'Например: 5'
-                            input_filter: 'int'
-                            on_text: app.on_governor_skill_input_changed()
+                        BoxLayout:
+                            size_hint_y: None
+                            height: dp(44)
+                            spacing: dp(8)
+
+                            SecondaryButton:
+                                text: app.governor_skill_detail_slot_action_text
+                                opacity: 1 if app.governor_skill_detail_slot_action_visible else 0
+                                disabled: not app.governor_skill_detail_slot_action_enabled
+                                size_hint_x: 1.2
+                                on_release: app.toggle_selected_governor_tree_slot_skill()
+
+                            SecondaryButton:
+                                text: '-1'
+                                disabled: not app.governor_skill_detail_can_decrease
+                                on_release: app.adjust_selected_governor_tree_skill(-1)
+
+                            SecondaryButton:
+                                text: 'Сброс'
+                                disabled: not app.governor_skill_detail_can_decrease
+                                on_release: app.reset_selected_governor_tree_skill()
+
+                            SecondaryButton:
+                                text: 'Макс'
+                                disabled: not app.governor_skill_detail_can_increase
+                                on_release: app.maximize_selected_governor_tree_skill()
+
+                            AppButton:
+                                text: '+1'
+                                disabled: not app.governor_skill_detail_can_increase
+                                on_release: app.adjust_selected_governor_tree_skill(1)
+
+                        BoxLayout:
+                            id: governor_skill_tree_rows
+                            orientation: 'vertical'
+                            size_hint_y: None
+                            height: self.minimum_height
+                            spacing: dp(8)
+
+                        BoxLayout:
+                            size_hint_y: None
+                            height: 0
+                            opacity: 0
+
+                            AppSpinner:
+                                id: skill_flank_bonus_level
+                                text: '0'
+                                values: ['0']
+                                disabled: True
+                                on_text: app.on_governor_skill_input_changed()
+
+                            AppSpinner:
+                                id: skill_center_bonus_level
+                                text: '0'
+                                values: ['0']
+                                disabled: True
+                                on_text: app.on_governor_skill_input_changed()
+
+                            AppSpinner:
+                                id: skill_courtyard_bonus_level
+                                text: '0'
+                                values: ['0']
+                                disabled: True
+                                on_text: app.on_governor_skill_input_changed()
+
+                            AppSpinner:
+                                id: skill_wall_limit_percent_bonus_level
+                                text: '0'
+                                values: ['0']
+                                disabled: True
+                                on_text: app.on_governor_skill_input_changed()
+
+                            AppSpinner:
+                                id: skill_courtyard_size_bonus_level
+                                text: '0'
+                                values: ['0']
+                                disabled: True
+                                on_text: app.on_governor_skill_input_changed()
 
                         FieldName:
                             text: 'Фланги вручную, %'
@@ -651,17 +864,12 @@ BoxLayout:
                             OutputArea:
                                 text: app.defense_tool_picker_output
 
-                        ScrollView:
-                            do_scroll_x: False
+                        BoxLayout:
+                            id: defense_tools_list
+                            orientation: 'vertical'
                             size_hint_y: None
-                            height: dp(180)
-
-                            BoxLayout:
-                                id: defense_tools_list
-                                orientation: 'vertical'
-                                size_hint_y: None
-                                height: self.minimum_height
-                                spacing: dp(8)
+                            height: self.minimum_height
+                            spacing: dp(8)
 
                         AppArea:
                             id: defensive_tools_lines
@@ -741,17 +949,12 @@ BoxLayout:
                                 size_hint_y: None
                                 height: dp(110)
 
-                            ScrollView:
-                                do_scroll_x: False
+                            BoxLayout:
+                                id: wall_active_units_list
+                                orientation: 'vertical'
                                 size_hint_y: None
-                                height: dp(214)
-
-                                BoxLayout:
-                                    id: wall_active_units_list
-                                    orientation: 'vertical'
-                                    size_hint_y: None
-                                    height: self.minimum_height
-                                    spacing: dp(8)
+                                height: self.minimum_height
+                                spacing: dp(8)
 
                         BodyText:
                             text: 'Техническое хранилище гарнизона. Можно не трогать, если пользуешься интерактивным блоком выше.'
@@ -1153,7 +1356,7 @@ BoxLayout:
         AppButton:
             text: 'Замки'
             background_color: 0.79, 0.45, 0.17, 1
-            on_release: app.open_castle_selector_popup()
+            on_release: app.open_castle_dropdown()
 
         AppButton:
             text: 'Бой'
