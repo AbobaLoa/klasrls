@@ -1,0 +1,405 @@
+#:import dp kivy.metrics.dp
+
+BoxLayout:
+    orientation: 'vertical'
+    padding: dp(10)
+    spacing: dp(8)
+
+    BoxLayout:
+        size_hint_y: None
+        height: dp(44)
+        spacing: dp(8)
+
+        Button:
+            text: 'Демо'
+            on_release: app.load_demo()
+
+        Button:
+            text: 'Аккаунт'
+            on_release: app.create_or_open_account()
+
+        Button:
+            text: 'Сохранить замок'
+            on_release: app.store_current_castle()
+
+        Button:
+            text: 'Проверить оборону'
+            on_release: app.calculate_profile_defense()
+
+    ScrollView:
+        do_scroll_x: False
+
+        GridLayout:
+            cols: 1
+            size_hint_y: None
+            height: self.minimum_height
+            spacing: dp(12)
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(6)
+
+                Label:
+                    text: 'Локальный профиль'
+                    size_hint_y: None
+                    height: dp(28)
+                    halign: 'left'
+                    text_size: self.width, None
+                    bold: True
+
+                BoxLayout:
+                    size_hint_y: None
+                    height: dp(44)
+                    spacing: dp(8)
+
+                    TextInput:
+                        id: account_name
+                        hint_text: 'Имя аккаунта, например AbobaVaflya'
+                        multiline: False
+
+                    Spinner:
+                        id: castle_spinner
+                        text: 'Основной замок'
+                        values: app.castle_values
+                        on_text: app.select_castle(self.text)
+
+                Label:
+                    text: app.profile_output
+                    size_hint_y: None
+                    height: max(dp(90), self.texture_size[1] + dp(20))
+                    halign: 'left'
+                    text_size: self.width, None
+                    valign: 'top'
+
+                Label:
+                    text: 'Наместник и защита замка'
+                    size_hint_y: None
+                    height: dp(28)
+                    halign: 'left'
+                    text_size: self.width, None
+                    bold: True
+
+                GridLayout:
+                    cols: 2
+                    size_hint_y: None
+                    height: dp(198)
+                    spacing: dp(6)
+
+                    TextInput:
+                        id: governor_melee_bonus
+                        hint_text: 'Бонус мили-защиты %'
+                        multiline: False
+                        input_filter: 'float'
+
+                    TextInput:
+                        id: governor_ranged_bonus
+                        hint_text: 'Бонус стрелков в защите %'
+                        multiline: False
+                        input_filter: 'float'
+
+                    TextInput:
+                        id: governor_courtyard_bonus
+                        hint_text: 'Боевая мощь двора %'
+                        multiline: False
+                        input_filter: 'float'
+
+                    TextInput:
+                        id: governor_center_bonus
+                        hint_text: 'Бонус защиты центра %'
+                        multiline: False
+                        input_filter: 'float'
+
+                    TextInput:
+                        id: governor_overall_bonus
+                        hint_text: 'Общая мощь защитников %'
+                        multiline: False
+                        input_filter: 'float'
+
+                    TextInput:
+                        id: governor_wall_defense
+                        hint_text: 'Защита стены %'
+                        multiline: False
+                        input_filter: 'float'
+
+                    TextInput:
+                        id: governor_gate_defense
+                        hint_text: 'Защита ворот %'
+                        multiline: False
+                        input_filter: 'float'
+
+                    TextInput:
+                        id: governor_moat_defense
+                        hint_text: 'Защита рва %'
+                        multiline: False
+                        input_filter: 'float'
+
+                    TextInput:
+                        id: governor_wall_limit_bonus
+                        hint_text: 'Лимит юнитов на стене +'
+                        multiline: False
+                        input_filter: 'int'
+
+                    TextInput:
+                        id: wall_units_base
+                        hint_text: 'Солдат на стене без буста'
+                        multiline: False
+                        input_filter: 'int'
+
+                TextInput:
+                    id: defensive_resources_note
+                    hint_text: 'Заглушка: сюда позже добавим оборонительные ресурсы'
+                    size_hint_y: None
+                    height: dp(80)
+
+                Label:
+                    text: 'Гарнизон замка: имя,всего,защ_ближ,защ_дальн,лево,центр,право'
+                    size_hint_y: None
+                    height: dp(40)
+                    halign: 'left'
+                    text_size: self.width, None
+
+                TextInput:
+                    id: unit_lines
+                    hint_text: 'Защитницы севера,100000,95,185,18000,22000,18000'
+                    size_hint_y: None
+                    height: dp(180)
+
+                Label:
+                    text: 'Атакующие орудия: flank,name,count  или  name,count для общего применения'
+                    size_hint_y: None
+                    height: dp(40)
+                    halign: 'left'
+                    text_size: self.width, None
+
+                TextInput:
+                    id: attack_tools_lines
+                    hint_text: 'left,Осадная башня,10'
+                    size_hint_y: None
+                    height: dp(140)
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(6)
+
+                Label:
+                    text: 'Атака по 3 флангам и итоговый расчёт'
+                    size_hint_y: None
+                    height: dp(28)
+                    halign: 'left'
+                    text_size: self.width, None
+                    bold: True
+
+                Label:
+                    text: 'Левая стена'
+                    size_hint_y: None
+                    height: dp(22)
+                    halign: 'left'
+                    text_size: self.width, None
+
+                GridLayout:
+                    cols: 2
+                    size_hint_y: None
+                    height: dp(132)
+                    spacing: dp(6)
+
+                    TextInput:
+                        id: left_enemy_melee
+                        hint_text: 'Атака врага ближ.'
+                        multiline: False
+                        input_filter: 'float'
+
+                    TextInput:
+                        id: left_enemy_ranged
+                        hint_text: 'Атака врага дальн.'
+                        multiline: False
+                        input_filter: 'float'
+
+                    TextInput:
+                        id: left_tool_melee
+                        hint_text: 'Твой доп. буст мили %'
+                        multiline: False
+                        input_filter: 'float'
+
+                    TextInput:
+                        id: left_tool_ranged
+                        hint_text: 'Твой доп. буст стрелков %'
+                        multiline: False
+                        input_filter: 'float'
+
+                    TextInput:
+                        id: left_extra_bonus
+                        hint_text: 'Прочий бонус %'
+                        multiline: False
+                        input_filter: 'float'
+
+                    Widget:
+
+                Label:
+                    text: 'Центр'
+                    size_hint_y: None
+                    height: dp(22)
+                    halign: 'left'
+                    text_size: self.width, None
+
+                GridLayout:
+                    cols: 2
+                    size_hint_y: None
+                    height: dp(132)
+                    spacing: dp(6)
+
+                    TextInput:
+                        id: center_enemy_melee
+                        hint_text: 'Атака врага ближ.'
+                        multiline: False
+                        input_filter: 'float'
+
+                    TextInput:
+                        id: center_enemy_ranged
+                        hint_text: 'Атака врага дальн.'
+                        multiline: False
+                        input_filter: 'float'
+
+                    TextInput:
+                        id: center_tool_melee
+                        hint_text: 'Твой доп. буст мили %'
+                        multiline: False
+                        input_filter: 'float'
+
+                    TextInput:
+                        id: center_tool_ranged
+                        hint_text: 'Твой доп. буст стрелков %'
+                        multiline: False
+                        input_filter: 'float'
+
+                    TextInput:
+                        id: center_extra_bonus
+                        hint_text: 'Прочий бонус %'
+                        multiline: False
+                        input_filter: 'float'
+
+                    Widget:
+
+                Label:
+                    text: 'Правая стена'
+                    size_hint_y: None
+                    height: dp(22)
+                    halign: 'left'
+                    text_size: self.width, None
+
+                GridLayout:
+                    cols: 2
+                    size_hint_y: None
+                    height: dp(132)
+                    spacing: dp(6)
+
+                    TextInput:
+                        id: right_enemy_melee
+                        hint_text: 'Атака врага ближ.'
+                        multiline: False
+                        input_filter: 'float'
+
+                    TextInput:
+                        id: right_enemy_ranged
+                        hint_text: 'Атака врага дальн.'
+                        multiline: False
+                        input_filter: 'float'
+
+                    TextInput:
+                        id: right_tool_melee
+                        hint_text: 'Твой доп. буст мили %'
+                        multiline: False
+                        input_filter: 'float'
+
+                    TextInput:
+                        id: right_tool_ranged
+                        hint_text: 'Твой доп. буст стрелков %'
+                        multiline: False
+                        input_filter: 'float'
+
+                    TextInput:
+                        id: right_extra_bonus
+                        hint_text: 'Прочий бонус %'
+                        multiline: False
+                        input_filter: 'float'
+
+                    Widget:
+
+                Label:
+                    text: app.defense_output
+                    size_hint_y: None
+                    height: max(dp(380), self.texture_size[1] + dp(20))
+                    text_size: self.width, None
+                    valign: 'top'
+                    halign: 'left'
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(6)
+
+                BoxLayout:
+                    size_hint_y: None
+                    height: dp(44)
+                    spacing: dp(8)
+
+                    Button:
+                        text: 'Ап здания'
+                        on_release: app.calculate_upgrade()
+
+                Label:
+                    text: 'Калькулятор улучшения'
+                    size_hint_y: None
+                    height: dp(28)
+                    halign: 'left'
+                    text_size: self.width, None
+                    bold: True
+
+                TextInput:
+                    id: building_name
+                    hint_text: 'Название здания'
+                    multiline: False
+                    size_hint_y: None
+                    height: dp(44)
+
+                BoxLayout:
+                    size_hint_y: None
+                    height: dp(44)
+                    spacing: dp(8)
+
+                    TextInput:
+                        id: current_level
+                        hint_text: 'Текущий'
+                        multiline: False
+                        input_filter: 'int'
+
+                    TextInput:
+                        id: target_level
+                        hint_text: 'Целевой'
+                        multiline: False
+                        input_filter: 'int'
+
+                Label:
+                    text: 'Строки: уровень,молотки,жетоны,заметка'
+                    size_hint_y: None
+                    height: dp(22)
+                    halign: 'left'
+                    text_size: self.width, None
+
+                TextInput:
+                    id: upgrade_lines
+                    hint_text: '9,120,4,обычный ап'
+                    size_hint_y: None
+                    height: dp(120)
+
+                Label:
+                    text: app.upgrade_output
+                    size_hint_y: None
+                    height: max(dp(160), self.texture_size[1] + dp(20))
+                    text_size: self.width, None
+                    valign: 'top'
+                    halign: 'left'

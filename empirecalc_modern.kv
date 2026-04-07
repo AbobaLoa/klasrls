@@ -1,0 +1,1171 @@
+#:import dp kivy.metrics.dp
+
+<ScreenTitle@Label>:
+    size_hint_y: None
+    height: dp(34)
+    text_size: self.width, None
+    halign: 'left'
+    valign: 'middle'
+    bold: True
+    color: 0.98, 0.99, 1, 1
+    font_size: dp(22)
+
+<SectionTitle@Label>:
+    size_hint_y: None
+    height: dp(28)
+    text_size: self.width, None
+    halign: 'left'
+    valign: 'middle'
+    bold: True
+    color: 0.96, 0.98, 1, 1
+    font_size: dp(17)
+
+<BodyText@Label>:
+    size_hint_y: None
+    height: max(dp(24), self.texture_size[1] + dp(6))
+    text_size: self.width, None
+    halign: 'left'
+    valign: 'top'
+    color: 0.69, 0.78, 0.9, 1
+    font_size: dp(13)
+
+<FieldName@Label>:
+    size_hint_y: None
+    height: dp(20)
+    text_size: self.width, None
+    halign: 'left'
+    valign: 'middle'
+    color: 0.88, 0.92, 0.99, 1
+    font_size: dp(13)
+
+<PanelCard@BoxLayout>:
+    orientation: 'vertical'
+    size_hint_y: None
+    height: self.minimum_height
+    padding: dp(14)
+    spacing: dp(8)
+    canvas.before:
+        Color:
+            rgba: 0.08, 0.12, 0.18, 0.98
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [18,]
+
+<AppButton@Button>:
+    size_hint_y: None
+    height: dp(44)
+    background_normal: ''
+    background_down: ''
+    background_color: 0.2, 0.45, 0.88, 1
+    color: 1, 1, 1, 1
+    font_size: dp(14)
+
+<SecondaryButton@AppButton>:
+    background_color: 0.16, 0.23, 0.34, 1
+
+<DangerButton@AppButton>:
+    background_color: 0.73, 0.24, 0.24, 1
+
+<AppInput@TextInput>:
+    size_hint_y: None
+    height: dp(44)
+    multiline: False
+    background_normal: ''
+    background_active: ''
+    background_color: 0.11, 0.17, 0.25, 1
+    foreground_color: 0.96, 0.98, 1, 1
+    cursor_color: 1, 1, 1, 1
+    hint_text_color: 0.52, 0.62, 0.74, 1
+    padding: [dp(12), dp(12), dp(12), dp(12)]
+
+<AppArea@TextInput>:
+    background_normal: ''
+    background_active: ''
+    background_color: 0.11, 0.17, 0.25, 1
+    foreground_color: 0.96, 0.98, 1, 1
+    cursor_color: 1, 1, 1, 1
+    hint_text_color: 0.52, 0.62, 0.74, 1
+    padding: [dp(12), dp(12), dp(12), dp(12)]
+
+<OutputArea@TextInput>:
+    readonly: True
+    background_normal: ''
+    background_active: ''
+    background_color: 0.07, 0.11, 0.18, 1
+    foreground_color: 0.92, 0.96, 1, 1
+    cursor_color: 1, 1, 1, 1
+    padding: [dp(12), dp(12), dp(12), dp(12)]
+
+<AppSpinner@Spinner>:
+    size_hint_y: None
+    height: dp(44)
+    background_normal: ''
+    background_down: ''
+    background_color: 0.11, 0.17, 0.25, 1
+    color: 0.96, 0.98, 1, 1
+
+<WallUnitRow>:
+    orientation: 'horizontal'
+    size_hint_y: None
+    height: dp(74)
+    spacing: dp(10)
+    padding: [dp(10), dp(8), dp(10), dp(8)]
+    canvas.before:
+        Color:
+            rgba: (0.74, 0.58, 0.31, 1) if self.selected else (0.11, 0.17, 0.25, 1)
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [14,]
+        Color:
+            rgba: (0.95, 0.84, 0.56, 0.28) if self.selected else (1, 1, 1, 0.04)
+        Line:
+            rounded_rectangle: [self.x, self.y, self.width, self.height, dp(14)]
+            width: 1.2
+
+    AsyncImage:
+        source: root.image_source if root.image_source else ''
+        size_hint_x: None
+        width: dp(58)
+        fit_mode: 'contain'
+
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: dp(2)
+
+        Label:
+            text: root.title_text
+            text_size: self.width, None
+            halign: 'left'
+            valign: 'middle'
+            color: 1, 0.98, 0.92, 1
+            bold: True
+            font_size: dp(14)
+            size_hint_y: None
+            height: dp(20)
+            shorten: True
+            shorten_from: 'right'
+
+        Label:
+            text: root.subtitle_text
+            text_size: self.width, None
+            halign: 'left'
+            valign: 'middle'
+            color: 0.98, 0.9, 0.68, 1
+            font_size: dp(12)
+            size_hint_y: None
+            height: dp(18)
+            shorten: True
+            shorten_from: 'right'
+
+        Label:
+            text: root.detail_text
+            text_size: self.width, None
+            halign: 'left'
+            valign: 'middle'
+            color: 0.79, 0.86, 0.95, 1
+            font_size: dp(11)
+            size_hint_y: None
+            height: dp(18)
+            shorten: True
+            shorten_from: 'right'
+
+    Label:
+        text: root.stats_text
+        size_hint_x: None
+        width: dp(92)
+        text_size: self.width, None
+        halign: 'right'
+        valign: 'middle'
+        color: 1, 1, 1, 1
+        font_size: dp(12)
+
+<SceneCaption@Label>:
+    size_hint_y: None
+    height: dp(22)
+    text_size: self.width, None
+    halign: 'center'
+    valign: 'middle'
+    color: 0.32, 0.2, 0.08, 1
+    bold: True
+    font_size: dp(14)
+
+<SceneStat@Label>:
+    size_hint_y: None
+    height: dp(20)
+    text_size: self.width, None
+    halign: 'center'
+    valign: 'middle'
+    color: 0.42, 0.27, 0.11, 1
+    font_size: dp(12)
+
+<CastlePreview@RelativeLayout>:
+    size_hint_y: None
+    height: dp(228)
+    canvas.before:
+        Color:
+            rgba: 0.94, 0.82, 0.67, 1
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [20,]
+        Color:
+            rgba: 0.67, 0.84, 0.96, 1
+        RoundedRectangle:
+            pos: self.x + dp(6), self.y + dp(56)
+            size: self.width - dp(12), self.height - dp(62)
+            radius: [18,]
+        Color:
+            rgba: 0.97, 0.96, 0.9, 0.95
+        Ellipse:
+            pos: self.x + dp(18), self.top - dp(54)
+            size: dp(78), dp(28)
+        Ellipse:
+            pos: self.x + dp(74), self.top - dp(48)
+            size: dp(92), dp(24)
+        Ellipse:
+            pos: self.right - dp(154), self.top - dp(52)
+            size: dp(108), dp(28)
+        Color:
+            rgba: 0.51, 0.73, 0.35, 1
+        Rectangle:
+            pos: self.x + dp(6), self.y + dp(56)
+            size: self.width - dp(12), dp(40)
+        Color:
+            rgba: 0.69, 0.55, 0.39, 1
+        RoundedRectangle:
+            pos: self.center_x - dp(118), self.y + dp(68)
+            size: dp(236), dp(52)
+            radius: [10,]
+        RoundedRectangle:
+            pos: self.x + dp(40), self.y + dp(74)
+            size: dp(28), dp(72)
+            radius: [8,]
+        RoundedRectangle:
+            pos: self.right - dp(68), self.y + dp(74)
+            size: dp(28), dp(72)
+            radius: [8,]
+        RoundedRectangle:
+            pos: self.center_x - dp(28), self.y + dp(78)
+            size: dp(56), dp(84)
+            radius: [10,]
+        RoundedRectangle:
+            pos: self.center_x + dp(44), self.y + dp(92)
+            size: dp(34), dp(96)
+            radius: [8,]
+        Color:
+            rgba: 0.39, 0.25, 0.15, 1
+        Rectangle:
+            pos: self.center_x - dp(18), self.y + dp(68)
+            size: dp(36), dp(32)
+        Rectangle:
+            pos: self.center_x + dp(56), self.y + dp(96)
+            size: dp(10), dp(82)
+        Color:
+            rgba: 0.56, 0.22, 0.11, 1
+        Triangle:
+            points: [self.center_x - dp(36), self.y + dp(162), self.center_x, self.y + dp(190), self.center_x + dp(36), self.y + dp(162)]
+        Triangle:
+            points: [self.center_x + dp(40), self.y + dp(188), self.center_x + dp(61), self.y + dp(210), self.center_x + dp(82), self.y + dp(188)]
+        Color:
+            rgba: 0.86, 0.22, 0.12, 1
+        Rectangle:
+            pos: self.center_x + dp(64), self.y + dp(154)
+            size: dp(3), dp(34)
+        Triangle:
+            points: [self.center_x + dp(67), self.y + dp(186), self.center_x + dp(89), self.y + dp(180), self.center_x + dp(67), self.y + dp(170)]
+        Rectangle:
+            pos: self.x + dp(50), self.y + dp(128)
+            size: dp(2), dp(24)
+        Triangle:
+            points: [self.x + dp(52), self.y + dp(150), self.x + dp(68), self.y + dp(146), self.x + dp(52), self.y + dp(138)]
+        Rectangle:
+            pos: self.right - dp(52), self.y + dp(128)
+            size: dp(2), dp(24)
+        Triangle:
+            points: [self.right - dp(50), self.y + dp(150), self.right - dp(34), self.y + dp(146), self.right - dp(50), self.y + dp(138)]
+        Color:
+            rgba: 0.84, 0.73, 0.61, 1
+        RoundedRectangle:
+            pos: self.x + dp(10), self.y + dp(10)
+            size: self.width - dp(20), dp(42)
+            radius: [12,]
+
+BoxLayout:
+    orientation: 'vertical'
+    padding: dp(12)
+    spacing: dp(12)
+    canvas.before:
+        Color:
+            rgba: 0.04, 0.06, 0.1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    PanelCard:
+        FloatLayout:
+            size_hint_y: None
+            height: header_left.height
+
+            BoxLayout:
+                id: header_left
+                orientation: 'vertical'
+                size_hint: 1, None
+                height: self.minimum_height
+                spacing: dp(8)
+                pos_hint: {'x': 0, 'top': 1}
+                padding: [0, 0, dp(70), 0]
+
+                ScreenTitle:
+                    text: 'Empire 4 Kingdoms Calculator'
+
+                BodyText:
+                    text: 'Рабочий профиль замка, атака по волнам, оборонительные орудия и расчёт прорыва в одном месте.'
+
+                OutputArea:
+                    text: app.profile_output
+                    size_hint_y: None
+                    height: dp(96)
+
+                BoxLayout:
+                    size_hint_y: None
+                    height: dp(104)
+                    spacing: dp(10)
+
+                    AsyncImage:
+                        source: app.active_castle_card_image_source if app.active_castle_card_image_source else ''
+                        size_hint_x: None
+                        width: dp(108)
+                        fit_mode: 'contain'
+
+                    BoxLayout:
+                        orientation: 'vertical'
+                        spacing: dp(2)
+
+                        SectionTitle:
+                            text: app.active_castle_card_title
+                            font_size: dp(16)
+
+                        BodyText:
+                            text: app.active_castle_card_subtitle
+                            color: 0.98, 0.9, 0.68, 1
+
+                        BodyText:
+                            text: app.active_castle_card_summary
+
+            Button:
+                text: '◎'
+                size_hint: None, None
+                size: dp(46), dp(46)
+                pos_hint: {'right': 1, 'top': 1}
+                background_normal: ''
+                background_down: ''
+                background_color: 0.12, 0.19, 0.3, 1
+                color: 0.98, 0.99, 1, 1
+                font_size: dp(22)
+                on_release: app.toggle_account_panel()
+                canvas.before:
+                    Color:
+                        rgba: 0.74, 0.58, 0.31, 1
+                    Ellipse:
+                        pos: self.pos
+                        size: self.size
+
+    BoxLayout:
+        size_hint_y: None
+        height: 0
+        opacity: 0
+        disabled: True
+
+        AppInput:
+            id: account_name
+            text: ''
+
+        AppSpinner:
+            id: castle_spinner
+            text: 'Основной замок'
+            values: app.castle_values
+            on_text: app.select_castle(self.text)
+
+        AppInput:
+            id: new_castle_name
+            text: ''
+
+    TabbedPanel:
+        id: main_tabs
+        do_default_tab: False
+        tab_height: 0
+        tab_width: 0
+        strip_image: ''
+        background_image: ''
+        background_color: 0, 0, 0, 0
+        content_tab_width: 0
+
+        TabbedPanelItem:
+            id: tab_profile
+            text: 'Профиль'
+
+            ScrollView:
+                do_scroll_x: False
+
+                GridLayout:
+                    cols: 1
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: dp(12)
+                    padding: [0, 0, 0, dp(12)]
+
+                    PanelCard:
+                        SectionTitle:
+                            text: 'Наместник'
+
+                        AppInput:
+                            id: governor_general_name
+                            size_hint_y: None
+                            height: 0
+                            opacity: 0
+                            disabled: True
+
+                        AppInput:
+                            id: governor_general_id
+                            size_hint_y: None
+                            height: 0
+                            opacity: 0
+                            disabled: True
+
+                        FieldName:
+                            text: 'Официальный наместник'
+
+                        AppSpinner:
+                            id: governor_general_picker
+                            text: 'Без наместника'
+                            values: app.governor_general_values
+                            on_text: app.on_governor_general_selected(self.text)
+
+                        OutputArea:
+                            text: app.governor_general_summary
+                            size_hint_y: None
+                            height: dp(154)
+
+                        FieldName:
+                            text: 'Навык: фланги в обороне, ур.'
+
+                        AppInput:
+                            id: skill_flank_bonus_level
+                            hint_text: 'Например: 12'
+                            input_filter: 'int'
+                            on_text: app.on_governor_skill_input_changed()
+
+                        FieldName:
+                            text: 'Навык: центр в обороне, ур.'
+
+                        AppInput:
+                            id: skill_center_bonus_level
+                            hint_text: 'Например: 16'
+                            input_filter: 'int'
+                            on_text: app.on_governor_skill_input_changed()
+
+                        FieldName:
+                            text: 'Навык: двор в обороне, ур.'
+
+                        AppInput:
+                            id: skill_courtyard_bonus_level
+                            hint_text: 'Например: 8'
+                            input_filter: 'int'
+                            on_text: app.on_governor_skill_input_changed()
+
+                        FieldName:
+                            text: 'Навык: лимит стены, %, ур.'
+
+                        AppInput:
+                            id: skill_wall_limit_percent_bonus_level
+                            hint_text: 'Например: 10'
+                            input_filter: 'int'
+                            on_text: app.on_governor_skill_input_changed()
+
+                        FieldName:
+                            text: 'Навык: размер двора, ур.'
+
+                        AppInput:
+                            id: skill_courtyard_size_bonus_level
+                            hint_text: 'Например: 5'
+                            input_filter: 'int'
+                            on_text: app.on_governor_skill_input_changed()
+
+                        FieldName:
+                            text: 'Фланги вручную, %'
+
+                        AppInput:
+                            id: governor_flank_bonus
+                            hint_text: 'Например: 25'
+                            input_filter: 'float'
+                            on_text: app.on_governor_skill_input_changed()
+
+                        FieldName:
+                            text: 'Ближняя защита, %'
+
+                        AppInput:
+                            id: governor_melee_bonus
+                            hint_text: 'Например: 85'
+                            input_filter: 'float'
+                            on_text: app.refresh_wall_scene()
+
+                        FieldName:
+                            text: 'Дальняя защита, %'
+
+                        AppInput:
+                            id: governor_ranged_bonus
+                            hint_text: 'Например: 110'
+                            input_filter: 'float'
+                            on_text: app.refresh_wall_scene()
+
+                        FieldName:
+                            text: 'Бонус двора, %'
+
+                        AppInput:
+                            id: governor_courtyard_bonus
+                            hint_text: 'Например: 60'
+                            input_filter: 'float'
+                            on_text: app.on_governor_skill_input_changed()
+
+                        FieldName:
+                            text: 'Бонус центра, %'
+
+                        AppInput:
+                            id: governor_center_bonus
+                            hint_text: 'Например: 35'
+                            input_filter: 'float'
+                            on_text: app.on_governor_skill_input_changed()
+
+                        FieldName:
+                            text: 'Общая защита, %'
+
+                        AppInput:
+                            id: governor_overall_bonus
+                            hint_text: 'Например: 70'
+                            input_filter: 'float'
+                            on_text: app.refresh_wall_scene()
+
+                    PanelCard:
+                        SectionTitle:
+                            text: 'Замок и защитные инструменты'
+
+                        FieldName:
+                            text: 'Защита стены, %'
+
+                        AppInput:
+                            id: governor_wall_defense
+                            hint_text: 'Например: 120'
+                            input_filter: 'float'
+                            on_text: app.refresh_wall_scene()
+
+                        FieldName:
+                            text: 'Защита ворот, %'
+
+                        AppInput:
+                            id: governor_gate_defense
+                            hint_text: 'Например: 95'
+                            input_filter: 'float'
+                            on_text: app.refresh_wall_scene()
+
+                        FieldName:
+                            text: 'Защита рва, %'
+
+                        AppInput:
+                            id: governor_moat_defense
+                            hint_text: 'Например: 75'
+                            input_filter: 'float'
+                            on_text: app.refresh_wall_scene()
+
+                        FieldName:
+                            text: 'Лимит стены вручную, +'
+
+                        AppInput:
+                            id: governor_wall_limit_bonus
+                            hint_text: 'Например: 180'
+                            input_filter: 'int'
+                            on_text: app.refresh_wall_scene()
+
+                        FieldName:
+                            text: 'Лимит стены вручную, %'
+
+                        AppInput:
+                            id: governor_wall_limit_percent_bonus
+                            hint_text: 'Например: 15'
+                            input_filter: 'float'
+                            on_text: app.on_governor_skill_input_changed()
+
+                        FieldName:
+                            text: 'Размер двора вручную'
+
+                        AppInput:
+                            id: governor_courtyard_size_bonus
+                            hint_text: 'Например: 8'
+                            input_filter: 'float'
+                            on_text: app.on_governor_skill_input_changed()
+
+                        FieldName:
+                            text: 'Солдат на стене без буста'
+
+                        AppInput:
+                            id: wall_units_base
+                            hint_text: 'Например: 1040'
+                            input_filter: 'int'
+                            on_text: app.refresh_wall_scene()
+
+                        FieldName:
+                            text: 'Оборонительные ресурсы'
+
+                        AppArea:
+                            id: defensive_resources_note
+                            hint_text: 'Смола, камни, масло, заметки по дефу и прочая информация по замку.'
+                            size_hint_y: None
+                            height: dp(92)
+
+                        FieldName:
+                            text: 'Оборонительные орудия'
+
+                        BodyText:
+                            text: 'Нажми кнопку ниже, чтобы открыть интерактивный список орудий. Добавление и редактирование работает так же, как у войск.'
+
+                        FieldName:
+                            text: app.defense_tool_picker_title
+
+                        AppButton:
+                            text: '+ Орудия'
+                            background_color: 0.79, 0.45, 0.17, 1
+                            on_release: app.toggle_defense_tool_add_panel()
+
+                        BoxLayout:
+                            size_hint_y: None
+                            height: dp(116)
+                            spacing: dp(10)
+
+                            AsyncImage:
+                                source: app.defense_tool_picker_image_source if app.defense_tool_picker_image_source else ''
+                                size_hint_x: None
+                                width: dp(92)
+                                fit_mode: 'contain'
+
+                            OutputArea:
+                                text: app.defense_tool_picker_output
+
+                        ScrollView:
+                            do_scroll_x: False
+                            size_hint_y: None
+                            height: dp(180)
+
+                            BoxLayout:
+                                id: defense_tools_list
+                                orientation: 'vertical'
+                                size_hint_y: None
+                                height: self.minimum_height
+                                spacing: dp(8)
+
+                        AppArea:
+                            id: defensive_tools_lines
+                            hint_text: 'left,Бомба с известковой мукой ур.4,5\ncourtyard,Камнемёт,10'
+                            size_hint_y: None
+                            height: dp(132)
+
+                    PanelCard:
+                        SectionTitle:
+                            text: 'Гарнизон на стене'
+
+                        BodyText:
+                            text: 'Выбери фланг, посмотри состав стены и нажми плюс, чтобы сразу добавить солдат на нужный участок.'
+
+                        BoxLayout:
+                            size_hint_y: None
+                            height: dp(64)
+                            padding: dp(12)
+                            spacing: dp(6)
+                            orientation: 'vertical'
+                            canvas.before:
+                                Color:
+                                    rgba: 0.12, 0.16, 0.23, 1
+                                RoundedRectangle:
+                                    pos: self.pos
+                                    size: self.size
+                                    radius: [16,]
+
+                            SectionTitle:
+                                text: app.wall_scene_caption
+                                font_size: dp(16)
+
+                            BodyText:
+                                text: app.wall_scene_totals
+                                color: 0.82, 0.88, 0.96, 1
+
+                        BoxLayout:
+                            size_hint_y: None
+                            height: dp(44)
+                            spacing: dp(8)
+
+                            AppButton:
+                                text: 'Левый'
+                                background_color: (0.82, 0.5, 0.22, 1) if app.wall_active_flank == 'left' else (0.16, 0.23, 0.34, 1)
+                                on_release: app.set_wall_active_flank('left')
+
+                            AppButton:
+                                text: 'Центр'
+                                background_color: (0.82, 0.5, 0.22, 1) if app.wall_active_flank == 'center' else (0.16, 0.23, 0.34, 1)
+                                on_release: app.set_wall_active_flank('center')
+
+                            AppButton:
+                                text: 'Правый'
+                                background_color: (0.82, 0.5, 0.22, 1) if app.wall_active_flank == 'right' else (0.16, 0.23, 0.34, 1)
+                                on_release: app.set_wall_active_flank('right')
+
+                        PanelCard:
+                            padding: dp(12)
+                            spacing: dp(8)
+
+                            BoxLayout:
+                                size_hint_y: None
+                                height: dp(40)
+                                spacing: dp(8)
+
+                                SectionTitle:
+                                    text: app.wall_active_flank_label
+
+                                AppButton:
+                                    size_hint_x: 0.32
+                                    text: '+ Солдаты'
+                                    background_color: 0.79, 0.45, 0.17, 1
+                                    on_release: app.toggle_wall_add_panel()
+
+                            OutputArea:
+                                text: app.wall_active_units_output
+                                size_hint_y: None
+                                height: dp(110)
+
+                            ScrollView:
+                                do_scroll_x: False
+                                size_hint_y: None
+                                height: dp(214)
+
+                                BoxLayout:
+                                    id: wall_active_units_list
+                                    orientation: 'vertical'
+                                    size_hint_y: None
+                                    height: self.minimum_height
+                                    spacing: dp(8)
+
+                        BodyText:
+                            text: 'Техническое хранилище гарнизона. Можно не трогать, если пользуешься интерактивным блоком выше.'
+
+                        AppArea:
+                            id: unit_lines
+                            hint_text: 'Защитницы севера,100000,95,185,18000,22000,18000'
+                            on_text: app.refresh_wall_scene()
+                            size_hint_y: None
+                            height: dp(96)
+
+        TabbedPanelItem:
+            id: tab_battle
+            text: 'Бой'
+
+            ScrollView:
+                do_scroll_x: False
+
+                GridLayout:
+                    cols: 1
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: dp(12)
+                    padding: [0, 0, 0, dp(12)]
+
+                    PanelCard:
+                        SectionTitle:
+                            text: 'Военачальник и атакующий билд'
+
+                        FieldName:
+                            text: 'Ближняя атака, %'
+
+                        AppInput:
+                            id: commander_melee_bonus
+                            hint_text: 'Например: 90'
+                            input_filter: 'float'
+
+                        FieldName:
+                            text: 'Дальняя атака, %'
+
+                        AppInput:
+                            id: commander_ranged_bonus
+                            hint_text: 'Например: 120'
+                            input_filter: 'float'
+
+                        FieldName:
+                            text: 'Общая мощь атаки, %'
+
+                        AppInput:
+                            id: commander_overall_bonus
+                            hint_text: 'Например: 45'
+                            input_filter: 'float'
+
+                        FieldName:
+                            text: 'Бонус флангов, %'
+
+                        AppInput:
+                            id: commander_flank_bonus
+                            hint_text: 'Например: 30'
+                            input_filter: 'float'
+
+                        FieldName:
+                            text: 'Бонус центра, %'
+
+                        AppInput:
+                            id: commander_center_bonus
+                            hint_text: 'Например: 20'
+                            input_filter: 'float'
+
+                        FieldName:
+                            text: 'Бонус двора, %'
+
+                        AppInput:
+                            id: commander_courtyard_bonus
+                            hint_text: 'Например: 55'
+                            input_filter: 'float'
+
+                        FieldName:
+                            text: 'Игнор стены, %'
+
+                        AppInput:
+                            id: commander_wall_bonus
+                            hint_text: 'Например: 70'
+                            input_filter: 'float'
+
+                        FieldName:
+                            text: 'Игнор ворот, %'
+
+                        AppInput:
+                            id: commander_gate_bonus
+                            hint_text: 'Например: 55'
+                            input_filter: 'float'
+
+                        FieldName:
+                            text: 'Игнор рва, %'
+
+                        AppInput:
+                            id: commander_moat_bonus
+                            hint_text: 'Например: 40'
+                            input_filter: 'float'
+
+                    PanelCard:
+                        SectionTitle:
+                            text: 'Атакующие солдаты по волнам'
+
+                        FieldName:
+                            text: 'Количество волн'
+
+                        AppInput:
+                            id: attack_wave_count
+                            text: app.attack_wave_count
+                            hint_text: 'По умолчанию 1'
+                            input_filter: 'int'
+                            on_text: app.update_wave_values(self.text)
+
+                        FieldName:
+                            text: 'Атакующий юнит'
+
+                        AppSpinner:
+                            id: attack_unit_picker
+                            text: 'Выбери атакующего солдата'
+                            values: app.attack_unit_values
+                            on_text: app.update_attack_unit_preview(self.text)
+
+                        AsyncImage:
+                            source: app.attack_unit_picker_image_source if app.attack_unit_picker_image_source else ''
+                            size_hint_y: None
+                            height: dp(116)
+                            fit_mode: 'contain'
+
+                        BodyText:
+                            text: app.attack_unit_picker_output
+
+                        FieldName:
+                            text: 'Фланг / волна / количество'
+
+                        BoxLayout:
+                            size_hint_y: None
+                            height: dp(44)
+                            spacing: dp(8)
+
+                            AppSpinner:
+                                id: attack_unit_flank
+                                text: 'left'
+                                values: ['left', 'center', 'right']
+
+                            AppSpinner:
+                                id: attack_unit_wave
+                                text: '1'
+                                values: app.wave_values
+
+                            AppInput:
+                                id: attack_unit_count
+                                hint_text: 'Кол-во'
+                                input_filter: 'int'
+
+                        AppButton:
+                            text: 'Добавить солдата в волну'
+                            on_release: app.add_selected_attack_unit()
+
+                        BodyText:
+                            text: 'Строки атаки: фланг,волна,солдат,количество,атака,тип'
+
+                        AppArea:
+                            id: attack_unit_lines
+                            hint_text: 'left,1,Maceman,250,38,melee'
+                            size_hint_y: None
+                            height: dp(180)
+
+                    PanelCard:
+                        SectionTitle:
+                            text: 'Атакующие орудия'
+
+                        BodyText:
+                            text: 'Формат: flank,wave,name,count. Можно также общим действием: name,count.'
+
+                        AppArea:
+                            id: attack_tools_lines
+                            hint_text: 'left,1,Осадная башня,10\nall,1,Штандарт,2'
+                            size_hint_y: None
+                            height: dp(132)
+
+                    PanelCard:
+                        SectionTitle:
+                            text: 'Сценарий атаки по флангам'
+
+                        BodyText:
+                            text: 'Вводи видимую атаку и свои дополнительные локальные бонусы по каждому направлению.'
+
+                        SectionTitle:
+                            text: 'Левый фланг'
+
+                        FieldName:
+                            text: 'Атака врага ближнего боя'
+
+                        AppInput:
+                            id: left_enemy_melee
+                            hint_text: 'Например: 14000'
+                            input_filter: 'float'
+
+                        FieldName:
+                            text: 'Атака врага дальнего боя'
+
+                        AppInput:
+                            id: left_enemy_ranged
+                            hint_text: 'Например: 24000'
+                            input_filter: 'float'
+
+                        FieldName:
+                            text: 'Твой доп. буст мили, %'
+
+                        AppInput:
+                            id: left_tool_melee
+                            hint_text: 'Например: 20'
+                            input_filter: 'float'
+
+                        FieldName:
+                            text: 'Твой доп. буст стрелков, %'
+
+                        AppInput:
+                            id: left_tool_ranged
+                            hint_text: 'Например: 70'
+                            input_filter: 'float'
+
+                        FieldName:
+                            text: 'Прочий бонус, %'
+
+                        AppInput:
+                            id: left_extra_bonus
+                            hint_text: 'Например: 10'
+                            input_filter: 'float'
+
+                        SectionTitle:
+                            text: 'Центр'
+
+                        FieldName:
+                            text: 'Атака врага ближнего боя'
+
+                        AppInput:
+                            id: center_enemy_melee
+                            hint_text: 'Например: 18000'
+                            input_filter: 'float'
+
+                        FieldName:
+                            text: 'Атака врага дальнего боя'
+
+                        AppInput:
+                            id: center_enemy_ranged
+                            hint_text: 'Например: 16000'
+                            input_filter: 'float'
+
+                        FieldName:
+                            text: 'Твой доп. буст мили, %'
+
+                        AppInput:
+                            id: center_tool_melee
+                            hint_text: 'Например: 30'
+                            input_filter: 'float'
+
+                        FieldName:
+                            text: 'Твой доп. буст стрелков, %'
+
+                        AppInput:
+                            id: center_tool_ranged
+                            hint_text: 'Например: 30'
+                            input_filter: 'float'
+
+                        FieldName:
+                            text: 'Прочий бонус, %'
+
+                        AppInput:
+                            id: center_extra_bonus
+                            hint_text: 'Например: 5'
+                            input_filter: 'float'
+
+                        SectionTitle:
+                            text: 'Правый фланг'
+
+                        FieldName:
+                            text: 'Атака врага ближнего боя'
+
+                        AppInput:
+                            id: right_enemy_melee
+                            hint_text: 'Например: 15000'
+                            input_filter: 'float'
+
+                        FieldName:
+                            text: 'Атака врага дальнего боя'
+
+                        AppInput:
+                            id: right_enemy_ranged
+                            hint_text: 'Например: 21000'
+                            input_filter: 'float'
+
+                        FieldName:
+                            text: 'Твой доп. буст мили, %'
+
+                        AppInput:
+                            id: right_tool_melee
+                            hint_text: 'Например: 20'
+                            input_filter: 'float'
+
+                        FieldName:
+                            text: 'Твой доп. буст стрелков, %'
+
+                        AppInput:
+                            id: right_tool_ranged
+                            hint_text: 'Например: 50'
+                            input_filter: 'float'
+
+                        FieldName:
+                            text: 'Прочий бонус, %'
+
+                        AppInput:
+                            id: right_extra_bonus
+                            hint_text: 'Например: 10'
+                            input_filter: 'float'
+
+                    PanelCard:
+                        SectionTitle:
+                            text: 'Результат проверки'
+
+                        BodyText:
+                            text: 'После расчёта здесь будет полный разбор стены, двора, потерь и рекомендаций для атаки.'
+
+                        AppButton:
+                            text: 'Проверить оборону'
+                            on_release: app.calculate_profile_defense()
+
+                        OutputArea:
+                            text: app.defense_output
+                            size_hint_y: None
+                            height: dp(520)
+
+        TabbedPanelItem:
+            id: tab_upgrade
+            text: 'Апгрейд'
+
+            ScrollView:
+                do_scroll_x: False
+
+                GridLayout:
+                    cols: 1
+                    size_hint_y: None
+                    height: self.minimum_height
+                    spacing: dp(12)
+                    padding: [0, 0, 0, dp(12)]
+
+                    PanelCard:
+                        SectionTitle:
+                            text: 'Калькулятор улучшения здания'
+
+                        FieldName:
+                            text: 'Название здания'
+
+                        AppInput:
+                            id: building_name
+                            hint_text: 'Например: Госпиталь'
+
+                        FieldName:
+                            text: 'Текущий уровень'
+
+                        AppInput:
+                            id: current_level
+                            hint_text: 'Например: 8'
+                            input_filter: 'int'
+
+                        FieldName:
+                            text: 'Целевой уровень'
+
+                        AppInput:
+                            id: target_level
+                            hint_text: 'Например: 11'
+                            input_filter: 'int'
+
+                        FieldName:
+                            text: 'Строки затрат: уровень, молотки, жетоны, заметка'
+
+                        AppArea:
+                            id: upgrade_lines
+                            hint_text: '9,120,4,обычный ап\n10,180,6,\n11,240,8,под ивент'
+                            size_hint_y: None
+                            height: dp(156)
+
+                        AppButton:
+                            text: 'Посчитать улучшение'
+                            on_release: app.calculate_upgrade()
+
+                        OutputArea:
+                            text: app.upgrade_output
+                            size_hint_y: None
+                            height: dp(240)
+
+    BoxLayout:
+        size_hint_y: None
+        height: dp(52)
+        spacing: dp(8)
+
+        AppButton:
+            text: 'Замки'
+            background_color: 0.79, 0.45, 0.17, 1
+            on_release: app.open_castle_selector_popup()
+
+        AppButton:
+            text: 'Бой'
+            background_color: (0.79, 0.67, 0.42, 1) if app.main_tab == 'battle' else (0.16, 0.23, 0.34, 1)
+            on_release: app.set_main_tab('battle')
+
+        AppButton:
+            text: 'Апгрейд'
+            background_color: (0.79, 0.67, 0.42, 1) if app.main_tab == 'upgrade' else (0.16, 0.23, 0.34, 1)
+            on_release: app.set_main_tab('upgrade')
+
+        AppButton:
+            text: 'Профиль'
+            background_color: (0.79, 0.67, 0.42, 1) if app.main_tab == 'profile' else (0.16, 0.23, 0.34, 1)
+            on_release: app.open_profile_menu()

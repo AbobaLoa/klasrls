@@ -1,0 +1,308 @@
+{
+  "scope": "Goodgame Empire / Empire Four Kingdoms PvP battle model snapshot",
+  "sources": [
+    {
+      "type": "official_catalog",
+      "name": "Units catalog",
+      "path": "data/official_units_catalog.json"
+    },
+    {
+      "type": "official_catalog",
+      "name": "Tools catalog",
+      "path": "data/official_tools_catalog.json"
+    },
+    {
+      "type": "official_catalog",
+      "name": "Generals catalog",
+      "path": "data/official_generals_catalog.json"
+    },
+    {
+      "type": "official_catalog",
+      "name": "Equipment sets catalog",
+      "path": "data/official_equipment_sets_catalog.json"
+    },
+    {
+      "type": "wiki",
+      "url": "https://goodgameempirewiki.wordpress.com/2024/06/06/attack-defense-for-new-players/",
+      "focus": "wall, courtyard, waves, commander/castellan, general assignment, attack presets"
+    },
+    {
+      "type": "wiki",
+      "url": "https://goodgameempirewiki.wordpress.com/2024/06/06/tools/",
+      "focus": "tool categories, combo tools, per-wave/support limits"
+    },
+    {
+      "type": "wiki",
+      "url": "https://goodgameempirewiki.wordpress.com/2024/06/06/equipment-commander-castelan-relic-equipment/",
+      "focus": "equipment rarity, relic rules, gems, caps, commander/castellan setup"
+    },
+    {
+      "type": "wiki",
+      "url": "https://goodgameempirewiki.wordpress.com/2024/06/11/generals-basic-info/comment-page-1/",
+      "focus": "general assignment, leveling, shards, abilities, skill tree"
+    },
+    {
+      "type": "wiki",
+      "url": "https://goodgameempirewiki.wordpress.com/2024/06/11/generals-abilities-and-skills/",
+      "focus": "ability groups per slot, point spending logic"
+    },
+    {
+      "type": "wiki",
+      "url": "https://goodgameempirewiki.wordpress.com/2025/11/13/technicus-relicus/",
+      "focus": "equipment upgrade systems"
+    },
+    {
+      "type": "wiki",
+      "url": "https://goodgameempirewiki.wordpress.com/2024/11/05/battle-calculator-pvp-combat/",
+      "focus": "battle calculator scope and current complexity of PvP combat"
+    },
+    {
+      "type": "wiki",
+      "url": "https://goodgameempirewiki.wordpress.com/2024/11/04/relic-tools-info-calculator-resources-etc/",
+      "focus": "relic tools as endgame source of extra tool strength and resource model"
+    }
+  ],
+  "battle_flow": [
+    {
+      "stage": "wall",
+      "rules": [
+        "The wall is the first combat stage.",
+        "Holding more wall sections reduces the attacker's effective transition to the courtyard.",
+        "If the defender catches the full attack on the wall, the attacker's courtyard wave does not activate.",
+        "Wall capacity matters; increasing wall unit limit is strategically important."
+      ]
+    },
+    {
+      "stage": "courtyard",
+      "rules": [
+        "Courtyard combat is a separate stage after wall resolution.",
+        "Courtyard size is limited by own capacity plus alliance capacity.",
+        "If total troops exceed the limit, only the limit fights and the rest stay in reserve.",
+        "Stronger support troops can replace weaker own troops in active courtyard participation."
+      ]
+    },
+    {
+      "stage": "waves",
+      "rules": [
+        "Attack is executed in waves.",
+        "Base wave count grows with account progression and can reach up to six.",
+        "Additional waves can come from temporary items, equipment and advanced relic tools.",
+        "Wave composition includes units and tools per flank and per wave."
+      ]
+    }
+  ],
+  "attack_construction": {
+    "flanks": [
+      "left",
+      "center",
+      "right"
+    ],
+    "wave_model": {
+      "base_max_waves": 6,
+      "extra_wave_sources": [
+        "temporary items",
+        "commander equipment",
+        "advanced relic tools",
+        "other event/endgame bonuses"
+      ],
+      "practical_rule": "The more waves the attacker has, the better the chance to break the wall and reach an efficient courtyard phase."
+    },
+    "tool_usage": {
+      "categories": [
+        "basic",
+        "premium",
+        "elite",
+        "event",
+        "combo",
+        "support",
+        "relic"
+      ],
+      "rules": [
+        "Combo tools are among the strongest attack tools.",
+        "Attack tools are limited by a maximum per wave.",
+        "Support tools are limited to one per attack or defense setup.",
+        "Event tools can carry economy/event bonuses and are consumed in battle."
+      ]
+    },
+    "attacker_power_sources": [
+      "attacking unit attack values",
+      "tool bonuses per wave",
+      "commander equipment and gems",
+      "general assignment and selected abilities",
+      "stables, research, temporary items and other account progression bonuses"
+    ]
+  },
+  "defense_construction": {
+    "castellan_governor_role": {
+      "description": "Every normal castle has its own defending castellan/governor whose equipment defines major defense bonuses.",
+      "core_bonus_groups": [
+        "melee defense bonus",
+        "ranged defense bonus",
+        "courtyard bonus",
+        "center bonus",
+        "overall bonus",
+        "wall defense bonus",
+        "gate defense bonus",
+        "moat defense bonus",
+        "wall unit limit bonus"
+      ]
+    },
+    "wall_setup": {
+      "rules": [
+        "Defenders distribute troops between left flank, center and right flank.",
+        "Defenders also control melee/ranged ratios.",
+        "Wall-holding logic is strategically central because it can suppress courtyard activation."
+      ]
+    },
+    "courtyard_setup": {
+      "rules": [
+        "Courtyard defenders can adjust troop ratio and include support/courtyard tools.",
+        "Troops over the active courtyard limit remain in reserve.",
+        "Alliance support can alter which troops actually fight."
+      ]
+    },
+    "defender_power_sources": [
+      "defender unit melee/ranged defense values",
+      "castellan/governor bonuses",
+      "general assignment and selected abilities",
+      "defensive tools",
+      "build items and looks",
+      "tower level and structural progression",
+      "support troops"
+    ]
+  },
+  "equipment_and_sets": {
+    "equipment_types": [
+      "commander equipment",
+      "castellan equipment"
+    ],
+    "rarities": [
+      "ordinary",
+      "rare",
+      "epic",
+      "legendary",
+      "unique",
+      "relic"
+    ],
+    "relic_rules": [
+      "Relic equipment is the strongest category.",
+      "Relic equipment cannot be combined with non-relic equipment.",
+      "Relic gems cannot be placed into non-relic equipment and vice versa.",
+      "Relic equipment has star tiers and generation differences that change stat count and power."
+    ],
+    "gems": {
+      "description": "Gems are an independent multiplier layer for commander/castellan builds.",
+      "rules": [
+        "Gems are socketed into equipped pieces.",
+        "Gem compatibility follows relic vs non-relic separation.",
+        "Gems strengthen combat stats and should be considered part of the final build, not a cosmetic add-on."
+      ]
+    },
+    "caps": {
+      "exists": true,
+      "rules": [
+        "Equipment bonuses are capped.",
+        "The wiki explicitly mentions hard caps for commander and castellan builds.",
+        "Cap tables exist externally and are important for optimal build calculation."
+      ],
+      "status_in_project": "caps are not yet modeled"
+    },
+    "set_logic": {
+      "description": "Sets provide piece-level bonuses and milestone bonuses when enough set items are equipped.",
+      "available_local_catalog": "data/official_equipment_sets_catalog.json",
+      "catalog_content": [
+        "pieces",
+        "piece effects",
+        "set milestones",
+        "effect summary",
+        "images"
+      ]
+    },
+    "upgrade_systems": {
+      "technicus": "Upgrades non-relic equipment effects; failure chance rises over time unless paying premium currency.",
+      "relicus": "Upgrades relic items, relic gems and relic heroes using relic splinters and coins/rubies."
+    }
+  },
+  "generals": {
+    "role": "Generals are an extra offensive/defensive multiplier layer attached to a commander or castellan.",
+    "assignment_rules": [
+      "A general can be assigned to a commander or a castellan.",
+      "A general cannot be active on both at the same time.",
+      "General bonuses work only if the general is attached and abilities are selected/activated."
+    ],
+    "progression": {
+      "max_level": 100,
+      "star_model": "2x5 stars with star gating every ten levels",
+      "resources": [
+        "xp",
+        "shards"
+      ],
+      "skill_points": "One skill point per level"
+    },
+    "skill_tree_rules": [
+      "Skills and abilities both consume skill points through the tree.",
+      "Blue icons are defensive skills, red icons are offensive skills.",
+      "Abilities belong to grouped slots; only one ability from the group can be used in the slot.",
+      "It is wasteful to invest points into multiple mutually exclusive abilities from the same slot group."
+    ],
+    "available_local_catalog": {
+      "path": "data/official_generals_catalog.json",
+      "content": [
+        "general rarity and portrait",
+        "skills",
+        "abilities",
+        "slot indexes",
+        "attack and defense descriptions",
+        "upgrade costs"
+      ]
+    }
+  },
+  "build_items_and_looks": {
+    "rules": [
+      "Permanent wall items and temporary building items can boost wall limit, courtyard strength and troop strength.",
+      "These bonuses are strategically important for defense.",
+      "They are not yet modeled in the current calculator."
+    ]
+  },
+  "current_project_model": {
+    "implemented": [
+      "Wave-based attacking units by flank and wave",
+      "Official attack tool catalog with effects and images",
+      "Official generals catalog with skills, abilities and portraits",
+      "Official equipment set catalog with piece and set bonus summaries",
+      "Governor/castellan manual input for melee, ranged, courtyard, center, overall, wall, gate, moat and wall limit bonuses",
+      "Wall defense per flank with melee/ranged defense comparison",
+      "Wave-aware attacker tool aggregation",
+      "Courtyard estimate based on governor bonuses and attack tool kill effects",
+      "Reserve allocation advice when a flank has a deficit"
+    ],
+    "not_implemented": [
+      "Explicit wall-hold resolution and courtyard wave cancellation",
+      "Real active courtyard capacity model with own/alliance limits",
+      "Commander equipment and gem bonuses as direct battle inputs",
+      "Castellan equipment and gem bonuses as structured battle inputs beyond manual totals",
+      "General assignment to commander/castellan inside battle calculation",
+      "General ability effects inside the battle formula",
+      "Set milestone bonuses feeding into commander/castellan totals",
+      "Defensive tools and support tool rules",
+      "Build items/looks and decoration-driven combat bonuses",
+      "Exact equipment caps validation",
+      "Speed, detection, horses and movement-time model",
+      "Some complex general abilities that external calculators also mark as hard to compute"
+    ],
+    "high_risk_assumptions": [
+      "Current tool aggregation sums many tool effects linearly; some in-game interactions may be constrained by slot or per-wave limits.",
+      "Current courtyard model is an estimate, not a full battle-stage simulation.",
+      "Current structure bonus handling treats wall, gate and moat as additive modifiers from governor stats minus attack reductions; actual game resolution can be more stage-specific.",
+      "Current model uses manual governor totals instead of deriving them from actual castellan equipment, gems, sets and general."
+    ]
+  },
+  "recommended_next_integration_order": [
+    "Derive commander/castellan total stats from equipment sets, relic/non-relic gear and gems",
+    "Add general assignment and selected ability contributions to commander/castellan totals",
+    "Model wall-hold and courtyard activation as separate combat stages",
+    "Add active courtyard capacity, reserve participation and support troop logic",
+    "Add defensive tools and build item/look bonuses",
+    "Enforce equipment caps and tool slot limits where the game uses them"
+  ]
+}
