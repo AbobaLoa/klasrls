@@ -1,0 +1,61 @@
+{
+  "collect_food": {
+    "type": "click",
+    "x": 0,
+    "y": 0,
+    "pause_after": 0.6
+  },
+  "collect_wood": {
+    "type": "click",
+    "x": 0,
+    "y": 0,
+    "pause_after": 0.6
+  },
+  "collect_stone": {
+    "type": "click",
+    "x": 0,
+    "y": 0,
+    "pause_after": 0.6
+  },
+  "upgrade_farm": {
+    "type": "click",
+    "x": 0,
+    "y": 0,
+    "pause_after": 0.8
+  },
+  "upgrade_lumberyard": {
+    "type": "click",
+    "x": 0,
+    "y": 0,
+    "pause_after": 0.8
+  },
+  "upgrade_quarry": {
+    "type": "click",
+    "x": 0,
+    "y": 0,
+    "pause_after": 0.8
+  },
+  "build_house": {
+    "type": "click",
+    "x": 0,
+    "y": 0,
+    "pause_after": 0.8
+  },
+  "upgrade_academy": {
+    "type": "click",
+    "x": 0,
+    "y": 0,
+    "pause_after": 0.8
+  },
+  "train_soldiers": {
+    "type": "click",
+    "x": 0,
+    "y": 0,
+    "pause_after": 0.8
+  },
+  "wait": {
+    "type": "press",
+    "key": "space",
+    "pause_after": 0.3
+  }
+}

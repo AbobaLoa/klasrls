@@ -1,0 +1,4824 @@
+[
+  {
+    "name": "Imperial Council hall",
+    "display_name": "Имперский совет",
+    "category": "Администрация",
+    "description": "Административное здание позднего этапа развития замка.",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S2Tgz7Wpc_-pG4buMVBWBfRNQioixcugEwq1yOQnq8IKwz21frpS_aedIWt0hU4fE6WGXPBpTaST8NXAqe4eQECktDuak2YWrbMgQPNL-n8IFxHnQUJ8HXVpifLbBmY0bUo_bnh_Li_-jlxNWj52cOQw91uROPwor6Ljw=w403-h62",
+    "resource_fields": [
+      "plaster",
+      "dragon_scale_tiles"
+    ],
+    "levels": [
+      {
+        "level": "0"
+      },
+      {
+        "level": "1",
+        "plaster": "96",
+        "dragon_scale_tiles": "482"
+      },
+      {
+        "level": "2",
+        "plaster": "116",
+        "dragon_scale_tiles": "578"
+      },
+      {
+        "level": "3",
+        "plaster": "139",
+        "dragon_scale_tiles": "693"
+      },
+      {
+        "level": "4",
+        "plaster": "166",
+        "dragon_scale_tiles": "832"
+      },
+      {
+        "level": "5",
+        "plaster": "200",
+        "dragon_scale_tiles": "999"
+      },
+      {
+        "level": "6",
+        "plaster": "240",
+        "dragon_scale_tiles": "1198"
+      },
+      {
+        "level": "7",
+        "plaster": "288",
+        "dragon_scale_tiles": "1438"
+      },
+      {
+        "level": "8",
+        "plaster": "345",
+        "dragon_scale_tiles": "1725"
+      },
+      {
+        "level": "9",
+        "plaster": "414",
+        "dragon_scale_tiles": "2071"
+      },
+      {
+        "level": "10",
+        "plaster": "497",
+        "dragon_scale_tiles": "2485"
+      }
+    ],
+    "level_labels": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Military academy",
+    "display_name": "Военная академия",
+    "category": "Военное",
+    "description": "Обеспечивает доступ к программам подготовки.",
+    "image_url": "",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens"
+    ],
+    "levels": [
+      {
+        "level": "0",
+        "build_tokens": "0",
+        "upgrade_tokens": "0"
+      },
+      {
+        "level": "1",
+        "build_tokens": "50",
+        "upgrade_tokens": "250"
+      },
+      {
+        "level": "2",
+        "build_tokens": "50",
+        "upgrade_tokens": "350"
+      },
+      {
+        "level": "3",
+        "build_tokens": "50",
+        "upgrade_tokens": "450"
+      },
+      {
+        "level": "4",
+        "build_tokens": "50",
+        "upgrade_tokens": "550"
+      },
+      {
+        "level": "5",
+        "build_tokens": "50",
+        "upgrade_tokens": "650"
+      },
+      {
+        "level": "6",
+        "build_tokens": "50",
+        "upgrade_tokens": "750"
+      },
+      {
+        "level": "7",
+        "build_tokens": "100",
+        "upgrade_tokens": "850"
+      },
+      {
+        "level": "8",
+        "build_tokens": "150",
+        "upgrade_tokens": "950"
+      },
+      {
+        "level": "9",
+        "build_tokens": "150",
+        "upgrade_tokens": "1050"
+      },
+      {
+        "level": "10",
+        "build_tokens": "150",
+        "upgrade_tokens": "2000"
+      },
+      {
+        "level": "2400",
+        "upgrade_tokens": "7"
+      },
+      {
+        "level": "3600",
+        "upgrade_tokens": "8"
+      },
+      {
+        "level": "7200",
+        "upgrade_tokens": "9"
+      },
+      {
+        "level": "482",
+        "upgrade_tokens": "1"
+      },
+      {
+        "level": "578",
+        "upgrade_tokens": "2"
+      },
+      {
+        "level": "693",
+        "upgrade_tokens": "3"
+      },
+      {
+        "level": "832",
+        "upgrade_tokens": "4"
+      },
+      {
+        "level": "999",
+        "upgrade_tokens": "5"
+      },
+      {
+        "level": "1198",
+        "upgrade_tokens": "6"
+      },
+      {
+        "level": "1438",
+        "upgrade_tokens": "7"
+      },
+      {
+        "level": "1725",
+        "upgrade_tokens": "8"
+      },
+      {
+        "level": "2071",
+        "upgrade_tokens": "9"
+      },
+      {
+        "level": "2485",
+        "upgrade_tokens": "10"
+      }
+    ],
+    "level_labels": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "2400",
+      "3600",
+      "7200",
+      "482",
+      "578",
+      "693",
+      "832",
+      "999",
+      "1198",
+      "1438",
+      "1725",
+      "2071",
+      "2485"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Encampment",
+    "display_name": "Военный лагерь",
+    "category": "Военное",
+    "description": "Военный лагерь. Вспомогательная постройка для развития армейской инфраструктуры.",
+    "image_url": "",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens",
+      "plaster",
+      "dragon_scale_tiles"
+    ],
+    "levels": [
+      {
+        "level": "7",
+        "build_tokens": "0",
+        "upgrade_tokens": "0",
+        "plaster": "0",
+        "dragon_scale_tiles": "0"
+      },
+      {
+        "level": "8",
+        "build_tokens": "50",
+        "upgrade_tokens": "200",
+        "plaster": "0",
+        "dragon_scale_tiles": "0"
+      },
+      {
+        "level": "9",
+        "build_tokens": "50",
+        "upgrade_tokens": "300",
+        "plaster": "0",
+        "dragon_scale_tiles": "0"
+      },
+      {
+        "level": "10",
+        "build_tokens": "50",
+        "upgrade_tokens": "400",
+        "plaster": "0",
+        "dragon_scale_tiles": "0"
+      },
+      {
+        "level": "11",
+        "build_tokens": "75",
+        "upgrade_tokens": "500",
+        "plaster": "0",
+        "dragon_scale_tiles": "0"
+      },
+      {
+        "level": "12",
+        "build_tokens": "125",
+        "upgrade_tokens": "700",
+        "plaster": "0",
+        "dragon_scale_tiles": "0"
+      },
+      {
+        "level": "13",
+        "build_tokens": "0",
+        "upgrade_tokens": "0",
+        "plaster": "135",
+        "dragon_scale_tiles": "675"
+      },
+      {
+        "level": "14",
+        "build_tokens": "0",
+        "upgrade_tokens": "0",
+        "plaster": "175",
+        "dragon_scale_tiles": "880"
+      },
+      {
+        "level": "15",
+        "build_tokens": "0",
+        "upgrade_tokens": "0",
+        "plaster": "230",
+        "dragon_scale_tiles": "1140"
+      },
+      {
+        "level": "6"
+      },
+      {
+        "level": "4"
+      },
+      {
+        "level": "5",
+        "build_tokens": "550",
+        "upgrade_tokens": "2300"
+      }
+    ],
+    "level_labels": [
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "6",
+      "4",
+      "5"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Toolsmith",
+    "display_name": "Инструментальная кузница",
+    "category": "Военное",
+    "description": "Кузница инструментов. Используется для военной и вспомогательной инфраструктуры.",
+    "image_url": "",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens"
+    ],
+    "levels": [
+      {
+        "level": "0",
+        "build_tokens": "0",
+        "upgrade_tokens": "0"
+      },
+      {
+        "level": "1",
+        "build_tokens": "29",
+        "upgrade_tokens": "122"
+      },
+      {
+        "level": "2",
+        "build_tokens": "87",
+        "upgrade_tokens": "368"
+      },
+      {
+        "level": "3",
+        "build_tokens": "174",
+        "upgrade_tokens": "735"
+      },
+      {
+        "level": "4",
+        "build_tokens": "290",
+        "upgrade_tokens": "1225"
+      }
+    ],
+    "level_labels": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Toolsmith-Kingdoms",
+    "display_name": "Инструментальная кузница королевств",
+    "category": "Военное",
+    "description": "Кузница инструментов для миров и королевств.",
+    "image_url": "",
+    "resource_fields": [
+      "plaster",
+      "dragon_scale_tiles"
+    ],
+    "levels": [
+      {
+        "level": "0",
+        "plaster": "0",
+        "dragon_scale_tiles": "0"
+      },
+      {
+        "level": "1",
+        "plaster": "200",
+        "dragon_scale_tiles": "1000"
+      },
+      {
+        "level": "2",
+        "plaster": "300",
+        "dragon_scale_tiles": "1465"
+      },
+      {
+        "level": "3",
+        "plaster": "450",
+        "dragon_scale_tiles": "2150"
+      },
+      {
+        "level": "4",
+        "plaster": "680",
+        "dragon_scale_tiles": "3140"
+      }
+    ],
+    "level_labels": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Barracks",
+    "display_name": "Казармы",
+    "category": "Военное",
+    "description": "Казармы для найма и подготовки солдат. Базовое военное здание для развития армии.",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S0aW-SuV-TzJKJkk-pY5Cm2NOV1vCGq5HOjnipFusLxpVDWLBdnAEYo-smN24SbuuIZkUZef3QvTfrAw9Rk7whogSpQvTX-rh4uohA2P_kEPLdEPjmBfS15jhlr-FIQ4lY2RBvgEkT2ALbhhtin5fAV4n7S5bQVH7I=w403-h62",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens",
+      "talers",
+      "plaster",
+      "dragon_scale_tiles"
+    ],
+    "levels": [
+      {
+        "level": "5"
+      },
+      {
+        "level": "6",
+        "build_tokens": "0",
+        "upgrade_tokens": "50",
+        "talers": "0"
+      },
+      {
+        "level": "7",
+        "build_tokens": "50",
+        "upgrade_tokens": "50",
+        "talers": "0"
+      },
+      {
+        "level": "8",
+        "build_tokens": "0",
+        "upgrade_tokens": "100",
+        "talers": "0"
+      },
+      {
+        "level": "9",
+        "build_tokens": "75",
+        "upgrade_tokens": "100",
+        "talers": "0"
+      },
+      {
+        "level": "10",
+        "build_tokens": "0",
+        "upgrade_tokens": "100",
+        "talers": "0"
+      },
+      {
+        "level": "11",
+        "build_tokens": "100",
+        "upgrade_tokens": "100",
+        "talers": "0"
+      },
+      {
+        "level": "12",
+        "build_tokens": "100",
+        "upgrade_tokens": "100",
+        "talers": "0"
+      },
+      {
+        "level": "13",
+        "build_tokens": "100",
+        "upgrade_tokens": "150",
+        "talers": "0"
+      },
+      {
+        "level": "14",
+        "build_tokens": "425",
+        "upgrade_tokens": "550",
+        "talers": "0"
+      },
+      {
+        "level": "15",
+        "build_tokens": "425",
+        "upgrade_tokens": "550",
+        "talers": "0"
+      },
+      {
+        "level": "16",
+        "plaster": "75",
+        "dragon_scale_tiles": "325"
+      },
+      {
+        "level": "17",
+        "plaster": "150",
+        "dragon_scale_tiles": "750"
+      },
+      {
+        "level": "18",
+        "plaster": "225",
+        "dragon_scale_tiles": "1125"
+      },
+      {
+        "level": "19",
+        "plaster": "340",
+        "dragon_scale_tiles": "1690"
+      },
+      {
+        "level": "20",
+        "plaster": "510",
+        "dragon_scale_tiles": "2530"
+      },
+      {
+        "level": "1",
+        "build_tokens": "0",
+        "upgrade_tokens": "0",
+        "talers": "0"
+      },
+      {
+        "level": "2",
+        "build_tokens": "250",
+        "upgrade_tokens": "1000"
+      },
+      {
+        "level": "3",
+        "build_tokens": "250",
+        "upgrade_tokens": "1000"
+      },
+      {
+        "level": "4",
+        "build_tokens": "500",
+        "upgrade_tokens": "2000"
+      }
+    ],
+    "level_labels": [
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20",
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Armory",
+    "display_name": "Оружейная",
+    "category": "Военное",
+    "description": "Оружейная замка. Связана с военной инфраструктурой и развитием боевой части крепости.",
+    "image_url": "",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens"
+    ],
+    "levels": [
+      {
+        "level": "0",
+        "build_tokens": "0",
+        "upgrade_tokens": "0"
+      },
+      {
+        "level": "1",
+        "build_tokens": "25",
+        "upgrade_tokens": "225"
+      },
+      {
+        "level": "2",
+        "build_tokens": "25",
+        "upgrade_tokens": "225"
+      },
+      {
+        "level": "3",
+        "build_tokens": "25",
+        "upgrade_tokens": "225"
+      },
+      {
+        "level": "4",
+        "build_tokens": "25",
+        "upgrade_tokens": "225"
+      },
+      {
+        "level": "5",
+        "build_tokens": "25",
+        "upgrade_tokens": "225"
+      },
+      {
+        "level": "6",
+        "build_tokens": "50",
+        "upgrade_tokens": "450"
+      },
+      {
+        "level": "7",
+        "build_tokens": "50",
+        "upgrade_tokens": "450"
+      },
+      {
+        "level": "8",
+        "build_tokens": "50",
+        "upgrade_tokens": "450"
+      },
+      {
+        "level": "9",
+        "build_tokens": "50",
+        "upgrade_tokens": "450"
+      },
+      {
+        "level": "10",
+        "build_tokens": "50",
+        "upgrade_tokens": "450"
+      },
+      {
+        "level": "11",
+        "build_tokens": "100",
+        "upgrade_tokens": "900"
+      },
+      {
+        "level": "12",
+        "build_tokens": "100",
+        "upgrade_tokens": "900"
+      },
+      {
+        "level": "13",
+        "build_tokens": "100",
+        "upgrade_tokens": "900"
+      },
+      {
+        "level": "14",
+        "build_tokens": "100",
+        "upgrade_tokens": "900"
+      },
+      {
+        "level": "15",
+        "build_tokens": "100",
+        "upgrade_tokens": "900"
+      },
+      {
+        "level": "16",
+        "build_tokens": "200",
+        "upgrade_tokens": "1800"
+      },
+      {
+        "level": "17",
+        "build_tokens": "200",
+        "upgrade_tokens": "1800"
+      },
+      {
+        "level": "18",
+        "build_tokens": "200",
+        "upgrade_tokens": "1800"
+      },
+      {
+        "level": "19",
+        "build_tokens": "200",
+        "upgrade_tokens": "1800"
+      },
+      {
+        "level": "20",
+        "build_tokens": "200",
+        "upgrade_tokens": "1800"
+      },
+      {
+        "level": "425",
+        "build_tokens": "0"
+      },
+      {
+        "level": "450",
+        "build_tokens": "0"
+      },
+      {
+        "level": "475",
+        "build_tokens": "0"
+      },
+      {
+        "level": "525",
+        "build_tokens": "0"
+      },
+      {
+        "level": "375",
+        "build_tokens": "0"
+      },
+      {
+        "level": "1250",
+        "build_tokens": "0"
+      },
+      {
+        "level": "1875",
+        "build_tokens": "0"
+      },
+      {
+        "level": "2300"
+      },
+      {
+        "level": "400"
+      },
+      {
+        "level": "800"
+      },
+      {
+        "level": "1600"
+      },
+      {
+        "level": "3200"
+      },
+      {
+        "level": "6400"
+      }
+    ],
+    "level_labels": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20",
+      "425",
+      "450",
+      "475",
+      "525",
+      "375",
+      "1250",
+      "1875",
+      "2300",
+      "400",
+      "800",
+      "1600",
+      "3200",
+      "6400"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Siege workshop",
+    "display_name": "Осадная мастерская",
+    "category": "Военное",
+    "description": "Осадная мастерская. Связана с осадными инструментами и военной инфраструктурой.",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S0TEg-eUXOuC12pqsbekHec4If3xTFmvjhDjkpMNWUvJI9yvkMXTSIbDL11PUw8WjHhLmFY6uRuaaqlk-sN14EgmJDYBqIYSDWuhn1WbxMremZRolbPirBAWBmwFZ139PBLVm2-nm3pJaHDI1wKrawYPu2O0ULgb-1dqA=w201-h62",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens"
+    ],
+    "levels": [
+      {
+        "level": "3"
+      },
+      {
+        "level": "4",
+        "build_tokens": "550",
+        "upgrade_tokens": "2300"
+      }
+    ],
+    "level_labels": [
+      "3",
+      "4"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Dragon Breath Forge",
+    "display_name": "Кузница дыхания дракона",
+    "category": "Дракон",
+    "description": "Поздняя игровая кузница драконьей ветки. Используется для развития специальной инфраструктуры.",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S3iSep1QENk6E7R_xw0pPvLR58QbXv2d0zZC2t04PoLgWigx6eMQSAbAbb-iyug-luYZXrvKbu1Zv3SsAJvGLIhhHhtFQF2X64Me5YQX0zpFTeS_fRFYqvHrPNapKVJIUXY5nv6ua7z91xlHK3RvKp_pQl7AExFLrbpfw=w403-h62",
+    "resource_fields": [
+      "plaster",
+      "dragon_scale_tiles"
+    ],
+    "levels": [
+      {
+        "level": "0"
+      },
+      {
+        "level": "1",
+        "plaster": "75",
+        "dragon_scale_tiles": "375"
+      },
+      {
+        "level": "2",
+        "plaster": "150",
+        "dragon_scale_tiles": "750"
+      },
+      {
+        "level": "3",
+        "plaster": "225",
+        "dragon_scale_tiles": "1125"
+      },
+      {
+        "level": "4",
+        "plaster": "340",
+        "dragon_scale_tiles": "1690"
+      },
+      {
+        "level": "5",
+        "plaster": "510",
+        "dragon_scale_tiles": "2530"
+      }
+    ],
+    "level_labels": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Dragon Hoard",
+    "display_name": "Сокровищница дракона",
+    "category": "Дракон",
+    "description": "Хранилище драконьих ресурсов. Нужен для накопления и развития драконьей ветки построек.",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S32DtAVCnxWmWaJ5u5d5Bru1DiMwOcgTezADzDXP0yUDhjVsunLcTmZGeHSn-DW5ssmj9NDmWofzBCdbn-CeXunvefkeS5Krv3pnXM1yym8dwniVeFAc0kHDD3VTIpdGDombmW0QvBh2Q6c4Vh1laLQ8m82DaCTXWcASg=w403-h62",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens",
+      "plaster",
+      "dragon_scale_tiles"
+    ],
+    "levels": [
+      {
+        "level": "0"
+      },
+      {
+        "level": "1",
+        "build_tokens": "290",
+        "upgrade_tokens": "1225"
+      },
+      {
+        "level": "2",
+        "plaster": "150",
+        "dragon_scale_tiles": "750"
+      },
+      {
+        "level": "3",
+        "plaster": "225",
+        "dragon_scale_tiles": "1125"
+      },
+      {
+        "level": "4",
+        "plaster": "340",
+        "dragon_scale_tiles": "1690"
+      },
+      {
+        "level": "5",
+        "plaster": "510",
+        "dragon_scale_tiles": "2530"
+      }
+    ],
+    "level_labels": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Reinforced Vault",
+    "display_name": "Укреплённое хранилище",
+    "category": "Дракон",
+    "description": "Усиленное хранилище для ценных ресурсов и позднего развития.",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S3HmkL2MFHL5C9lFR-mvTV_IchLPT-Q2rzH0iI1oC7LCYsi3k1SebidmbWezf6xQvH3RD4tUvJwWqSMjQszL7wCOYeuRo0h5WJMzN1Xr5OWMyXu2DQjjW8LB7NCOZbIKK3gG_D7zXsMdmJqnTJo2cWO0UyO8GtgEr1D-w=w403-h62",
+    "resource_fields": [
+      "plaster",
+      "dragon_scale_tiles"
+    ],
+    "levels": [
+      {
+        "level": "0"
+      },
+      {
+        "level": "1",
+        "plaster": "96",
+        "dragon_scale_tiles": "482"
+      },
+      {
+        "level": "2",
+        "plaster": "116",
+        "dragon_scale_tiles": "578"
+      },
+      {
+        "level": "3",
+        "plaster": "139",
+        "dragon_scale_tiles": "693"
+      },
+      {
+        "level": "4",
+        "plaster": "166",
+        "dragon_scale_tiles": "832"
+      },
+      {
+        "level": "5",
+        "plaster": "200",
+        "dragon_scale_tiles": "999"
+      },
+      {
+        "level": "6",
+        "plaster": "240",
+        "dragon_scale_tiles": "1198"
+      },
+      {
+        "level": "7",
+        "plaster": "288",
+        "dragon_scale_tiles": "1438"
+      },
+      {
+        "level": "8",
+        "plaster": "345",
+        "dragon_scale_tiles": "1725"
+      },
+      {
+        "level": "9",
+        "plaster": "414",
+        "dragon_scale_tiles": "2071"
+      },
+      {
+        "level": "10",
+        "plaster": "497",
+        "dragon_scale_tiles": "2485"
+      }
+    ],
+    "level_labels": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Keep",
+    "display_name": "Главная башня",
+    "category": "Замок",
+    "description": "Главное здание замка и центр всей крепости. Через него проходит развитие ключевой инфраструктуры.",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S0jjFad3SyYiX9eaN1IxZ8TSOM2pbTtv9A7yyeC5HhYu_PcPolLIwSr8zz3d1JErK4idvcmnmvZ7ZoLsjwT2adNOYpgoutte2QEuaq-PM63v4dTyUHiEfCdCA1ccPhCpMf06ucE2dZqfRha_1J48HvsGflhOcnw76uF9Q=w201-h62",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens",
+      "talers"
+    ],
+    "levels": [
+      {
+        "level": "5"
+      },
+      {
+        "level": "6",
+        "build_tokens": "850",
+        "upgrade_tokens": "1250",
+        "talers": "0"
+      },
+      {
+        "level": "7",
+        "build_tokens": "1240",
+        "upgrade_tokens": "5200",
+        "talers": "0"
+      },
+      {
+        "level": "8",
+        "build_tokens": "1840",
+        "upgrade_tokens": "7700",
+        "talers": "0"
+      },
+      {
+        "level": "9",
+        "build_tokens": "75",
+        "upgrade_tokens": "100",
+        "talers": "0"
+      },
+      {
+        "level": "10",
+        "build_tokens": "0",
+        "upgrade_tokens": "100",
+        "talers": "0"
+      },
+      {
+        "level": "11",
+        "build_tokens": "100",
+        "upgrade_tokens": "100",
+        "talers": "0"
+      },
+      {
+        "level": "12",
+        "build_tokens": "100",
+        "upgrade_tokens": "100",
+        "talers": "0"
+      },
+      {
+        "level": "13",
+        "build_tokens": "100",
+        "upgrade_tokens": "150",
+        "talers": "0"
+      },
+      {
+        "level": "14",
+        "build_tokens": "425",
+        "upgrade_tokens": "550",
+        "talers": "0"
+      },
+      {
+        "level": "15",
+        "build_tokens": "425",
+        "upgrade_tokens": "550",
+        "talers": "0"
+      },
+      {
+        "level": "16"
+      },
+      {
+        "level": "17"
+      },
+      {
+        "level": "18"
+      },
+      {
+        "level": "19"
+      },
+      {
+        "level": "20"
+      }
+    ],
+    "level_labels": [
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Castle expansion",
+    "display_name": "Расширение замка",
+    "category": "Замок",
+    "description": "Расширение замка. Открывает дополнительное место для развития и строительства внутри крепости.",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S2TBSXorxw_SJPg-MAODPkecosh-Rl1d9CW1ffjHFJ4-XJNXhJH_tfNpIFyb2cJdB5thbQQu3g2P9PC5cL7Qvk2ybNvb94NPcS1duFoYfdqP59QFTRq8-jUmFFWtVdAnlkAyxMCokeGZB2HHNO66nBgH_sKDQmtEAG02w=w201-h62",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens",
+      "talers"
+    ],
+    "levels": [
+      {
+        "level": "0"
+      },
+      {
+        "level": "1",
+        "build_tokens": "500",
+        "upgrade_tokens": "2500",
+        "talers": "0"
+      },
+      {
+        "level": "2",
+        "build_tokens": "750",
+        "upgrade_tokens": "3750",
+        "talers": "0"
+      },
+      {
+        "level": "3",
+        "build_tokens": "1000",
+        "upgrade_tokens": "5000",
+        "talers": "0"
+      }
+    ],
+    "level_labels": [
+      "0",
+      "1",
+      "2",
+      "3"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Tavern",
+    "display_name": "Таверна",
+    "category": "Инфраструктура",
+    "description": "Служебное здание внутренней инфраструктуры замка.",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S3oDFD67Gv-_ZJDNFyYiPJ_wKPO5wwe4pcqHTAp1hE3LKuy_XbJIhVLhl-ow4Mr0LEpBaXjVmH2Ja6NjQ8tYuI-MoObCVa6YyL89kjR-zXID8DPP5sbCfNNg2K-gR55YvO5XwWPUuxPKG1oVz-GN81gq6Gpc1h1oARCPw=w403-h62",
+    "resource_fields": [
+      "plaster",
+      "dragon_scale_tiles"
+    ],
+    "levels": [
+      {
+        "level": "7"
+      },
+      {
+        "level": "8",
+        "plaster": "135",
+        "dragon_scale_tiles": "675"
+      },
+      {
+        "level": "9",
+        "plaster": "175",
+        "dragon_scale_tiles": "880"
+      },
+      {
+        "level": "10",
+        "plaster": "230",
+        "dragon_scale_tiles": "1140"
+      }
+    ],
+    "level_labels": [
+      "7",
+      "8",
+      "9",
+      "10"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Research Tower",
+    "display_name": "Башня исследований",
+    "category": "Исследования",
+    "description": "Башня исследований. Нужна для технологического и системного развития замка.",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S1aAW1K1kcJwLr2gn0hSEi1XBWBmc35_jDjMCP-0oU7HMTFjotJS698leCWsWuzdsCN-03kWMVHP8LUSTu_tMAAPXitfSFDJRSKhOm5L7yyJrlkVKV9m7PKUydTmA2H6KN7Z1vAJMzedIaQPV6lEEj-JLxPwxDBghBwRg=w403-h62",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens",
+      "plaster",
+      "dragon_scale_tiles"
+    ],
+    "levels": [
+      {
+        "level": "4"
+      },
+      {
+        "level": "5",
+        "build_tokens": "550",
+        "upgrade_tokens": "2300"
+      },
+      {
+        "level": "6",
+        "plaster": "480",
+        "dragon_scale_tiles": "2400"
+      }
+    ],
+    "level_labels": [
+      "4",
+      "5",
+      "6"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Inner district",
+    "display_name": "Внутренний квартал",
+    "category": "Квартал",
+    "description": "Внутренний квартал замка. Отвечает за развитие центральной городской части.",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S3skPuvAtsgjuLirRDRbeopz9JZiY7xqzlyapkd8U3vl63rQTKY4RdaliQItx5YL282ca4FpK1tEBEPBaYV6_Ye1lP8i8rP2LFmHrbn0bGY33Z2lsKBmeS4D821HLOYP4LPzU6_csVAeKuZQ2nh79-IQ_962bYcNmc=w201-h62",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens",
+      "ducats"
+    ],
+    "levels": [
+      {
+        "level": "1",
+        "build_tokens": "0",
+        "upgrade_tokens": "0",
+        "ducats": "0"
+      },
+      {
+        "level": "2",
+        "build_tokens": "100",
+        "upgrade_tokens": "400"
+      },
+      {
+        "level": "3",
+        "build_tokens": "100",
+        "upgrade_tokens": "400"
+      },
+      {
+        "level": "4",
+        "build_tokens": "200",
+        "upgrade_tokens": "800"
+      },
+      {
+        "level": "5",
+        "build_tokens": "200",
+        "upgrade_tokens": "800"
+      },
+      {
+        "level": "6",
+        "build_tokens": "400",
+        "upgrade_tokens": "1600"
+      },
+      {
+        "level": "7",
+        "build_tokens": "400",
+        "upgrade_tokens": "1600"
+      },
+      {
+        "level": "8",
+        "build_tokens": "800",
+        "upgrade_tokens": "3200"
+      },
+      {
+        "level": "9",
+        "build_tokens": "800",
+        "upgrade_tokens": "3200"
+      },
+      {
+        "level": "10",
+        "build_tokens": "1600",
+        "upgrade_tokens": "6400"
+      },
+      {
+        "level": "11",
+        "build_tokens": "1600",
+        "upgrade_tokens": "6400"
+      },
+      {
+        "level": "12",
+        "build_tokens": "3200",
+        "upgrade_tokens": "12800"
+      },
+      {
+        "level": "13",
+        "build_tokens": "3200",
+        "upgrade_tokens": "12800"
+      },
+      {
+        "level": "14",
+        "build_tokens": "3200",
+        "upgrade_tokens": "12800",
+        "ducats": "75"
+      },
+      {
+        "level": "15",
+        "build_tokens": "3200",
+        "upgrade_tokens": "12800",
+        "ducats": "150"
+      },
+      {
+        "level": "16",
+        "build_tokens": "3200",
+        "upgrade_tokens": "12800",
+        "ducats": "225"
+      },
+      {
+        "level": "0"
+      }
+    ],
+    "level_labels": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "0"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Military district",
+    "display_name": "Военный квартал",
+    "category": "Квартал",
+    "description": "Военный квартал. Сконцентрирован на развитии армии и профильных построек.",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S0YS6K_IbMEyUkYR5M_RNKIucKN-GHdiyVdUfOKU2AcektLY5wNtsTUjyUn9bFEqox8EDGqsNWBPaAYXgsLXAiaUQTXf0zhXLezqlCNZM2nEUCvHcQSf9siQm6i2Gb-usCHw-dZyeDPi7fRiiEWHUi7Cq8LLJo-1pc=w201-h62",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens",
+      "ducats"
+    ],
+    "levels": [
+      {
+        "level": "1",
+        "build_tokens": "0",
+        "upgrade_tokens": "0",
+        "ducats": "0"
+      },
+      {
+        "level": "2",
+        "build_tokens": "100",
+        "upgrade_tokens": "400"
+      },
+      {
+        "level": "3",
+        "build_tokens": "100",
+        "upgrade_tokens": "400"
+      },
+      {
+        "level": "4",
+        "build_tokens": "200",
+        "upgrade_tokens": "800"
+      },
+      {
+        "level": "5",
+        "build_tokens": "200",
+        "upgrade_tokens": "800"
+      },
+      {
+        "level": "6",
+        "build_tokens": "400",
+        "upgrade_tokens": "1600"
+      },
+      {
+        "level": "7",
+        "build_tokens": "400",
+        "upgrade_tokens": "1600"
+      },
+      {
+        "level": "8",
+        "build_tokens": "800",
+        "upgrade_tokens": "3200"
+      },
+      {
+        "level": "9",
+        "build_tokens": "800",
+        "upgrade_tokens": "3200"
+      },
+      {
+        "level": "10",
+        "build_tokens": "1600",
+        "upgrade_tokens": "6400"
+      },
+      {
+        "level": "11",
+        "build_tokens": "1600",
+        "upgrade_tokens": "6400"
+      },
+      {
+        "level": "12",
+        "build_tokens": "1600",
+        "upgrade_tokens": "6400",
+        "ducats": "75"
+      },
+      {
+        "level": "13",
+        "build_tokens": "1600",
+        "upgrade_tokens": "6400",
+        "ducats": "150"
+      },
+      {
+        "level": "14",
+        "build_tokens": "1600",
+        "upgrade_tokens": "6400",
+        "ducats": "225"
+      },
+      {
+        "level": "0"
+      }
+    ],
+    "level_labels": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "0"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Mead district",
+    "display_name": "Медовый квартал",
+    "category": "Квартал",
+    "description": "Квартал медовой продукции. Объединяет профильные производственные улучшения.",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S3I0ZtCXwOPZf5Xujyx2EojHOLtVg-9hOQz51KjvCga9-dAj0VYfsUC4a0xdVA-ljiuZUjloJTEfxLzH-1DMbp57r4KtwdtaPJjpJjw_uvo2QjfzL9y_04YVTrDRDEfMHK8ub9Ei-gjAUiKWCWSjc24GQBU5opZfrE=w201-h62",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens",
+      "talers"
+    ],
+    "levels": [
+      {
+        "level": "1",
+        "build_tokens": "0",
+        "upgrade_tokens": "0",
+        "talers": "0"
+      },
+      {
+        "level": "2",
+        "build_tokens": "250",
+        "upgrade_tokens": "1000"
+      },
+      {
+        "level": "3",
+        "build_tokens": "250",
+        "upgrade_tokens": "1000"
+      },
+      {
+        "level": "4",
+        "build_tokens": "500",
+        "upgrade_tokens": "2000"
+      },
+      {
+        "level": "5",
+        "build_tokens": "500",
+        "upgrade_tokens": "2000"
+      },
+      {
+        "level": "6",
+        "build_tokens": "1000",
+        "upgrade_tokens": "4000"
+      },
+      {
+        "level": "7",
+        "build_tokens": "1000",
+        "upgrade_tokens": "4000"
+      },
+      {
+        "level": "8",
+        "build_tokens": "2000",
+        "upgrade_tokens": "8000"
+      },
+      {
+        "level": "9",
+        "build_tokens": "2000",
+        "upgrade_tokens": "8000"
+      },
+      {
+        "level": "10",
+        "build_tokens": "4000",
+        "upgrade_tokens": "16000"
+      },
+      {
+        "level": "11",
+        "build_tokens": "4000",
+        "upgrade_tokens": "16000"
+      },
+      {
+        "level": "0"
+      }
+    ],
+    "level_labels": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "0"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Food district",
+    "display_name": "Пищевой квартал",
+    "category": "Квартал",
+    "description": "Пищевой квартал. Концентрирует развитие зданий, связанных с продовольствием.",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S3jcJlZOuGgUYfcncF_hY6iaduB4afs4cjUJ_hUlLknMHxrQdZ1UB9jUK44awGKzjAq4pLYLmh_ovs3QOEoOwP77fFRtZSl2XOGJeayb3NupcJonEeWyF5x2iX58xNo0cZvnGCR2YY9hDe8RCXCwDFaHbCi6qe3QKT0Nw=w201-h62",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens",
+      "ducats"
+    ],
+    "levels": [
+      {
+        "level": "1",
+        "build_tokens": "0",
+        "upgrade_tokens": "0",
+        "ducats": "0"
+      },
+      {
+        "level": "2",
+        "build_tokens": "250",
+        "upgrade_tokens": "1000"
+      },
+      {
+        "level": "3",
+        "build_tokens": "250",
+        "upgrade_tokens": "1000"
+      },
+      {
+        "level": "4",
+        "build_tokens": "500",
+        "upgrade_tokens": "2000"
+      },
+      {
+        "level": "5",
+        "build_tokens": "500",
+        "upgrade_tokens": "2000"
+      },
+      {
+        "level": "6",
+        "build_tokens": "1000",
+        "upgrade_tokens": "4000"
+      },
+      {
+        "level": "7",
+        "build_tokens": "1000",
+        "upgrade_tokens": "4000"
+      },
+      {
+        "level": "8",
+        "build_tokens": "2000",
+        "upgrade_tokens": "8000"
+      },
+      {
+        "level": "9",
+        "build_tokens": "2000",
+        "upgrade_tokens": "8000"
+      },
+      {
+        "level": "10",
+        "build_tokens": "4000",
+        "upgrade_tokens": "16000"
+      },
+      {
+        "level": "11",
+        "build_tokens": "4000",
+        "upgrade_tokens": "16000"
+      },
+      {
+        "level": "12",
+        "build_tokens": "4000",
+        "upgrade_tokens": "16000",
+        "ducats": "75"
+      },
+      {
+        "level": "13",
+        "build_tokens": "4000",
+        "upgrade_tokens": "16000",
+        "ducats": "150"
+      },
+      {
+        "level": "14",
+        "build_tokens": "4000",
+        "upgrade_tokens": "16000",
+        "ducats": "225"
+      },
+      {
+        "level": "15",
+        "build_tokens": "4000",
+        "upgrade_tokens": "16000",
+        "ducats": "300"
+      }
+    ],
+    "level_labels": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Trade district",
+    "display_name": "Торговый квартал",
+    "category": "Квартал",
+    "description": "Торговый квартал. Развивает экономику, торговлю и хозяйственную часть замка.",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S1gmx6FNpZn5qE-e7zpbEShtbpGpgUOXQtHGnIMrZIaHfjPDncI8hpZS-a2UloEzujxPNJ2db_l3gZqMCEEOr88ltaoPMCiOSj043hRTi5mxXeLYTxY_FRV3ukD4OLenoKsCCIl3nLLiRANaafDfUWz-QBGrqWWSQoV2g=w201-h62",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens",
+      "ducats"
+    ],
+    "levels": [
+      {
+        "level": "1",
+        "build_tokens": "0",
+        "upgrade_tokens": "0",
+        "ducats": "0"
+      },
+      {
+        "level": "2",
+        "build_tokens": "100",
+        "upgrade_tokens": "400"
+      },
+      {
+        "level": "3",
+        "build_tokens": "100",
+        "upgrade_tokens": "400"
+      },
+      {
+        "level": "4",
+        "build_tokens": "200",
+        "upgrade_tokens": "800"
+      },
+      {
+        "level": "5",
+        "build_tokens": "200",
+        "upgrade_tokens": "800"
+      },
+      {
+        "level": "6",
+        "build_tokens": "400",
+        "upgrade_tokens": "1600"
+      },
+      {
+        "level": "7",
+        "build_tokens": "400",
+        "upgrade_tokens": "1600"
+      },
+      {
+        "level": "8",
+        "build_tokens": "800",
+        "upgrade_tokens": "3200"
+      },
+      {
+        "level": "9",
+        "build_tokens": "800",
+        "upgrade_tokens": "3200"
+      },
+      {
+        "level": "10",
+        "build_tokens": "1600",
+        "upgrade_tokens": "6400"
+      },
+      {
+        "level": "11",
+        "build_tokens": "1600",
+        "upgrade_tokens": "6400"
+      },
+      {
+        "level": "12",
+        "build_tokens": "3200",
+        "upgrade_tokens": "12800"
+      },
+      {
+        "level": "13",
+        "build_tokens": "3200",
+        "upgrade_tokens": "12800"
+      },
+      {
+        "level": "14",
+        "build_tokens": "3200",
+        "upgrade_tokens": "12800",
+        "ducats": "75"
+      },
+      {
+        "level": "15",
+        "build_tokens": "3200",
+        "upgrade_tokens": "12800",
+        "ducats": "150"
+      },
+      {
+        "level": "0"
+      }
+    ],
+    "level_labels": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "0"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Tower",
+    "display_name": "Башня",
+    "category": "Оборона",
+    "description": "Оборонительная башня. Усиливает защитную систему стен и внешнего периметра.",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S2pB29xOa9yvxqw1TWBGNdln79wa9vEM_gO7s7Xqj3DcO0GxcZlODbWbxfIpJGMtZlSyXhNKFXOGrcgaPDhPN_ONpO1YKHkwzdbk32sqcVwPIUc21KSeZa8lt12Se9QGG87dCWniSMUQ9TmqsQmgRVe5YT2vwHrh8E=w403-h62",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens",
+      "talers",
+      "plaster",
+      "dragon_scale_tiles"
+    ],
+    "levels": [
+      {
+        "level": "5"
+      },
+      {
+        "level": "6",
+        "build_tokens": "25",
+        "upgrade_tokens": "35",
+        "talers": "0"
+      },
+      {
+        "level": "7",
+        "build_tokens": "250",
+        "upgrade_tokens": "375",
+        "talers": "0"
+      },
+      {
+        "level": "8",
+        "build_tokens": "300",
+        "upgrade_tokens": "400",
+        "talers": "0"
+      },
+      {
+        "level": "9",
+        "plaster": "480",
+        "dragon_scale_tiles": "2400"
+      },
+      {
+        "level": "3"
+      },
+      {
+        "level": "4",
+        "build_tokens": "550",
+        "upgrade_tokens": "2300"
+      },
+      {
+        "level": "1",
+        "build_tokens": "0",
+        "upgrade_tokens": "0",
+        "talers": "0"
+      },
+      {
+        "level": "2",
+        "build_tokens": "250",
+        "upgrade_tokens": "1000"
+      },
+      {
+        "level": "10",
+        "build_tokens": "4000",
+        "upgrade_tokens": "16000"
+      },
+      {
+        "level": "11",
+        "build_tokens": "4000",
+        "upgrade_tokens": "16000"
+      }
+    ],
+    "level_labels": [
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "3",
+      "4",
+      "1",
+      "2",
+      "10",
+      "11"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Gate",
+    "display_name": "Ворота",
+    "category": "Оборона",
+    "description": "Ворота замка. Ключевой элемент обороны, связанный с защитой прохода в крепость.",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S28Sw3XgXTdCoAtrpFjdgk-YA-iJsJ-9VB1lsIC_sPVpU6BJSOsVCViM_No7SRXSLOsI3qFCulJjpd063WnwxVrMvMIAqNdQeO4coi5WdBm-9jZ0ZwPQqSosV6G9Tyb30vtK2INWg4AAjb4rmmXf7XTqPBfJclcPTE=w403-h62",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens",
+      "talers",
+      "plaster",
+      "dragon_scale_tiles"
+    ],
+    "levels": [
+      {
+        "level": "5"
+      },
+      {
+        "level": "6",
+        "build_tokens": "250",
+        "upgrade_tokens": "375",
+        "talers": "0"
+      },
+      {
+        "level": "7",
+        "build_tokens": "850",
+        "upgrade_tokens": "1250",
+        "talers": "0"
+      },
+      {
+        "level": "8",
+        "build_tokens": "1250",
+        "upgrade_tokens": "1875",
+        "talers": "0"
+      },
+      {
+        "level": "9",
+        "plaster": "1440",
+        "dragon_scale_tiles": "7200"
+      },
+      {
+        "level": "0"
+      },
+      {
+        "level": "1",
+        "build_tokens": "120",
+        "upgrade_tokens": "0",
+        "talers": "0"
+      },
+      {
+        "level": "2",
+        "build_tokens": "0",
+        "upgrade_tokens": "50",
+        "talers": "0"
+      },
+      {
+        "level": "3",
+        "build_tokens": "0",
+        "upgrade_tokens": "50",
+        "talers": "0"
+      },
+      {
+        "level": "4",
+        "build_tokens": "0",
+        "upgrade_tokens": "50",
+        "talers": "0"
+      },
+      {
+        "level": "10",
+        "build_tokens": "0",
+        "upgrade_tokens": "50",
+        "talers": "0"
+      },
+      {
+        "level": "11",
+        "build_tokens": "0",
+        "upgrade_tokens": "60",
+        "talers": "0"
+      },
+      {
+        "level": "12",
+        "build_tokens": "0",
+        "upgrade_tokens": "60",
+        "talers": "0"
+      },
+      {
+        "level": "13",
+        "build_tokens": "0",
+        "upgrade_tokens": "60",
+        "talers": "0"
+      },
+      {
+        "level": "14",
+        "build_tokens": "0",
+        "upgrade_tokens": "60",
+        "talers": "0"
+      },
+      {
+        "level": "15",
+        "build_tokens": "0",
+        "upgrade_tokens": "60",
+        "talers": "0"
+      },
+      {
+        "level": "16",
+        "build_tokens": "0",
+        "upgrade_tokens": "75",
+        "talers": "0"
+      },
+      {
+        "level": "17",
+        "build_tokens": "0",
+        "upgrade_tokens": "75",
+        "talers": "0"
+      },
+      {
+        "level": "18",
+        "build_tokens": "0",
+        "upgrade_tokens": "75",
+        "talers": "0"
+      },
+      {
+        "level": "19",
+        "build_tokens": "0",
+        "upgrade_tokens": "75",
+        "talers": "0"
+      },
+      {
+        "level": "20",
+        "build_tokens": "0",
+        "upgrade_tokens": "75",
+        "talers": "0"
+      },
+      {
+        "level": "21",
+        "build_tokens": "20",
+        "upgrade_tokens": "100",
+        "talers": "20"
+      },
+      {
+        "level": "22",
+        "build_tokens": "30",
+        "upgrade_tokens": "110",
+        "talers": "30"
+      },
+      {
+        "level": "23",
+        "build_tokens": "40",
+        "upgrade_tokens": "120",
+        "talers": "40"
+      },
+      {
+        "level": "24",
+        "build_tokens": "50",
+        "upgrade_tokens": "130",
+        "talers": "50"
+      },
+      {
+        "level": "25",
+        "build_tokens": "60",
+        "upgrade_tokens": "140",
+        "talers": "60"
+      },
+      {
+        "level": "26",
+        "build_tokens": "70",
+        "upgrade_tokens": "150",
+        "talers": "70"
+      },
+      {
+        "level": "27",
+        "build_tokens": "80",
+        "upgrade_tokens": "160",
+        "talers": "80"
+      },
+      {
+        "level": "28",
+        "build_tokens": "90",
+        "upgrade_tokens": "170",
+        "talers": "90"
+      },
+      {
+        "level": "29",
+        "build_tokens": "100",
+        "upgrade_tokens": "180",
+        "talers": "100"
+      },
+      {
+        "level": "30",
+        "build_tokens": "125",
+        "upgrade_tokens": "200",
+        "talers": "120"
+      },
+      {
+        "level": "31",
+        "build_tokens": "150",
+        "upgrade_tokens": "220",
+        "talers": "140"
+      },
+      {
+        "level": "32",
+        "build_tokens": "175",
+        "upgrade_tokens": "240",
+        "talers": "160"
+      },
+      {
+        "level": "33",
+        "build_tokens": "200",
+        "upgrade_tokens": "260",
+        "talers": "180"
+      },
+      {
+        "level": "34",
+        "build_tokens": "225",
+        "upgrade_tokens": "280",
+        "talers": "200"
+      },
+      {
+        "level": "35",
+        "build_tokens": "250",
+        "upgrade_tokens": "300",
+        "talers": "220"
+      },
+      {
+        "level": "36",
+        "build_tokens": "275",
+        "upgrade_tokens": "320",
+        "talers": "240"
+      },
+      {
+        "level": "37",
+        "build_tokens": "300",
+        "upgrade_tokens": "340",
+        "talers": "260"
+      },
+      {
+        "level": "38",
+        "build_tokens": "350",
+        "upgrade_tokens": "380",
+        "talers": "300"
+      },
+      {
+        "level": "39",
+        "build_tokens": "400",
+        "upgrade_tokens": "420",
+        "talers": "340"
+      },
+      {
+        "level": "40",
+        "build_tokens": "450",
+        "upgrade_tokens": "460",
+        "talers": "380"
+      }
+    ],
+    "level_labels": [
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20",
+      "21",
+      "22",
+      "23",
+      "24",
+      "25",
+      "26",
+      "27",
+      "28",
+      "29",
+      "30",
+      "31",
+      "32",
+      "33",
+      "34",
+      "35",
+      "36",
+      "37",
+      "38",
+      "39",
+      "40"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Defence workshop",
+    "display_name": "Оборонная мастерская",
+    "category": "Оборона",
+    "description": "Мастерская обороны. Связана с изготовлением и развитием защитной инфраструктуры замка.",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S18EvH7fpmLI42B7pXPGxu1dT76N4cFNdiuZV_vhJ2sfSUJTJY3XkiOFB7PnaREnm_-2_3cNn755IiQzZvaiTYSf5ZnyMxZOj0WTsImXxySrbPRsduJpgZViC9nG5YnXzM0r-RMclGSw1mylqMvu1Df0BVHd-YlGZF4Cg=w201-h62",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens"
+    ],
+    "levels": [
+      {
+        "level": "3"
+      },
+      {
+        "level": "4",
+        "build_tokens": "550",
+        "upgrade_tokens": "2300"
+      }
+    ],
+    "level_labels": [
+      "3",
+      "4"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Moat",
+    "display_name": "Ров",
+    "category": "Оборона",
+    "description": "Ров перед стенами крепости. Важная часть обороны подступов к замку.",
+    "image_url": "",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens",
+      "rubies"
+    ],
+    "levels": [
+      {
+        "level": "0",
+        "build_tokens": "0",
+        "upgrade_tokens": "0",
+        "rubies": "0"
+      },
+      {
+        "level": "1",
+        "build_tokens": "0",
+        "upgrade_tokens": "0",
+        "rubies": "0"
+      },
+      {
+        "level": "2",
+        "build_tokens": "0",
+        "upgrade_tokens": "0",
+        "rubies": "0"
+      },
+      {
+        "level": "3",
+        "build_tokens": "850",
+        "upgrade_tokens": "1250",
+        "rubies": "0"
+      },
+      {
+        "level": "4",
+        "build_tokens": "2500",
+        "upgrade_tokens": "3750",
+        "rubies": "0"
+      },
+      {
+        "level": "1-Premium",
+        "build_tokens": "0",
+        "upgrade_tokens": "0",
+        "rubies": "12500"
+      },
+      {
+        "level": "2-Premium",
+        "build_tokens": "0",
+        "upgrade_tokens": "0",
+        "rubies": "68000"
+      },
+      {
+        "level": "3-Premium",
+        "build_tokens": "0",
+        "upgrade_tokens": "0",
+        "rubies": "120000"
+      },
+      {
+        "level": "4-Premium",
+        "build_tokens": "2500",
+        "upgrade_tokens": "3750",
+        "rubies": "0"
+      },
+      {
+        "level": "750",
+        "upgrade_tokens": "2"
+      },
+      {
+        "level": "1125",
+        "upgrade_tokens": "3"
+      },
+      {
+        "level": "1690",
+        "upgrade_tokens": "4"
+      },
+      {
+        "level": "2530",
+        "upgrade_tokens": "5"
+      }
+    ],
+    "level_labels": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "1-Premium",
+      "2-Premium",
+      "3-Premium",
+      "4-Premium",
+      "750",
+      "1125",
+      "1690",
+      "2530"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Wall",
+    "display_name": "Стена",
+    "category": "Оборона",
+    "description": "Стена замка. Главная линия укрепления и базовая часть обороны крепости.",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S0a2gzenFv8vYYq00hcii9jexbrRMCHrci4Oyc7qPTcMWZvGC87B4YfYwFQnR27-_NqtDp0uVXkUJ62bdZPaT6LKt0QjfKafvLRCeuWmK2hvABE1jQ2E4gQYa2sKOkV9joagOrKDjNmQSpR-Kvm2Jalnhtal8ANQ6U=w403-h62",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens",
+      "talers",
+      "plaster",
+      "dragon_scale_tiles"
+    ],
+    "levels": [
+      {
+        "level": "5"
+      },
+      {
+        "level": "6",
+        "build_tokens": "250",
+        "upgrade_tokens": "375",
+        "talers": "0"
+      },
+      {
+        "level": "7",
+        "build_tokens": "850",
+        "upgrade_tokens": "1250",
+        "talers": "0"
+      },
+      {
+        "level": "8",
+        "build_tokens": "1250",
+        "upgrade_tokens": "1875",
+        "talers": "0"
+      },
+      {
+        "level": "9",
+        "plaster": "1440",
+        "dragon_scale_tiles": "7200"
+      },
+      {
+        "level": "3"
+      },
+      {
+        "level": "4",
+        "build_tokens": "550",
+        "upgrade_tokens": "2300"
+      },
+      {
+        "level": "1",
+        "build_tokens": "0",
+        "upgrade_tokens": "0",
+        "talers": "0"
+      },
+      {
+        "level": "2",
+        "build_tokens": "100",
+        "upgrade_tokens": "400"
+      },
+      {
+        "level": "10",
+        "build_tokens": "1600",
+        "upgrade_tokens": "6400"
+      },
+      {
+        "level": "11",
+        "build_tokens": "1600",
+        "upgrade_tokens": "6400"
+      },
+      {
+        "level": "12",
+        "build_tokens": "1600",
+        "upgrade_tokens": "6400",
+        "talers": "75"
+      },
+      {
+        "level": "13",
+        "build_tokens": "1600",
+        "upgrade_tokens": "6400",
+        "talers": "150"
+      },
+      {
+        "level": "14",
+        "build_tokens": "1600",
+        "upgrade_tokens": "6400",
+        "talers": "225"
+      }
+    ],
+    "level_labels": [
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "3",
+      "4",
+      "1",
+      "2",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Honey gardens",
+    "display_name": "Медовые сады",
+    "category": "Провиант",
+    "description": "Производственное здание медовой линии. Поддерживает хозяйственную цепочку ресурсов.",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S0XFsREICYGM9GOkw5taUSDSf_c2HFF7BCKdUGLC6uNa6H1uWQ9VRYaPR_8i2YUrI2dlXN_PZBSQmzcRRStlxdHAnUX8vBdjg227WPCVJ6kQpJLhaElNYLYMxp6EVkxOs_N_TX51IojZS20F_O-OJmxXxbrBkMF_4k=w403-h62",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens",
+      "talers",
+      "plaster",
+      "dragon_scale_tiles"
+    ],
+    "levels": [
+      {
+        "level": "0"
+      },
+      {
+        "level": "1",
+        "build_tokens": "270",
+        "upgrade_tokens": "425",
+        "talers": "0"
+      },
+      {
+        "level": "2",
+        "build_tokens": "280",
+        "upgrade_tokens": "425",
+        "talers": "0"
+      },
+      {
+        "level": "3",
+        "build_tokens": "300",
+        "upgrade_tokens": "450",
+        "talers": "0"
+      },
+      {
+        "level": "4",
+        "build_tokens": "300",
+        "upgrade_tokens": "450",
+        "talers": "0"
+      },
+      {
+        "level": "5",
+        "build_tokens": "320",
+        "upgrade_tokens": "475",
+        "talers": "0"
+      },
+      {
+        "level": "6",
+        "build_tokens": "350",
+        "upgrade_tokens": "525",
+        "talers": "0"
+      },
+      {
+        "level": "7",
+        "plaster": "480",
+        "dragon_scale_tiles": "2400"
+      },
+      {
+        "level": "8",
+        "plaster": "720",
+        "dragon_scale_tiles": "3600"
+      }
+    ],
+    "level_labels": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Flour mill",
+    "display_name": "Мельница",
+    "category": "Провиант",
+    "description": "Мельница для переработки продовольствия. Часть пищевой цепочки развития замка.",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S2g7PhjN7T9CnF2VxVHT4gc_zoltyg5Dp5AcVPEMQroQfs7_ERN_NDkZMyJ29DPcGCi9hlZ8oT0yYWyP3CSv0ngWbp61QpoUQNN3cMrDtHAle7L_5DuUlO-9acugGIn52vNsZERi8Bber1BjmlUgItmP5fIgoYeNnCRkw=w403-h62",
+    "resource_fields": [
+      "plaster",
+      "dragon_scale_tiles"
+    ],
+    "levels": [
+      {
+        "level": "6"
+      },
+      {
+        "level": "7",
+        "plaster": "480",
+        "dragon_scale_tiles": "2400"
+      },
+      {
+        "level": "8",
+        "plaster": "720",
+        "dragon_scale_tiles": "3600"
+      }
+    ],
+    "level_labels": [
+      "6",
+      "7",
+      "8"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Butcher shop",
+    "display_name": "Мясная лавка",
+    "category": "Провиант",
+    "description": "Пищевое здание. Поддерживает провиантную цепочку и переработку продукции животноводства.",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S2sBOaB6JqCfv7HGRKO_RZMfUgEExnOYjDxytJP85Mrzcr72-Mgd1CnhMySbRG3P1oztfUGFeUTu9HnzDuB6Gve9DyTsYlCkix4yv3XknLoC-0X83rbeNx2NGQFErxnbSGWFC80cjpCy3Bs4lgYPmou-UyEyxFZggA=w403-h61",
+    "resource_fields": [
+      "plaster",
+      "dragon_scale_tiles"
+    ],
+    "levels": [
+      {
+        "level": "0",
+        "plaster": "0",
+        "dragon_scale_tiles": "0"
+      },
+      {
+        "level": "1",
+        "plaster": "45",
+        "dragon_scale_tiles": "227"
+      },
+      {
+        "level": "2",
+        "plaster": "90",
+        "dragon_scale_tiles": "455"
+      },
+      {
+        "level": "3",
+        "plaster": "135",
+        "dragon_scale_tiles": "682"
+      },
+      {
+        "level": "4",
+        "plaster": "181",
+        "dragon_scale_tiles": "909"
+      },
+      {
+        "level": "5",
+        "plaster": "226",
+        "dragon_scale_tiles": "1137"
+      },
+      {
+        "level": "6",
+        "plaster": "271",
+        "dragon_scale_tiles": "1364"
+      },
+      {
+        "level": "7",
+        "plaster": "316",
+        "dragon_scale_tiles": "1591"
+      },
+      {
+        "level": "8",
+        "plaster": "361",
+        "dragon_scale_tiles": "1818"
+      },
+      {
+        "level": "9",
+        "plaster": "406",
+        "dragon_scale_tiles": "2046"
+      },
+      {
+        "level": "10",
+        "plaster": "452",
+        "dragon_scale_tiles": "2273"
+      },
+      {
+        "level": "11",
+        "plaster": "219"
+      },
+      {
+        "level": "12"
+      },
+      {
+        "level": "13",
+        "plaster": "262"
+      },
+      {
+        "level": "14"
+      },
+      {
+        "level": "15",
+        "plaster": "262"
+      },
+      {
+        "level": "16"
+      },
+      {
+        "level": "17",
+        "plaster": "306"
+      },
+      {
+        "level": "18"
+      },
+      {
+        "level": "19",
+        "plaster": "350"
+      },
+      {
+        "level": "20"
+      },
+      {
+        "level": "21",
+        "plaster": "350"
+      },
+      {
+        "level": "22"
+      },
+      {
+        "level": "23",
+        "plaster": "526"
+      },
+      {
+        "level": "24"
+      },
+      {
+        "level": "25",
+        "plaster": "526"
+      }
+    ],
+    "level_labels": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20",
+      "21",
+      "22",
+      "23",
+      "24",
+      "25"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Cattle farm",
+    "display_name": "Скотная ферма",
+    "category": "Провиант",
+    "description": "Ферма животноводства. Работает в провиантной цепочке вместе с пищевыми зданиями.",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S2sBOaB6JqCfv7HGRKO_RZMfUgEExnOYjDxytJP85Mrzcr72-Mgd1CnhMySbRG3P1oztfUGFeUTu9HnzDuB6Gve9DyTsYlCkix4yv3XknLoC-0X83rbeNx2NGQFErxnbSGWFC80cjpCy3Bs4lgYPmou-UyEyxFZggA=w403-h61",
+    "resource_fields": [
+      "plaster",
+      "dragon_scale_tiles"
+    ],
+    "levels": [
+      {
+        "level": "0"
+      },
+      {
+        "level": "1",
+        "plaster": "114",
+        "dragon_scale_tiles": "568"
+      },
+      {
+        "level": "2",
+        "plaster": "115",
+        "dragon_scale_tiles": "573"
+      },
+      {
+        "level": "3",
+        "plaster": "116",
+        "dragon_scale_tiles": "579"
+      },
+      {
+        "level": "4",
+        "plaster": "117",
+        "dragon_scale_tiles": "585"
+      },
+      {
+        "level": "5",
+        "plaster": "118",
+        "dragon_scale_tiles": "591"
+      },
+      {
+        "level": "6",
+        "plaster": "119",
+        "dragon_scale_tiles": "597"
+      },
+      {
+        "level": "7",
+        "plaster": "120",
+        "dragon_scale_tiles": "603"
+      },
+      {
+        "level": "8",
+        "plaster": "121",
+        "dragon_scale_tiles": "609"
+      },
+      {
+        "level": "9",
+        "plaster": "122",
+        "dragon_scale_tiles": "615"
+      },
+      {
+        "level": "10",
+        "plaster": "123",
+        "dragon_scale_tiles": "621"
+      },
+      {
+        "level": "11",
+        "plaster": "124",
+        "dragon_scale_tiles": "627"
+      },
+      {
+        "level": "12",
+        "plaster": "125",
+        "dragon_scale_tiles": "633"
+      },
+      {
+        "level": "13",
+        "plaster": "127",
+        "dragon_scale_tiles": "640"
+      },
+      {
+        "level": "14",
+        "plaster": "128",
+        "dragon_scale_tiles": "646"
+      },
+      {
+        "level": "15",
+        "plaster": "129",
+        "dragon_scale_tiles": "653"
+      },
+      {
+        "level": "16",
+        "plaster": "131",
+        "dragon_scale_tiles": "659"
+      },
+      {
+        "level": "17",
+        "plaster": "132",
+        "dragon_scale_tiles": "666"
+      },
+      {
+        "level": "18",
+        "plaster": "133",
+        "dragon_scale_tiles": "672"
+      },
+      {
+        "level": "19",
+        "plaster": "134",
+        "dragon_scale_tiles": "679"
+      },
+      {
+        "level": "20",
+        "plaster": "135",
+        "dragon_scale_tiles": "686"
+      }
+    ],
+    "level_labels": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Relic conservatory",
+    "display_name": "Реликтовая консерватория",
+    "category": "Реликвии",
+    "description": "Реликтовое здание для развития и поддержки особой ресурсной ветки.",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S026VHzL9ZSK2_JBRJoLtMi7Biaer8663570eazFrW4eq4zmJvNDvRz-C1meg_RKGOAhuN1QQ9BAX42b2-4Uazx29ASRePOatgMSMnPWka63_hVK3ql1aGXtivO3Hq_TkJHoc6RdXwSEjawsOKWmjF3FThTKGanWEausw=w201-h62",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens",
+      "talers"
+    ],
+    "levels": [
+      {
+        "level": "0"
+      },
+      {
+        "level": "1",
+        "build_tokens": "25",
+        "upgrade_tokens": "113",
+        "talers": "0"
+      },
+      {
+        "level": "2",
+        "build_tokens": "25",
+        "upgrade_tokens": "113",
+        "talers": "0"
+      },
+      {
+        "level": "3",
+        "build_tokens": "25",
+        "upgrade_tokens": "113",
+        "talers": "0"
+      },
+      {
+        "level": "4",
+        "build_tokens": "25",
+        "upgrade_tokens": "113",
+        "talers": "0"
+      },
+      {
+        "level": "5",
+        "build_tokens": "25",
+        "upgrade_tokens": "113",
+        "talers": "0"
+      },
+      {
+        "level": "6",
+        "build_tokens": "50",
+        "upgrade_tokens": "300",
+        "talers": "0"
+      },
+      {
+        "level": "7",
+        "build_tokens": "50",
+        "upgrade_tokens": "300",
+        "talers": "0"
+      },
+      {
+        "level": "8",
+        "build_tokens": "50",
+        "upgrade_tokens": "300",
+        "talers": "0"
+      },
+      {
+        "level": "9",
+        "build_tokens": "50",
+        "upgrade_tokens": "300",
+        "talers": "0"
+      },
+      {
+        "level": "10",
+        "build_tokens": "50",
+        "upgrade_tokens": "300",
+        "talers": "0"
+      },
+      {
+        "level": "11",
+        "build_tokens": "100",
+        "upgrade_tokens": "500",
+        "talers": "0"
+      },
+      {
+        "level": "12",
+        "build_tokens": "100",
+        "upgrade_tokens": "500",
+        "talers": "0"
+      },
+      {
+        "level": "13",
+        "build_tokens": "100",
+        "upgrade_tokens": "500",
+        "talers": "0"
+      },
+      {
+        "level": "14",
+        "build_tokens": "100",
+        "upgrade_tokens": "500",
+        "talers": "0"
+      },
+      {
+        "level": "15",
+        "build_tokens": "100",
+        "upgrade_tokens": "500",
+        "talers": "0"
+      },
+      {
+        "level": "16",
+        "build_tokens": "200",
+        "upgrade_tokens": "950",
+        "talers": "0"
+      },
+      {
+        "level": "17",
+        "build_tokens": "200",
+        "upgrade_tokens": "950",
+        "talers": "0"
+      },
+      {
+        "level": "18",
+        "build_tokens": "200",
+        "upgrade_tokens": "950",
+        "talers": "0"
+      },
+      {
+        "level": "19",
+        "build_tokens": "200",
+        "upgrade_tokens": "950",
+        "talers": "0"
+      },
+      {
+        "level": "20",
+        "build_tokens": "200",
+        "upgrade_tokens": "950",
+        "talers": "0"
+      },
+      {
+        "level": "21",
+        "build_tokens": "210",
+        "upgrade_tokens": "970",
+        "talers": "70"
+      },
+      {
+        "level": "22",
+        "build_tokens": "220",
+        "upgrade_tokens": "990",
+        "talers": "90"
+      },
+      {
+        "level": "23",
+        "build_tokens": "230",
+        "upgrade_tokens": "1010",
+        "talers": "110"
+      },
+      {
+        "level": "24",
+        "build_tokens": "240",
+        "upgrade_tokens": "1030",
+        "talers": "130"
+      },
+      {
+        "level": "25",
+        "build_tokens": "250",
+        "upgrade_tokens": "1050",
+        "talers": "150"
+      },
+      {
+        "level": "26",
+        "build_tokens": "260",
+        "upgrade_tokens": "1070",
+        "talers": "170"
+      },
+      {
+        "level": "27",
+        "build_tokens": "270",
+        "upgrade_tokens": "1090",
+        "talers": "190"
+      },
+      {
+        "level": "28",
+        "build_tokens": "280",
+        "upgrade_tokens": "1110",
+        "talers": "210"
+      },
+      {
+        "level": "29",
+        "build_tokens": "290",
+        "upgrade_tokens": "1130",
+        "talers": "230"
+      },
+      {
+        "level": "30",
+        "build_tokens": "300",
+        "upgrade_tokens": "1150",
+        "talers": "250"
+      },
+      {
+        "level": "31",
+        "build_tokens": "315",
+        "upgrade_tokens": "1200",
+        "talers": "275"
+      },
+      {
+        "level": "32",
+        "build_tokens": "330",
+        "upgrade_tokens": "1250",
+        "talers": "300"
+      },
+      {
+        "level": "33",
+        "build_tokens": "345",
+        "upgrade_tokens": "1300",
+        "talers": "325"
+      },
+      {
+        "level": "34",
+        "build_tokens": "360",
+        "upgrade_tokens": "1350",
+        "talers": "350"
+      },
+      {
+        "level": "35",
+        "build_tokens": "400",
+        "upgrade_tokens": "1400",
+        "talers": "375"
+      },
+      {
+        "level": "36",
+        "build_tokens": "440",
+        "upgrade_tokens": "1450",
+        "talers": "400"
+      },
+      {
+        "level": "37",
+        "build_tokens": "480",
+        "upgrade_tokens": "1500",
+        "talers": "425"
+      },
+      {
+        "level": "38",
+        "build_tokens": "540",
+        "upgrade_tokens": "1600",
+        "talers": "500"
+      },
+      {
+        "level": "39",
+        "build_tokens": "600",
+        "upgrade_tokens": "1700",
+        "talers": "600"
+      },
+      {
+        "level": "40",
+        "build_tokens": "660",
+        "upgrade_tokens": "1800",
+        "talers": "700"
+      }
+    ],
+    "level_labels": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20",
+      "21",
+      "22",
+      "23",
+      "24",
+      "25",
+      "26",
+      "27",
+      "28",
+      "29",
+      "30",
+      "31",
+      "32",
+      "33",
+      "34",
+      "35",
+      "36",
+      "37",
+      "38",
+      "39",
+      "40"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Relic bakery",
+    "display_name": "Реликтовая пекарня",
+    "category": "Реликвии",
+    "description": "Реликтовая производственная постройка. Относится к ветке реликтовых ресурсов.",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S2mVce5NepamPjB5NRt2Be0nyRSpR0iRVyMRTb1_YiWn0EQNhNXsdvMJOJpJ1rfxBtmO-BNRSY8gUL6du8EFqw3JAi_qdHRA9lyVdc_1rQU-zEYudVtdswExX6DWTAiK7e-roc1yy3lV1cxg4yG47p5B4FMKsHZN2w=w201-h61",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens",
+      "talers"
+    ],
+    "levels": [
+      {
+        "level": "1"
+      },
+      {
+        "level": "2",
+        "build_tokens": "100",
+        "upgrade_tokens": "500"
+      },
+      {
+        "level": "3",
+        "build_tokens": "200",
+        "upgrade_tokens": "1000"
+      },
+      {
+        "level": "4",
+        "build_tokens": "300",
+        "upgrade_tokens": "1500"
+      },
+      {
+        "level": "5",
+        "build_tokens": "400",
+        "upgrade_tokens": "2000"
+      },
+      {
+        "level": "0",
+        "upgrade_tokens": "0",
+        "talers": "0"
+      },
+      {
+        "level": "250",
+        "upgrade_tokens": "1",
+        "talers": "25"
+      },
+      {
+        "level": "350",
+        "upgrade_tokens": "2",
+        "talers": "25"
+      },
+      {
+        "level": "450",
+        "upgrade_tokens": "3",
+        "talers": "25"
+      },
+      {
+        "level": "550",
+        "upgrade_tokens": "4",
+        "talers": "25"
+      },
+      {
+        "level": "650",
+        "upgrade_tokens": "5",
+        "talers": "25"
+      },
+      {
+        "level": "750",
+        "upgrade_tokens": "6",
+        "talers": "50"
+      },
+      {
+        "level": "850",
+        "upgrade_tokens": "7",
+        "talers": "50"
+      },
+      {
+        "level": "950",
+        "upgrade_tokens": "8",
+        "talers": "50"
+      },
+      {
+        "level": "1050",
+        "upgrade_tokens": "9",
+        "talers": "50"
+      },
+      {
+        "level": "2000",
+        "upgrade_tokens": "10",
+        "talers": "50"
+      },
+      {
+        "level": "6",
+        "build_tokens": "350",
+        "upgrade_tokens": "525",
+        "talers": "0"
+      },
+      {
+        "level": "7"
+      },
+      {
+        "level": "8"
+      },
+      {
+        "level": "9"
+      }
+    ],
+    "level_labels": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "0",
+      "250",
+      "350",
+      "450",
+      "550",
+      "650",
+      "750",
+      "850",
+      "950",
+      "1050",
+      "2000",
+      "6",
+      "7",
+      "8",
+      "9"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Relic greenhouse",
+    "display_name": "Реликтовая теплица",
+    "category": "Реликвии",
+    "description": "Реликтовая теплица. Используется в специальной цепочке реликтовых построек.",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S2xiJr_HYIy8ZOysMwKgeHdxzvW2_sSL5xBoAyN2gigIcTpX-DIjNS6eGKAYDW5pH_do0-lbxbJLQdy_tO1PvlOIrMIei6_SXGWqAHGYJ7PdR_gBVPDuogPD_qgWxfzhb2Pr6B4MFW4UeXiG1Jvv-5YByvWbU5YoM97-A=w201-h62",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens",
+      "talers"
+    ],
+    "levels": [
+      {
+        "level": "0"
+      },
+      {
+        "level": "1",
+        "build_tokens": "120",
+        "upgrade_tokens": "0",
+        "talers": "0"
+      },
+      {
+        "level": "2",
+        "build_tokens": "0",
+        "upgrade_tokens": "50",
+        "talers": "0"
+      },
+      {
+        "level": "3",
+        "build_tokens": "0",
+        "upgrade_tokens": "50",
+        "talers": "0"
+      },
+      {
+        "level": "4",
+        "build_tokens": "0",
+        "upgrade_tokens": "50",
+        "talers": "0"
+      },
+      {
+        "level": "5",
+        "build_tokens": "0",
+        "upgrade_tokens": "50",
+        "talers": "0"
+      },
+      {
+        "level": "6",
+        "build_tokens": "0",
+        "upgrade_tokens": "50",
+        "talers": "0"
+      },
+      {
+        "level": "7",
+        "build_tokens": "0",
+        "upgrade_tokens": "50",
+        "talers": "0"
+      },
+      {
+        "level": "8",
+        "build_tokens": "0",
+        "upgrade_tokens": "50",
+        "talers": "0"
+      },
+      {
+        "level": "9",
+        "build_tokens": "0",
+        "upgrade_tokens": "50",
+        "talers": "0"
+      },
+      {
+        "level": "10",
+        "build_tokens": "0",
+        "upgrade_tokens": "50",
+        "talers": "0"
+      },
+      {
+        "level": "11",
+        "build_tokens": "0",
+        "upgrade_tokens": "60",
+        "talers": "0"
+      },
+      {
+        "level": "12",
+        "build_tokens": "0",
+        "upgrade_tokens": "60",
+        "talers": "0"
+      },
+      {
+        "level": "13",
+        "build_tokens": "0",
+        "upgrade_tokens": "60",
+        "talers": "0"
+      },
+      {
+        "level": "14",
+        "build_tokens": "0",
+        "upgrade_tokens": "60",
+        "talers": "0"
+      },
+      {
+        "level": "15",
+        "build_tokens": "0",
+        "upgrade_tokens": "60",
+        "talers": "0"
+      },
+      {
+        "level": "16",
+        "build_tokens": "0",
+        "upgrade_tokens": "75",
+        "talers": "0"
+      },
+      {
+        "level": "17",
+        "build_tokens": "0",
+        "upgrade_tokens": "75",
+        "talers": "0"
+      },
+      {
+        "level": "18",
+        "build_tokens": "0",
+        "upgrade_tokens": "75",
+        "talers": "0"
+      },
+      {
+        "level": "19",
+        "build_tokens": "0",
+        "upgrade_tokens": "75",
+        "talers": "0"
+      },
+      {
+        "level": "20",
+        "build_tokens": "0",
+        "upgrade_tokens": "75",
+        "talers": "0"
+      },
+      {
+        "level": "21",
+        "build_tokens": "20",
+        "upgrade_tokens": "100",
+        "talers": "20"
+      },
+      {
+        "level": "22",
+        "build_tokens": "30",
+        "upgrade_tokens": "110",
+        "talers": "30"
+      },
+      {
+        "level": "23",
+        "build_tokens": "40",
+        "upgrade_tokens": "120",
+        "talers": "40"
+      },
+      {
+        "level": "24",
+        "build_tokens": "50",
+        "upgrade_tokens": "130",
+        "talers": "50"
+      },
+      {
+        "level": "25",
+        "build_tokens": "60",
+        "upgrade_tokens": "140",
+        "talers": "60"
+      },
+      {
+        "level": "26",
+        "build_tokens": "70",
+        "upgrade_tokens": "150",
+        "talers": "70"
+      },
+      {
+        "level": "27",
+        "build_tokens": "80",
+        "upgrade_tokens": "160",
+        "talers": "80"
+      },
+      {
+        "level": "28",
+        "build_tokens": "90",
+        "upgrade_tokens": "170",
+        "talers": "90"
+      },
+      {
+        "level": "29",
+        "build_tokens": "100",
+        "upgrade_tokens": "180",
+        "talers": "100"
+      },
+      {
+        "level": "30",
+        "build_tokens": "125",
+        "upgrade_tokens": "200",
+        "talers": "120"
+      },
+      {
+        "level": "31",
+        "build_tokens": "150",
+        "upgrade_tokens": "220",
+        "talers": "140"
+      },
+      {
+        "level": "32",
+        "build_tokens": "175",
+        "upgrade_tokens": "240",
+        "talers": "160"
+      },
+      {
+        "level": "33",
+        "build_tokens": "200",
+        "upgrade_tokens": "260",
+        "talers": "180"
+      },
+      {
+        "level": "34",
+        "build_tokens": "225",
+        "upgrade_tokens": "280",
+        "talers": "200"
+      },
+      {
+        "level": "35",
+        "build_tokens": "250",
+        "upgrade_tokens": "300",
+        "talers": "220"
+      },
+      {
+        "level": "36",
+        "build_tokens": "275",
+        "upgrade_tokens": "320",
+        "talers": "240"
+      },
+      {
+        "level": "37",
+        "build_tokens": "300",
+        "upgrade_tokens": "340",
+        "talers": "260"
+      },
+      {
+        "level": "38",
+        "build_tokens": "350",
+        "upgrade_tokens": "380",
+        "talers": "300"
+      },
+      {
+        "level": "39",
+        "build_tokens": "400",
+        "upgrade_tokens": "420",
+        "talers": "340"
+      },
+      {
+        "level": "40",
+        "build_tokens": "450",
+        "upgrade_tokens": "460",
+        "talers": "380"
+      }
+    ],
+    "level_labels": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20",
+      "21",
+      "22",
+      "23",
+      "24",
+      "25",
+      "26",
+      "27",
+      "28",
+      "29",
+      "30",
+      "31",
+      "32",
+      "33",
+      "34",
+      "35",
+      "36",
+      "37",
+      "38",
+      "39",
+      "40"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Relic woodcutter",
+    "display_name": "Реликтовый дровосек",
+    "category": "Реликвии",
+    "description": "Реликтовый дровосек. Производственная постройка ресурсной реликтовой ветки.",
+    "image_url": "",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens"
+    ],
+    "levels": [
+      {
+        "level": "0",
+        "build_tokens": "0",
+        "upgrade_tokens": "0"
+      },
+      {
+        "level": "1",
+        "build_tokens": "60",
+        "upgrade_tokens": "0"
+      },
+      {
+        "level": "2",
+        "build_tokens": "0",
+        "upgrade_tokens": "25"
+      },
+      {
+        "level": "3",
+        "build_tokens": "0",
+        "upgrade_tokens": "25"
+      },
+      {
+        "level": "4",
+        "build_tokens": "0",
+        "upgrade_tokens": "25"
+      },
+      {
+        "level": "5",
+        "build_tokens": "0",
+        "upgrade_tokens": "25"
+      },
+      {
+        "level": "6",
+        "build_tokens": "0",
+        "upgrade_tokens": "25"
+      },
+      {
+        "level": "7",
+        "build_tokens": "0",
+        "upgrade_tokens": "25"
+      },
+      {
+        "level": "8",
+        "build_tokens": "0",
+        "upgrade_tokens": "25"
+      },
+      {
+        "level": "9",
+        "build_tokens": "0",
+        "upgrade_tokens": "25"
+      },
+      {
+        "level": "10",
+        "build_tokens": "0",
+        "upgrade_tokens": "25"
+      },
+      {
+        "level": "11",
+        "build_tokens": "0",
+        "upgrade_tokens": "50"
+      },
+      {
+        "level": "12",
+        "build_tokens": "0",
+        "upgrade_tokens": "50"
+      },
+      {
+        "level": "13",
+        "build_tokens": "0",
+        "upgrade_tokens": "50"
+      },
+      {
+        "level": "14",
+        "build_tokens": "0",
+        "upgrade_tokens": "50"
+      },
+      {
+        "level": "15",
+        "build_tokens": "0",
+        "upgrade_tokens": "50"
+      },
+      {
+        "level": "16",
+        "build_tokens": "0",
+        "upgrade_tokens": "50"
+      },
+      {
+        "level": "17",
+        "build_tokens": "0",
+        "upgrade_tokens": "50"
+      },
+      {
+        "level": "18",
+        "build_tokens": "0",
+        "upgrade_tokens": "50"
+      },
+      {
+        "level": "19",
+        "build_tokens": "0",
+        "upgrade_tokens": "50"
+      },
+      {
+        "level": "20",
+        "build_tokens": "0",
+        "upgrade_tokens": "50"
+      }
+    ],
+    "level_labels": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Relic quarry",
+    "display_name": "Реликтовый карьер",
+    "category": "Реликвии",
+    "description": "Реликтовый карьер для добывающей части специальной ресурсной ветки.",
+    "image_url": "",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens"
+    ],
+    "levels": [
+      {
+        "level": "0",
+        "build_tokens": "0",
+        "upgrade_tokens": "0"
+      },
+      {
+        "level": "1",
+        "build_tokens": "60",
+        "upgrade_tokens": "0"
+      },
+      {
+        "level": "2",
+        "build_tokens": "0",
+        "upgrade_tokens": "25"
+      },
+      {
+        "level": "3",
+        "build_tokens": "0",
+        "upgrade_tokens": "25"
+      },
+      {
+        "level": "4",
+        "build_tokens": "0",
+        "upgrade_tokens": "25"
+      },
+      {
+        "level": "5",
+        "build_tokens": "0",
+        "upgrade_tokens": "25"
+      },
+      {
+        "level": "6",
+        "build_tokens": "0",
+        "upgrade_tokens": "25"
+      },
+      {
+        "level": "7",
+        "build_tokens": "0",
+        "upgrade_tokens": "25"
+      },
+      {
+        "level": "8",
+        "build_tokens": "0",
+        "upgrade_tokens": "25"
+      },
+      {
+        "level": "9",
+        "build_tokens": "0",
+        "upgrade_tokens": "25"
+      },
+      {
+        "level": "10",
+        "build_tokens": "0",
+        "upgrade_tokens": "25"
+      },
+      {
+        "level": "11",
+        "build_tokens": "0",
+        "upgrade_tokens": "50"
+      },
+      {
+        "level": "12",
+        "build_tokens": "0",
+        "upgrade_tokens": "50"
+      },
+      {
+        "level": "13",
+        "build_tokens": "0",
+        "upgrade_tokens": "50"
+      },
+      {
+        "level": "14",
+        "build_tokens": "0",
+        "upgrade_tokens": "50"
+      },
+      {
+        "level": "15",
+        "build_tokens": "0",
+        "upgrade_tokens": "50"
+      },
+      {
+        "level": "16",
+        "build_tokens": "0",
+        "upgrade_tokens": "50"
+      },
+      {
+        "level": "17",
+        "build_tokens": "0",
+        "upgrade_tokens": "50"
+      },
+      {
+        "level": "18",
+        "build_tokens": "0",
+        "upgrade_tokens": "50"
+      },
+      {
+        "level": "19",
+        "build_tokens": "0",
+        "upgrade_tokens": "50"
+      },
+      {
+        "level": "20",
+        "build_tokens": "0",
+        "upgrade_tokens": "50"
+      }
+    ],
+    "level_labels": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Relic storehouse",
+    "display_name": "Реликтовый склад",
+    "category": "Реликвии",
+    "description": "Реликтовый склад для хранения особых ресурсов.",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S0Zc1YyJv-gsGIxJJuqO71a6WGHvnEX7WmfY_CKfSCM9_4AUBE7sXJNfr5c7I8DpgZz6NPy4qcu-wXcWYckJACooyXQPoI-afoQLuHW6jQi7roKtqqoMeRpE-upk-PZ9DLMSSN1RU_GgA_9gi6dGNQW9XihGAEsxHXRuQ=w201-h61",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens",
+      "talers"
+    ],
+    "levels": [
+      {
+        "level": "1"
+      },
+      {
+        "level": "2",
+        "build_tokens": "100",
+        "upgrade_tokens": "500"
+      },
+      {
+        "level": "3",
+        "build_tokens": "200",
+        "upgrade_tokens": "1000"
+      },
+      {
+        "level": "4",
+        "build_tokens": "300",
+        "upgrade_tokens": "1500"
+      },
+      {
+        "level": "5",
+        "build_tokens": "400",
+        "upgrade_tokens": "2000"
+      },
+      {
+        "level": "0",
+        "build_tokens": "0",
+        "talers": "0"
+      },
+      {
+        "level": "60",
+        "build_tokens": "0",
+        "talers": "1"
+      },
+      {
+        "level": "7"
+      },
+      {
+        "level": "8",
+        "build_tokens": "450",
+        "upgrade_tokens": "650",
+        "talers": "0"
+      },
+      {
+        "level": "9"
+      },
+      {
+        "level": "6",
+        "build_tokens": "25",
+        "upgrade_tokens": "35",
+        "talers": "0"
+      }
+    ],
+    "level_labels": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "0",
+      "60",
+      "7",
+      "8",
+      "9",
+      "6"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Relictus",
+    "display_name": "Реликтус",
+    "category": "Реликвии",
+    "description": "Специальная реликтовая постройка позднего развития.",
+    "image_url": "",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens"
+    ],
+    "levels": [
+      {
+        "level": "5"
+      },
+      {
+        "level": "6",
+        "build_tokens": "24"
+      },
+      {
+        "level": "7",
+        "upgrade_tokens": "176"
+      },
+      {
+        "level": "8",
+        "build_tokens": "24"
+      },
+      {
+        "level": "9",
+        "upgrade_tokens": "176"
+      },
+      {
+        "level": "10",
+        "build_tokens": "29"
+      },
+      {
+        "level": "11",
+        "upgrade_tokens": "219"
+      },
+      {
+        "level": "12",
+        "build_tokens": "34"
+      },
+      {
+        "level": "13",
+        "upgrade_tokens": "262"
+      },
+      {
+        "level": "14",
+        "build_tokens": "34"
+      },
+      {
+        "level": "15",
+        "upgrade_tokens": "262"
+      },
+      {
+        "level": "16",
+        "build_tokens": "40"
+      },
+      {
+        "level": "17",
+        "upgrade_tokens": "306"
+      },
+      {
+        "level": "18",
+        "build_tokens": "46"
+      },
+      {
+        "level": "19",
+        "upgrade_tokens": "350"
+      },
+      {
+        "level": "20",
+        "build_tokens": "46"
+      },
+      {
+        "level": "21",
+        "upgrade_tokens": "350"
+      },
+      {
+        "level": "22",
+        "build_tokens": "70"
+      },
+      {
+        "level": "23",
+        "upgrade_tokens": "526"
+      },
+      {
+        "level": "24",
+        "build_tokens": "70"
+      },
+      {
+        "level": "25",
+        "upgrade_tokens": "526"
+      },
+      {
+        "level": "4"
+      }
+    ],
+    "level_labels": [
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20",
+      "21",
+      "22",
+      "23",
+      "24",
+      "25",
+      "4"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Refinery",
+    "display_name": "Рафинерия",
+    "category": "Ресурсы",
+    "description": "Перерабатывающее здание для редких материалов и специальной ресурсной ветки.",
+    "image_url": "",
+    "resource_fields": [
+      "plaster",
+      "dragon_scale_tiles"
+    ],
+    "levels": [
+      {
+        "level": "0",
+        "plaster": "0",
+        "dragon_scale_tiles": "0"
+      },
+      {
+        "level": "1",
+        "plaster": "200",
+        "dragon_scale_tiles": "1000"
+      },
+      {
+        "level": "2",
+        "plaster": "300",
+        "dragon_scale_tiles": "1465"
+      },
+      {
+        "level": "3",
+        "plaster": "450",
+        "dragon_scale_tiles": "2150"
+      },
+      {
+        "level": "4",
+        "plaster": "680",
+        "dragon_scale_tiles": "3140"
+      },
+      {
+        "level": "5",
+        "plaster": "1020",
+        "dragon_scale_tiles": "4180"
+      }
+    ],
+    "level_labels": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Refinery-Kingdoms",
+    "display_name": "Рафинерия королевств",
+    "category": "Ресурсы",
+    "description": "Версия переработки ресурсов для миров и королевств.",
+    "image_url": "",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens",
+      "plaster",
+      "dragon_scale_tiles"
+    ],
+    "levels": [
+      {
+        "level": "0",
+        "build_tokens": "0",
+        "upgrade_tokens": "0",
+        "plaster": "0",
+        "dragon_scale_tiles": "0"
+      },
+      {
+        "level": "1",
+        "build_tokens": "29",
+        "upgrade_tokens": "122",
+        "plaster": "0",
+        "dragon_scale_tiles": "0"
+      },
+      {
+        "level": "2",
+        "build_tokens": "87",
+        "upgrade_tokens": "368",
+        "plaster": "0",
+        "dragon_scale_tiles": "0"
+      },
+      {
+        "level": "3",
+        "build_tokens": "174",
+        "upgrade_tokens": "735",
+        "plaster": "0",
+        "dragon_scale_tiles": "0"
+      },
+      {
+        "level": "4",
+        "build_tokens": "290",
+        "upgrade_tokens": "1225",
+        "plaster": "0",
+        "dragon_scale_tiles": "0"
+      },
+      {
+        "level": "5",
+        "build_tokens": "0",
+        "upgrade_tokens": "0",
+        "plaster": "939",
+        "dragon_scale_tiles": "4586"
+      },
+      {
+        "level": "8"
+      },
+      {
+        "level": "9",
+        "build_tokens": "550",
+        "upgrade_tokens": "2300",
+        "plaster": "0"
+      },
+      {
+        "level": "6",
+        "build_tokens": "850",
+        "upgrade_tokens": "1250",
+        "plaster": "0"
+      },
+      {
+        "level": "7",
+        "build_tokens": "1240",
+        "upgrade_tokens": "5200",
+        "plaster": "0"
+      },
+      {
+        "level": "10",
+        "build_tokens": "0",
+        "upgrade_tokens": "100",
+        "plaster": "0"
+      },
+      {
+        "level": "11",
+        "build_tokens": "100",
+        "upgrade_tokens": "100",
+        "plaster": "0"
+      },
+      {
+        "level": "12",
+        "build_tokens": "100",
+        "upgrade_tokens": "100",
+        "plaster": "0"
+      },
+      {
+        "level": "13",
+        "build_tokens": "100",
+        "upgrade_tokens": "150",
+        "plaster": "0"
+      },
+      {
+        "level": "14",
+        "build_tokens": "425",
+        "upgrade_tokens": "550",
+        "plaster": "0"
+      },
+      {
+        "level": "15",
+        "build_tokens": "425",
+        "upgrade_tokens": "550",
+        "plaster": "0"
+      },
+      {
+        "level": "16",
+        "dragon_scale_tiles": "75"
+      },
+      {
+        "level": "17",
+        "dragon_scale_tiles": "150"
+      },
+      {
+        "level": "18",
+        "dragon_scale_tiles": "225"
+      },
+      {
+        "level": "19",
+        "dragon_scale_tiles": "340"
+      },
+      {
+        "level": "20",
+        "dragon_scale_tiles": "510"
+      }
+    ],
+    "level_labels": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "8",
+      "9",
+      "6",
+      "7",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Barrel workshop",
+    "display_name": "Бондарная мастерская",
+    "category": "Экономика",
+    "description": "Вспомогательное производственное здание. Используется в цепочке хозяйственных построек и переработки.",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S2bo-AhD0xG9WwzxhA2reCzHQAH7r3PNB8JezpFtnaW8KBYsukARb7ibB4ERRXdlsyUDgWAKuO89TmSrXaOaT6BBo8J8RTmyQGouVWcCW4W5uyxf9ANTlevdGq5uiCYiZkyHdHHhvbSMZfuu_yNNLxNLID4DYIwsRe0PA=w403-h62",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens",
+      "talers",
+      "plaster",
+      "dragon_scale_tiles"
+    ],
+    "levels": [
+      {
+        "level": "0"
+      },
+      {
+        "level": "1",
+        "build_tokens": "270",
+        "upgrade_tokens": "425",
+        "talers": "0"
+      },
+      {
+        "level": "2",
+        "build_tokens": "280",
+        "upgrade_tokens": "425",
+        "talers": "0"
+      },
+      {
+        "level": "3",
+        "build_tokens": "300",
+        "upgrade_tokens": "450",
+        "talers": "0"
+      },
+      {
+        "level": "4",
+        "build_tokens": "300",
+        "upgrade_tokens": "450",
+        "talers": "0"
+      },
+      {
+        "level": "5",
+        "build_tokens": "320",
+        "upgrade_tokens": "475",
+        "talers": "0"
+      },
+      {
+        "level": "6",
+        "build_tokens": "350",
+        "upgrade_tokens": "525",
+        "talers": "0"
+      },
+      {
+        "level": "7",
+        "plaster": "480",
+        "dragon_scale_tiles": "2400"
+      },
+      {
+        "level": "8",
+        "plaster": "720",
+        "dragon_scale_tiles": "3600"
+      }
+    ],
+    "level_labels": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Mead distillery",
+    "display_name": "Медоварня",
+    "category": "Экономика",
+    "description": "Производит медовую продукцию и участвует в профильной экономической цепочке.",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S1rTR0McYAo0xqYK2N9YsIxvhIAKU-SB51-7OsuaYN5zA_5QX-D49RlZ7zL_XBCiqE8Uzn29AXWieOgq3rvg08o5fUC0wKLOB9X1i0R1KOgbJXNALkUNYTZkFRV6v_NvQu0-dcOAfeKF-ofWAq-wYz8L-Dg1k6UInE=w201-h62",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens",
+      "talers"
+    ],
+    "levels": [
+      {
+        "level": "0"
+      },
+      {
+        "level": "1",
+        "build_tokens": "240",
+        "upgrade_tokens": "400",
+        "talers": "0"
+      },
+      {
+        "level": "2",
+        "build_tokens": "250",
+        "upgrade_tokens": "400",
+        "talers": "0"
+      },
+      {
+        "level": "3",
+        "build_tokens": "270",
+        "upgrade_tokens": "425",
+        "talers": "0"
+      },
+      {
+        "level": "4",
+        "build_tokens": "280",
+        "upgrade_tokens": "425",
+        "talers": "0"
+      },
+      {
+        "level": "5",
+        "build_tokens": "300",
+        "upgrade_tokens": "450",
+        "talers": "0"
+      },
+      {
+        "level": "6",
+        "build_tokens": "320",
+        "upgrade_tokens": "450",
+        "talers": "0"
+      },
+      {
+        "level": "7",
+        "build_tokens": "330",
+        "upgrade_tokens": "475",
+        "talers": "0"
+      },
+      {
+        "level": "8",
+        "build_tokens": "350",
+        "upgrade_tokens": "525",
+        "talers": "0"
+      }
+    ],
+    "level_labels": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Apiary",
+    "display_name": "Пасека",
+    "category": "Экономика",
+    "description": "Хозяйственная постройка медовой цепочки. Используется в экономическом развитии и поддерживает профильные производственные здания.",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S2O5W2hTJQuOmOnH854t6EPMR3uM8BNe0fT_b9LCECvGTzm9DYDNjaKjYfNpyyKM5eDlVIwHmq42WWKty3WLxSSc8w3basoa5z8F8IU7FEOrIfDGYFQWdMSDV_l1mMgOunkWxGrEXSpb18VrgaOiXdRu1uluzcgHeQ=w201-h61",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens",
+      "talers"
+    ],
+    "levels": [
+      {
+        "level": "0"
+      },
+      {
+        "level": "1",
+        "build_tokens": "160",
+        "upgrade_tokens": "300",
+        "talers": "0"
+      },
+      {
+        "level": "2",
+        "build_tokens": "170",
+        "upgrade_tokens": "300",
+        "talers": "0"
+      },
+      {
+        "level": "3",
+        "build_tokens": "180",
+        "upgrade_tokens": "325",
+        "talers": "0"
+      },
+      {
+        "level": "4",
+        "build_tokens": "190",
+        "upgrade_tokens": "325",
+        "talers": "0"
+      },
+      {
+        "level": "5",
+        "build_tokens": "200",
+        "upgrade_tokens": "350",
+        "talers": "0"
+      },
+      {
+        "level": "6",
+        "build_tokens": "210",
+        "upgrade_tokens": "350",
+        "talers": "0"
+      },
+      {
+        "level": "7",
+        "build_tokens": "220",
+        "upgrade_tokens": "375",
+        "talers": "0"
+      },
+      {
+        "level": "8",
+        "build_tokens": "230",
+        "upgrade_tokens": "375",
+        "talers": "0"
+      },
+      {
+        "level": "9",
+        "build_tokens": "240",
+        "upgrade_tokens": "400",
+        "talers": "0"
+      },
+      {
+        "level": "10",
+        "build_tokens": "250",
+        "upgrade_tokens": "400",
+        "talers": "0"
+      },
+      {
+        "level": "11",
+        "build_tokens": "270",
+        "upgrade_tokens": "425",
+        "talers": "0"
+      },
+      {
+        "level": "12",
+        "build_tokens": "280",
+        "upgrade_tokens": "425",
+        "talers": "0"
+      },
+      {
+        "level": "13",
+        "build_tokens": "300",
+        "upgrade_tokens": "450",
+        "talers": "0"
+      },
+      {
+        "level": "14",
+        "build_tokens": "320",
+        "upgrade_tokens": "450",
+        "talers": "0"
+      },
+      {
+        "level": "15",
+        "build_tokens": "330",
+        "upgrade_tokens": "475",
+        "talers": "0"
+      },
+      {
+        "level": "1250",
+        "build_tokens": "0"
+      },
+      {
+        "level": "3750",
+        "build_tokens": "0"
+      }
+    ],
+    "level_labels": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "1250",
+      "3750"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Brewery",
+    "display_name": "Пивоварня",
+    "category": "Экономика",
+    "description": "Производственное здание, связанное с пивоваренной и медовой цепочкой экономики.",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S2QldSIcThco9lEf-IBNOMQiL9E7SPfPI00rtgkPNKXG0NJOyl4rdRS5aRMHxqz_9BY4SaZ7uaXH-QLNF74iWpeIHmfUVS-MQrLrJHjGyP3SkJzZBMuIIyk98gS_lAZ0F-HRmHAv9l7zyNAyEDGAykEBpZJYHOsl2lyZg=w201-h61",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens",
+      "talers"
+    ],
+    "levels": [
+      {
+        "level": "0"
+      },
+      {
+        "level": "1",
+        "build_tokens": "160",
+        "upgrade_tokens": "300",
+        "talers": "0"
+      },
+      {
+        "level": "2",
+        "build_tokens": "170",
+        "upgrade_tokens": "300",
+        "talers": "0"
+      },
+      {
+        "level": "3",
+        "build_tokens": "180",
+        "upgrade_tokens": "325",
+        "talers": "0"
+      },
+      {
+        "level": "4",
+        "build_tokens": "190",
+        "upgrade_tokens": "325",
+        "talers": "0"
+      },
+      {
+        "level": "5",
+        "build_tokens": "200",
+        "upgrade_tokens": "350",
+        "talers": "0"
+      },
+      {
+        "level": "6",
+        "build_tokens": "210",
+        "upgrade_tokens": "350",
+        "talers": "0"
+      },
+      {
+        "level": "7",
+        "build_tokens": "220",
+        "upgrade_tokens": "375",
+        "talers": "0"
+      },
+      {
+        "level": "8",
+        "build_tokens": "230",
+        "upgrade_tokens": "375",
+        "talers": "0"
+      },
+      {
+        "level": "9",
+        "build_tokens": "240",
+        "upgrade_tokens": "400",
+        "talers": "0"
+      },
+      {
+        "level": "10",
+        "build_tokens": "250",
+        "upgrade_tokens": "400",
+        "talers": "0"
+      },
+      {
+        "level": "11",
+        "build_tokens": "270",
+        "upgrade_tokens": "425",
+        "talers": "0"
+      },
+      {
+        "level": "12",
+        "build_tokens": "290",
+        "upgrade_tokens": "425",
+        "talers": "0"
+      },
+      {
+        "level": "13",
+        "build_tokens": "310",
+        "upgrade_tokens": "450",
+        "talers": "0"
+      },
+      {
+        "level": "14",
+        "build_tokens": "320",
+        "upgrade_tokens": "450",
+        "talers": "0"
+      },
+      {
+        "level": "15",
+        "build_tokens": "330",
+        "upgrade_tokens": "475",
+        "talers": "0"
+      },
+      {
+        "level": "16",
+        "build_tokens": "350",
+        "upgrade_tokens": "750",
+        "talers": "300"
+      },
+      {
+        "level": "17",
+        "build_tokens": "400",
+        "upgrade_tokens": "1000",
+        "talers": "320"
+      },
+      {
+        "level": "18",
+        "build_tokens": "450",
+        "upgrade_tokens": "1200",
+        "talers": "340"
+      },
+      {
+        "level": "19",
+        "build_tokens": "500",
+        "upgrade_tokens": "1400",
+        "talers": "360"
+      },
+      {
+        "level": "20",
+        "build_tokens": "550",
+        "upgrade_tokens": "1600",
+        "talers": "380"
+      },
+      {
+        "level": "21",
+        "build_tokens": "600",
+        "upgrade_tokens": "1800",
+        "talers": "400"
+      },
+      {
+        "level": "22",
+        "build_tokens": "650",
+        "upgrade_tokens": "2000",
+        "talers": "420"
+      },
+      {
+        "level": "23",
+        "build_tokens": "700",
+        "upgrade_tokens": "2200",
+        "talers": "440"
+      },
+      {
+        "level": "24",
+        "build_tokens": "800",
+        "upgrade_tokens": "2400",
+        "talers": "460"
+      },
+      {
+        "level": "25",
+        "build_tokens": "900",
+        "upgrade_tokens": "2600",
+        "talers": "480"
+      },
+      {
+        "level": "26",
+        "build_tokens": "1000",
+        "upgrade_tokens": "2800",
+        "talers": "500"
+      },
+      {
+        "level": "27",
+        "build_tokens": "1100",
+        "upgrade_tokens": "3000",
+        "talers": "600"
+      },
+      {
+        "level": "28",
+        "build_tokens": "1200",
+        "upgrade_tokens": "3500",
+        "talers": "700"
+      },
+      {
+        "level": "29",
+        "build_tokens": "1500",
+        "upgrade_tokens": "4000",
+        "talers": "800"
+      },
+      {
+        "level": "30",
+        "build_tokens": "2000",
+        "upgrade_tokens": "5000",
+        "talers": "1000"
+      }
+    ],
+    "level_labels": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20",
+      "21",
+      "22",
+      "23",
+      "24",
+      "25",
+      "26",
+      "27",
+      "28",
+      "29",
+      "30"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Marketplace",
+    "display_name": "Рынок",
+    "category": "Экономика",
+    "description": "Рынок для торговли и хозяйственных операций. Экономическое здание базовой инфраструктуры.",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S1O_Hm3tQ-0G5YzwU1YSFziZj3Vfg-aCmkZN65ABThKe7wL-hpL6bTi9HKXrxh6Z6m-fuGfwsIELohHUmqoocyAqzm1KdOO5jLIASPxHbqT2fQ07dtkUF1V91GJVjP8w6iLlTBRprstgRQ3MVIS-D6hO0HVktKq9xA=w201-h62",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens",
+      "talers"
+    ],
+    "levels": [
+      {
+        "level": "8"
+      },
+      {
+        "level": "9",
+        "build_tokens": "550",
+        "upgrade_tokens": "2300",
+        "talers": "0"
+      }
+    ],
+    "level_labels": [
+      "8",
+      "9"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  },
+  {
+    "name": "Storehouse",
+    "display_name": "Склад",
+    "category": "Экономика",
+    "description": "Складская постройка. Поддерживает хранение и хозяйственную инфраструктуру.",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S1XPpFU2USzpDzBJuQJCNWVby3KR57SK2UdLrB0QXBfz0WMfluiP4FBDR1ATtbxke4x9ORXj_FIrbAu8t6O8MBHh2-x3rT6ySCooWcidyXERO6-ucYk-8W_RNOXcoZ-cluZcuV_PVnqNEmEYOmQRswB-9BkX2ShJY0vfQ=w403-h62",
+    "resource_fields": [
+      "build_tokens",
+      "upgrade_tokens",
+      "talers",
+      "plaster",
+      "dragon_scale_tiles"
+    ],
+    "levels": [
+      {
+        "level": "7"
+      },
+      {
+        "level": "8",
+        "build_tokens": "450",
+        "upgrade_tokens": "650",
+        "talers": "0"
+      },
+      {
+        "level": "9",
+        "plaster": "480",
+        "dragon_scale_tiles": "2400"
+      }
+    ],
+    "level_labels": [
+      "7",
+      "8",
+      "9"
+    ],
+    "source": "google_sheet",
+    "status": "verified"
+  }
+]

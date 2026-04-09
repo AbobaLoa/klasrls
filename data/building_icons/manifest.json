@@ -1,0 +1,310 @@
+[
+  {
+    "name": "Imperial Council hall",
+    "display_name": "Имперский совет",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\imperial_council_hall.png",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S2Tgz7Wpc_-pG4buMVBWBfRNQioixcugEwq1yOQnq8IKwz21frpS_aedIWt0hU4fE6WGXPBpTaST8NXAqe4eQECktDuak2YWrbMgQPNL-n8IFxHnQUJ8HXVpifLbBmY0bUo_bnh_Li_-jlxNWj52cOQw91uROPwor6Ljw=w403-h62"
+  },
+  {
+    "name": "Military academy",
+    "display_name": "Военная академия",
+    "status": "copied_manual",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\military_academy.png",
+    "image_url": ""
+  },
+  {
+    "name": "Encampment",
+    "display_name": "Военный лагерь",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\encampment.webp",
+    "image_url": "https://static.wikia.nocookie.net/goodgameempire/images/3/3f/Encampment_level_1_w.png/revision/latest?cb=20240202004927"
+  },
+  {
+    "name": "Toolsmith",
+    "display_name": "Инструментальная кузница",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\toolsmith.webp",
+    "image_url": "https://static.wikia.nocookie.net/goodgameempire/images/2/2f/Toolsmith_info.png/revision/latest?cb=20210701092043"
+  },
+  {
+    "name": "Toolsmith-Kingdoms",
+    "display_name": "Инструментальная кузница королевств",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\toolsmith_kingdoms.webp",
+    "image_url": "https://static.wikia.nocookie.net/goodgameempire/images/2/2f/Toolsmith_info.png/revision/latest?cb=20210701092043"
+  },
+  {
+    "name": "Barracks",
+    "display_name": "Казармы",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\barracks.png",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S0aW-SuV-TzJKJkk-pY5Cm2NOV1vCGq5HOjnipFusLxpVDWLBdnAEYo-smN24SbuuIZkUZef3QvTfrAw9Rk7whogSpQvTX-rh4uohA2P_kEPLdEPjmBfS15jhlr-FIQ4lY2RBvgEkT2ALbhhtin5fAV4n7S5bQVH7I=w403-h62"
+  },
+  {
+    "name": "Armory",
+    "display_name": "Оружейная",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\armory.webp",
+    "image_url": "https://static.wikia.nocookie.net/goodgameempire/images/f/f9/Armory.png/revision/latest?cb=20240108095135"
+  },
+  {
+    "name": "Siege workshop",
+    "display_name": "Осадная мастерская",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\siege_workshop.png",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S0TEg-eUXOuC12pqsbekHec4If3xTFmvjhDjkpMNWUvJI9yvkMXTSIbDL11PUw8WjHhLmFY6uRuaaqlk-sN14EgmJDYBqIYSDWuhn1WbxMremZRolbPirBAWBmwFZ139PBLVm2-nm3pJaHDI1wKrawYPu2O0ULgb-1dqA=w201-h62"
+  },
+  {
+    "name": "Dragon Breath Forge",
+    "display_name": "Кузница дыхания дракона",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\dragon_breath_forge.png",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S3iSep1QENk6E7R_xw0pPvLR58QbXv2d0zZC2t04PoLgWigx6eMQSAbAbb-iyug-luYZXrvKbu1Zv3SsAJvGLIhhHhtFQF2X64Me5YQX0zpFTeS_fRFYqvHrPNapKVJIUXY5nv6ua7z91xlHK3RvKp_pQl7AExFLrbpfw=w403-h62"
+  },
+  {
+    "name": "Dragon Hoard",
+    "display_name": "Сокровищница дракона",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\dragon_hoard.png",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S32DtAVCnxWmWaJ5u5d5Bru1DiMwOcgTezADzDXP0yUDhjVsunLcTmZGeHSn-DW5ssmj9NDmWofzBCdbn-CeXunvefkeS5Krv3pnXM1yym8dwniVeFAc0kHDD3VTIpdGDombmW0QvBh2Q6c4Vh1laLQ8m82DaCTXWcASg=w403-h62"
+  },
+  {
+    "name": "Reinforced Vault",
+    "display_name": "Укреплённое хранилище",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\reinforced_vault.png",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S3HmkL2MFHL5C9lFR-mvTV_IchLPT-Q2rzH0iI1oC7LCYsi3k1SebidmbWezf6xQvH3RD4tUvJwWqSMjQszL7wCOYeuRo0h5WJMzN1Xr5OWMyXu2DQjjW8LB7NCOZbIKK3gG_D7zXsMdmJqnTJo2cWO0UyO8GtgEr1D-w=w403-h62"
+  },
+  {
+    "name": "Keep",
+    "display_name": "Главная башня",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\keep.png",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S0jjFad3SyYiX9eaN1IxZ8TSOM2pbTtv9A7yyeC5HhYu_PcPolLIwSr8zz3d1JErK4idvcmnmvZ7ZoLsjwT2adNOYpgoutte2QEuaq-PM63v4dTyUHiEfCdCA1ccPhCpMf06ucE2dZqfRha_1J48HvsGflhOcnw76uF9Q=w201-h62"
+  },
+  {
+    "name": "Castle expansion",
+    "display_name": "Расширение замка",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\castle_expansion.png",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S2TBSXorxw_SJPg-MAODPkecosh-Rl1d9CW1ffjHFJ4-XJNXhJH_tfNpIFyb2cJdB5thbQQu3g2P9PC5cL7Qvk2ybNvb94NPcS1duFoYfdqP59QFTRq8-jUmFFWtVdAnlkAyxMCokeGZB2HHNO66nBgH_sKDQmtEAG02w=w201-h62"
+  },
+  {
+    "name": "Tavern",
+    "display_name": "Таверна",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\tavern.png",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S3oDFD67Gv-_ZJDNFyYiPJ_wKPO5wwe4pcqHTAp1hE3LKuy_XbJIhVLhl-ow4Mr0LEpBaXjVmH2Ja6NjQ8tYuI-MoObCVa6YyL89kjR-zXID8DPP5sbCfNNg2K-gR55YvO5XwWPUuxPKG1oVz-GN81gq6Gpc1h1oARCPw=w403-h62"
+  },
+  {
+    "name": "Research Tower",
+    "display_name": "Башня исследований",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\research_tower.png",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S1aAW1K1kcJwLr2gn0hSEi1XBWBmc35_jDjMCP-0oU7HMTFjotJS698leCWsWuzdsCN-03kWMVHP8LUSTu_tMAAPXitfSFDJRSKhOm5L7yyJrlkVKV9m7PKUydTmA2H6KN7Z1vAJMzedIaQPV6lEEj-JLxPwxDBghBwRg=w403-h62"
+  },
+  {
+    "name": "Inner district",
+    "display_name": "Внутренний квартал",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\inner_district.png",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S3skPuvAtsgjuLirRDRbeopz9JZiY7xqzlyapkd8U3vl63rQTKY4RdaliQItx5YL282ca4FpK1tEBEPBaYV6_Ye1lP8i8rP2LFmHrbn0bGY33Z2lsKBmeS4D821HLOYP4LPzU6_csVAeKuZQ2nh79-IQ_962bYcNmc=w201-h62"
+  },
+  {
+    "name": "Military district",
+    "display_name": "Военный квартал",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\military_district.png",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S0YS6K_IbMEyUkYR5M_RNKIucKN-GHdiyVdUfOKU2AcektLY5wNtsTUjyUn9bFEqox8EDGqsNWBPaAYXgsLXAiaUQTXf0zhXLezqlCNZM2nEUCvHcQSf9siQm6i2Gb-usCHw-dZyeDPi7fRiiEWHUi7Cq8LLJo-1pc=w201-h62"
+  },
+  {
+    "name": "Mead district",
+    "display_name": "Медовый квартал",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\mead_district.png",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S3I0ZtCXwOPZf5Xujyx2EojHOLtVg-9hOQz51KjvCga9-dAj0VYfsUC4a0xdVA-ljiuZUjloJTEfxLzH-1DMbp57r4KtwdtaPJjpJjw_uvo2QjfzL9y_04YVTrDRDEfMHK8ub9Ei-gjAUiKWCWSjc24GQBU5opZfrE=w201-h62"
+  },
+  {
+    "name": "Food district",
+    "display_name": "Пищевой квартал",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\food_district.png",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S3jcJlZOuGgUYfcncF_hY6iaduB4afs4cjUJ_hUlLknMHxrQdZ1UB9jUK44awGKzjAq4pLYLmh_ovs3QOEoOwP77fFRtZSl2XOGJeayb3NupcJonEeWyF5x2iX58xNo0cZvnGCR2YY9hDe8RCXCwDFaHbCi6qe3QKT0Nw=w201-h62"
+  },
+  {
+    "name": "Trade district",
+    "display_name": "Торговый квартал",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\trade_district.png",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S1gmx6FNpZn5qE-e7zpbEShtbpGpgUOXQtHGnIMrZIaHfjPDncI8hpZS-a2UloEzujxPNJ2db_l3gZqMCEEOr88ltaoPMCiOSj043hRTi5mxXeLYTxY_FRV3ukD4OLenoKsCCIl3nLLiRANaafDfUWz-QBGrqWWSQoV2g=w201-h62"
+  },
+  {
+    "name": "Tower",
+    "display_name": "Башня",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\tower.png",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S2pB29xOa9yvxqw1TWBGNdln79wa9vEM_gO7s7Xqj3DcO0GxcZlODbWbxfIpJGMtZlSyXhNKFXOGrcgaPDhPN_ONpO1YKHkwzdbk32sqcVwPIUc21KSeZa8lt12Se9QGG87dCWniSMUQ9TmqsQmgRVe5YT2vwHrh8E=w403-h62"
+  },
+  {
+    "name": "Gate",
+    "display_name": "Ворота",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\gate.png",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S28Sw3XgXTdCoAtrpFjdgk-YA-iJsJ-9VB1lsIC_sPVpU6BJSOsVCViM_No7SRXSLOsI3qFCulJjpd063WnwxVrMvMIAqNdQeO4coi5WdBm-9jZ0ZwPQqSosV6G9Tyb30vtK2INWg4AAjb4rmmXf7XTqPBfJclcPTE=w403-h62"
+  },
+  {
+    "name": "Defence workshop",
+    "display_name": "Оборонная мастерская",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\defence_workshop.png",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S18EvH7fpmLI42B7pXPGxu1dT76N4cFNdiuZV_vhJ2sfSUJTJY3XkiOFB7PnaREnm_-2_3cNn755IiQzZvaiTYSf5ZnyMxZOj0WTsImXxySrbPRsduJpgZViC9nG5YnXzM0r-RMclGSw1mylqMvu1Df0BVHd-YlGZF4Cg=w201-h62"
+  },
+  {
+    "name": "Moat",
+    "display_name": "Ров",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\moat.webp",
+    "image_url": "https://static.wikia.nocookie.net/goodgameempire/images/a/a7/Moat_november_11_2011.jpg/revision/latest/scale-to-width-down/800?cb=20240214052804"
+  },
+  {
+    "name": "Wall",
+    "display_name": "Стена",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\wall.png",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S0a2gzenFv8vYYq00hcii9jexbrRMCHrci4Oyc7qPTcMWZvGC87B4YfYwFQnR27-_NqtDp0uVXkUJ62bdZPaT6LKt0QjfKafvLRCeuWmK2hvABE1jQ2E4gQYa2sKOkV9joagOrKDjNmQSpR-Kvm2Jalnhtal8ANQ6U=w403-h62"
+  },
+  {
+    "name": "Honey gardens",
+    "display_name": "Медовые сады",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\honey_gardens.png",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S0XFsREICYGM9GOkw5taUSDSf_c2HFF7BCKdUGLC6uNa6H1uWQ9VRYaPR_8i2YUrI2dlXN_PZBSQmzcRRStlxdHAnUX8vBdjg227WPCVJ6kQpJLhaElNYLYMxp6EVkxOs_N_TX51IojZS20F_O-OJmxXxbrBkMF_4k=w403-h62"
+  },
+  {
+    "name": "Flour mill",
+    "display_name": "Мельница",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\flour_mill.png",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S2g7PhjN7T9CnF2VxVHT4gc_zoltyg5Dp5AcVPEMQroQfs7_ERN_NDkZMyJ29DPcGCi9hlZ8oT0yYWyP3CSv0ngWbp61QpoUQNN3cMrDtHAle7L_5DuUlO-9acugGIn52vNsZERi8Bber1BjmlUgItmP5fIgoYeNnCRkw=w403-h62"
+  },
+  {
+    "name": "Butcher shop",
+    "display_name": "Мясная лавка",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\butcher_shop.png",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S2sBOaB6JqCfv7HGRKO_RZMfUgEExnOYjDxytJP85Mrzcr72-Mgd1CnhMySbRG3P1oztfUGFeUTu9HnzDuB6Gve9DyTsYlCkix4yv3XknLoC-0X83rbeNx2NGQFErxnbSGWFC80cjpCy3Bs4lgYPmou-UyEyxFZggA=w403-h61"
+  },
+  {
+    "name": "Cattle farm",
+    "display_name": "Скотная ферма",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\cattle_farm.png",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S2sBOaB6JqCfv7HGRKO_RZMfUgEExnOYjDxytJP85Mrzcr72-Mgd1CnhMySbRG3P1oztfUGFeUTu9HnzDuB6Gve9DyTsYlCkix4yv3XknLoC-0X83rbeNx2NGQFErxnbSGWFC80cjpCy3Bs4lgYPmou-UyEyxFZggA=w403-h61"
+  },
+  {
+    "name": "Relic conservatory",
+    "display_name": "Реликтовая консерватория",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\relic_conservatory.png",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S026VHzL9ZSK2_JBRJoLtMi7Biaer8663570eazFrW4eq4zmJvNDvRz-C1meg_RKGOAhuN1QQ9BAX42b2-4Uazx29ASRePOatgMSMnPWka63_hVK3ql1aGXtivO3Hq_TkJHoc6RdXwSEjawsOKWmjF3FThTKGanWEausw=w201-h62"
+  },
+  {
+    "name": "Relic bakery",
+    "display_name": "Реликтовая пекарня",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\relic_bakery.png",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S2mVce5NepamPjB5NRt2Be0nyRSpR0iRVyMRTb1_YiWn0EQNhNXsdvMJOJpJ1rfxBtmO-BNRSY8gUL6du8EFqw3JAi_qdHRA9lyVdc_1rQU-zEYudVtdswExX6DWTAiK7e-roc1yy3lV1cxg4yG47p5B4FMKsHZN2w=w201-h61"
+  },
+  {
+    "name": "Relic greenhouse",
+    "display_name": "Реликтовая теплица",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\relic_greenhouse.png",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S2xiJr_HYIy8ZOysMwKgeHdxzvW2_sSL5xBoAyN2gigIcTpX-DIjNS6eGKAYDW5pH_do0-lbxbJLQdy_tO1PvlOIrMIei6_SXGWqAHGYJ7PdR_gBVPDuogPD_qgWxfzhb2Pr6B4MFW4UeXiG1Jvv-5YByvWbU5YoM97-A=w201-h62"
+  },
+  {
+    "name": "Relic woodcutter",
+    "display_name": "Реликтовый дровосек",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\relic_woodcutter.webp",
+    "image_url": "https://static.wikia.nocookie.net/goodgameempire/images/7/71/May_Update_CAP_Tool_Banner_april_2019_forum.png/revision/latest?cb=20240304092011"
+  },
+  {
+    "name": "Relic quarry",
+    "display_name": "Реликтовый карьер",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\relic_quarry.webp",
+    "image_url": "https://static.wikia.nocookie.net/goodgameempire/images/2/2c/Fettspielende_32_photo.png/revision/latest/scale-to-width-down/800?cb=20250223072205"
+  },
+  {
+    "name": "Relic storehouse",
+    "display_name": "Реликтовый склад",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\relic_storehouse.png",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S0Zc1YyJv-gsGIxJJuqO71a6WGHvnEX7WmfY_CKfSCM9_4AUBE7sXJNfr5c7I8DpgZz6NPy4qcu-wXcWYckJACooyXQPoI-afoQLuHW6jQi7roKtqqoMeRpE-upk-PZ9DLMSSN1RU_GgA_9gi6dGNQW9XihGAEsxHXRuQ=w201-h61"
+  },
+  {
+    "name": "Relictus",
+    "display_name": "Реликтус",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\relictus.webp",
+    "image_url": "https://static.wikia.nocookie.net/goodgameempire/images/a/a6/Relicus.png/revision/latest?cb=20240103035619"
+  },
+  {
+    "name": "Refinery",
+    "display_name": "Рафинерия",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\refinery.webp",
+    "image_url": "https://static.wikia.nocookie.net/goodgameempire/images/b/bb/Refinery_level_5.png/revision/latest?cb=20240802093758"
+  },
+  {
+    "name": "Refinery-Kingdoms",
+    "display_name": "Рафинерия королевств",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\refinery_kingdoms.webp",
+    "image_url": "https://static.wikia.nocookie.net/goodgameempire/images/b/bb/Refinery_level_5.png/revision/latest?cb=20240802093758"
+  },
+  {
+    "name": "Barrel workshop",
+    "display_name": "Бондарная мастерская",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\barrel_workshop.png",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S2bo-AhD0xG9WwzxhA2reCzHQAH7r3PNB8JezpFtnaW8KBYsukARb7ibB4ERRXdlsyUDgWAKuO89TmSrXaOaT6BBo8J8RTmyQGouVWcCW4W5uyxf9ANTlevdGq5uiCYiZkyHdHHhvbSMZfuu_yNNLxNLID4DYIwsRe0PA=w403-h62"
+  },
+  {
+    "name": "Mead distillery",
+    "display_name": "Медоварня",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\mead_distillery.png",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S1rTR0McYAo0xqYK2N9YsIxvhIAKU-SB51-7OsuaYN5zA_5QX-D49RlZ7zL_XBCiqE8Uzn29AXWieOgq3rvg08o5fUC0wKLOB9X1i0R1KOgbJXNALkUNYTZkFRV6v_NvQu0-dcOAfeKF-ofWAq-wYz8L-Dg1k6UInE=w201-h62"
+  },
+  {
+    "name": "Apiary",
+    "display_name": "Пасека",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\apiary.png",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S2O5W2hTJQuOmOnH854t6EPMR3uM8BNe0fT_b9LCECvGTzm9DYDNjaKjYfNpyyKM5eDlVIwHmq42WWKty3WLxSSc8w3basoa5z8F8IU7FEOrIfDGYFQWdMSDV_l1mMgOunkWxGrEXSpb18VrgaOiXdRu1uluzcgHeQ=w201-h61"
+  },
+  {
+    "name": "Brewery",
+    "display_name": "Пивоварня",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\brewery.png",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S2QldSIcThco9lEf-IBNOMQiL9E7SPfPI00rtgkPNKXG0NJOyl4rdRS5aRMHxqz_9BY4SaZ7uaXH-QLNF74iWpeIHmfUVS-MQrLrJHjGyP3SkJzZBMuIIyk98gS_lAZ0F-HRmHAv9l7zyNAyEDGAykEBpZJYHOsl2lyZg=w201-h61"
+  },
+  {
+    "name": "Marketplace",
+    "display_name": "Рынок",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\marketplace.png",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S1O_Hm3tQ-0G5YzwU1YSFziZj3Vfg-aCmkZN65ABThKe7wL-hpL6bTi9HKXrxh6Z6m-fuGfwsIELohHUmqoocyAqzm1KdOO5jLIASPxHbqT2fQ07dtkUF1V91GJVjP8w6iLlTBRprstgRQ3MVIS-D6hO0HVktKq9xA=w201-h62"
+  },
+  {
+    "name": "Storehouse",
+    "display_name": "Склад",
+    "status": "downloaded",
+    "image_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\data\\building_icons\\storehouse.png",
+    "image_url": "https://docs.google.com/sheets-images-rt/AC1M7S1XPpFU2USzpDzBJuQJCNWVby3KR57SK2UdLrB0QXBfz0WMfluiP4FBDR1ATtbxke4x9ORXj_FIrbAu8t6O8MBHh2-x3rT6ySCooWcidyXERO6-ucYk-8W_RNOXcoZ-cluZcuV_PVnqNEmEYOmQRswB-9BkX2ShJY0vfQ=w403-h62"
+  }
+]

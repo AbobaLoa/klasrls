@@ -1,0 +1,16 @@
+{
+  "castle_name": "Основной замок",
+  "food": 120,
+  "wood": 120,
+  "stone": 120,
+  "public_order": 100,
+  "free_tiles": 24,
+  "building_levels": {
+    "farm": 0,
+    "lumberyard": 0,
+    "quarry": 0,
+    "house": 0,
+    "barracks": 0,
+    "academy": 0
+  }
+}

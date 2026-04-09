@@ -124,6 +124,69 @@ def calculate_upgrade_plan(payload: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def calculate_building_upgrade_plan(payload: dict[str, Any]) -> dict[str, Any]:
+    building_name = str(payload.get("building_name") or "Здание").strip() or "Здание"
+    levels_payload = payload.get("levels") or []
+    current_level_label = str(payload.get("current_level") or "").strip()
+    target_level_label = str(payload.get("target_level") or current_level_label).strip()
+    resource_fields = [str(field).strip() for field in (payload.get("resource_fields") or []) if str(field).strip()]
+    warnings: list[str] = []
+
+    ordered_levels = [dict(item) for item in levels_payload if isinstance(item, dict) and str(item.get("level") or "").strip()]
+    level_labels = [str(item.get("level") or "").strip() for item in ordered_levels]
+
+    if not ordered_levels:
+        warnings.append("Для здания не загружены уровни улучшения.")
+        return {
+            "building_name": building_name,
+            "current_level": current_level_label,
+            "target_level": target_level_label,
+            "resource_totals": {},
+            "used_levels": [],
+            "warnings": warnings,
+            "ready": False,
+        }
+
+    if current_level_label not in level_labels:
+        current_level_label = level_labels[0]
+        warnings.append("Текущий уровень не найден в каталоге. Выбран первый доступный уровень.")
+    if target_level_label not in level_labels:
+        target_level_label = level_labels[-1]
+        warnings.append("Целевой уровень не найден в каталоге. Выбран максимальный доступный уровень.")
+
+    current_index = level_labels.index(current_level_label)
+    target_index = level_labels.index(target_level_label)
+    if target_index < current_index:
+        target_index = current_index
+        target_level_label = current_level_label
+        warnings.append("Целевой уровень был ниже текущего. Диапазон выровнен автоматически.")
+    if target_index == current_index:
+        warnings.append("Целевой уровень равен текущему. Дополнительных затрат нет.")
+
+    used_levels = ordered_levels[current_index + 1 : target_index + 1]
+    resource_totals = {field: 0 for field in resource_fields}
+
+    for row in used_levels:
+        for field in resource_fields:
+            value = row.get(field)
+            if value in {None, ""}:
+                continue
+            resource_totals[field] = resource_totals.get(field, 0) + non_negative_int(value, 0)
+
+    if not used_levels and target_index > current_index:
+        warnings.append("Для выбранного диапазона уровней не нашлось промежуточных шагов улучшения.")
+
+    return {
+        "building_name": building_name,
+        "current_level": current_level_label,
+        "target_level": target_level_label,
+        "resource_totals": resource_totals,
+        "used_levels": used_levels,
+        "warnings": warnings,
+        "ready": target_index > current_index,
+    }
+
+
 def parse_units(units_payload: list[dict[str, Any]]) -> tuple[list[dict[str, Any]], list[str]]:
     units: list[dict[str, Any]] = []
     warnings: list[str] = []

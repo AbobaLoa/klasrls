@@ -1,0 +1,16 @@
+{
+  "run_mode": "scout",
+  "collect_episodes": 120,
+  "simulate_episodes": 20,
+  "steps": 50,
+  "poll_interval_sec": 1.5,
+  "dry_run": true,
+  "model_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\ml_empire_bot\\data\\models\\policy.joblib",
+  "live_state_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\ml_empire_bot\\data\\live\\live_state.json",
+  "screen_profile_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\ml_empire_bot\\data\\live\\screen_profile.json",
+  "live_action_map_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\ml_empire_bot\\data\\live\\live_action_map.json",
+  "scout_report_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\ml_empire_bot\\data\\live\\auto_scout_report.json",
+  "live_command_log_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\ml_empire_bot\\data\\live\\command_log.jsonl",
+  "live_session_log_path": "C:\\Users\\Dima\\Desktop\\empire4k-calculator\\ml_empire_bot\\data\\live\\live_sessions.jsonl",
+  "game_window_title": "BlueStacks"
+}

@@ -3,11 +3,13 @@ from __future__ import annotations
 import hashlib
 import json
 from pathlib import Path
+import re
 import threading
 from typing import Any
 from urllib.parse import quote, urlparse
 from urllib.request import urlopen
 
+from kivy.config import Config
 from kivy.app import App
 from kivy.core.window import Window
 from kivy.clock import Clock
@@ -21,10 +23,12 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.image import AsyncImage
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
+from kivy.resources import resource_find
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.slider import Slider
 
-from calculators import calculate_profile_defense_plan, calculate_upgrade_plan
+from building_data import get_buildings_catalog
+from calculators import calculate_building_upgrade_plan, calculate_profile_defense_plan, calculate_upgrade_plan
 from general_data import get_generals_catalog
 from tools_data import get_defense_tools_catalog
 from units_data import get_unit_catalog
@@ -34,15 +38,38 @@ try:
 except Exception:
     platform = "unknown"
 
+def resolve_default_ui_font() -> str:
+    candidates = [
+        Path(r"C:\Windows\Fonts\segoeui.ttf"),
+        Path(r"C:\Windows\Fonts\arial.ttf"),
+    ]
+    for candidate in candidates:
+        if candidate.exists():
+            return str(candidate)
+    return str(resource_find("Roboto-Regular.ttf") or "")
+
+Config.set("graphics", "resizable", "1")
+Config.set("graphics", "minimum_width", "420")
+Config.set("graphics", "minimum_height", "760")
+Config.set("graphics", "width", "1360")
+Config.set("graphics", "height", "920")
+
+if platform not in {"android", "ios"}:
+    Config.set("graphics", "width", "1360")
+    Config.set("graphics", "height", "920")
+
 Window.clearcolor = (0.04, 0.07, 0.12, 1)
 
 if platform not in {"android", "ios"}:
-    Window.size = (420, 860)
+    Window.size = (1360, 920)
 
 
 KV_FILE = "empirecalc_modern.kv"
 PROFILE_FILE_NAME = "profiles.json"
 MAIN_CASTLE_IMAGE_FILE = Path(r"C:\Users\Dima\Desktop\castle.jpg")
+DEFAULT_UI_FONT = resolve_default_ui_font()
+LOCAL_BUILDING_IMAGE_DIR = Path(__file__).resolve().parent / "data" / "building_icons"
+LOCAL_BUILDING_IMAGE_OVERRIDES = {}
 ACCOUNT_CASTLE_NAMES = (
     "Основной замок",
     "Аванпост 1",
@@ -56,6 +83,22 @@ ACCOUNT_CASTLE_NAMES = (
     "Внешние миры",
     "За гранью горизонта",
 )
+WORLD_RESOURCE_FIELDS = {"plaster", "dragon_scale_tiles"}
+OUTPOST_AVAILABLE_BUILDING_NAMES = {
+    "Encampment",
+    "Barracks",
+    "Armory",
+    "Siege workshop",
+    "Keep",
+    "Tower",
+    "Gate",
+    "Defence workshop",
+    "Moat",
+    "Wall",
+    "Tavern",
+    "Marketplace",
+    "Storehouse",
+}
 GOVERNOR_GENERAL_NONE = "Без наместника"
 ACCOUNT_AVATAR_LABELS = {
     "crown": "Корона",
@@ -145,6 +188,7 @@ def default_castle_record(name: str) -> dict[str, Any]:
         "defensive_resources_note": "",
         "governor": default_governor(),
         "commander": default_commander(),
+        "building_levels": {},
         "units_text": "",
         "defensive_tools_text": "",
     }
@@ -165,11 +209,14 @@ class WallUnitRow(ButtonBehavior, BoxLayout):
     detail_text = StringProperty("")
     stats_text = StringProperty("")
     image_source = StringProperty("")
+    fallback_text = StringProperty("")
 
 
 class EmpireCalcApp(App):
     main_tab = StringProperty("profile")
+    ui_font_name = StringProperty(DEFAULT_UI_FONT)
     castle_values = ListProperty([])
+    building_values = ListProperty([])
     unit_values = ListProperty([])
     attack_unit_values = ListProperty([])
     defense_tool_values = ListProperty([])
@@ -186,6 +233,17 @@ class EmpireCalcApp(App):
     attack_unit_picker_output = StringProperty("Выбери атакующего солдата, фланг, волну и количество.")
     attack_unit_picker_image_source = StringProperty("")
     upgrade_output = StringProperty("Нет расчёта.")
+    upgrade_level_values = ListProperty([])
+    upgrade_view_mode = StringProperty("list")
+    upgrade_selected_building_name = StringProperty("")
+    upgrade_selected_building_badge = StringProperty("")
+    upgrade_selected_building_category = StringProperty("Категория не выбрана")
+    upgrade_selected_building_description = StringProperty("Выбери здание из списка ниже, чтобы увидеть, зачем оно нужно и сколько ресурсов требуется на апгрейд.")
+    upgrade_selected_building_summary = StringProperty("Каталог зданий загружается.")
+    upgrade_detail_title = StringProperty("Профиль: —")
+    upgrade_selected_building_image_source = StringProperty("")
+    upgrade_current_level_value = StringProperty("")
+    upgrade_target_level_value = StringProperty("")
     defense_output = StringProperty("Нет расчёта.")
     active_account_name = StringProperty("")
     active_account_avatar_source = StringProperty("")
@@ -208,6 +266,10 @@ class EmpireCalcApp(App):
 
     def build(self):
         self.title = "Empire 4K Calculator"
+        if platform not in {"android", "ios"}:
+            Window.size = (1360, 920)
+            if hasattr(Window, "system_size"):
+                Window.system_size = (1360, 920)
         self.profile_store: dict[str, Any] = {"active_account": "", "accounts": {}}
         self.unit_catalog: list[dict[str, Any]] = []
         self.unit_index: dict[str, dict[str, Any]] = {}
@@ -218,6 +280,9 @@ class EmpireCalcApp(App):
         self.general_catalog: list[dict[str, Any]] = []
         self.general_index_by_name: dict[str, dict[str, Any]] = {}
         self.general_index_by_id: dict[str, dict[str, Any]] = {}
+        self.all_building_catalog: list[dict[str, Any]] = []
+        self.building_catalog: list[dict[str, Any]] = []
+        self.building_index_by_name: dict[str, dict[str, Any]] = {}
         self.attack_unit_catalog: list[dict[str, Any]] = []
         self.attack_unit_index: dict[str, dict[str, Any]] = {}
         self.attack_unit_display_index: dict[str, dict[str, Any]] = {}
@@ -228,6 +293,7 @@ class EmpireCalcApp(App):
         self.load_unit_catalog()
         self.load_defense_tool_catalog()
         self.load_general_catalog()
+        self.load_building_catalog()
         self.update_wave_values(self.attack_wave_count)
         self.load_profile_store()
         active_account = str(self.profile_store.get("active_account") or "").strip()
@@ -273,10 +339,11 @@ class EmpireCalcApp(App):
             self.update_defense_tool_preview("")
         self.profile_output = "Открой аккаунт, затем выбери или добавь профиль замка."
         self.defense_output = "Заполни профиль, атаку и нажми 'Проверить оборону'."
-        self.upgrade_output = "Заполни уровни и нажми 'Посчитать улучшение'."
+        self.upgrade_output = "Выбери здание из списка, затем укажи текущий и желаемый уровень."
         self.refresh_active_account_state()
         self.refresh_governor_general_summary()
         self.refresh_wall_scene()
+        self.refresh_upgrade_state()
 
     def profiles_path(self) -> Path:
         base_dir = Path(self.user_data_dir)
@@ -289,6 +356,54 @@ class EmpireCalcApp(App):
         target.mkdir(parents=True, exist_ok=True)
         return target
 
+    def image_cache_digest(self, url: str) -> str:
+        return hashlib.sha1(str(url or "").strip().encode("utf-8")).hexdigest()
+
+    def image_suffix_from_content_type(self, content_type: str) -> str:
+        normalized = str(content_type or "").split(";", 1)[0].strip().lower()
+        return {
+            "image/png": ".png",
+            "image/jpeg": ".jpg",
+            "image/jpg": ".jpg",
+            "image/webp": ".webp",
+            "image/gif": ".gif",
+            "image/bmp": ".bmp",
+        }.get(normalized, ".png")
+
+    def sniff_image_suffix(self, data: bytes) -> str:
+        header = bytes(data[:16])
+        if header.startswith(b"\x89PNG\r\n\x1a\n"):
+            return ".png"
+        if header.startswith(b"\xff\xd8\xff"):
+            return ".jpg"
+        if header.startswith(b"GIF87a") or header.startswith(b"GIF89a"):
+            return ".gif"
+        if header.startswith(b"RIFF") and b"WEBP" in bytes(data[:32]):
+            return ".webp"
+        if header.startswith(b"BM"):
+            return ".bmp"
+        return ".png"
+
+    def migrate_legacy_cached_image(self, url: str) -> Path | None:
+        url = str(url or "").strip()
+        if not url:
+            return None
+        digest = self.image_cache_digest(url)
+        cache_dir = self.image_cache_dir()
+        legacy = cache_dir / f"{digest}.img"
+        if not legacy.exists():
+            return None
+        try:
+            data = legacy.read_bytes()
+            new_path = cache_dir / f"{digest}{self.sniff_image_suffix(data)}"
+            if not new_path.exists():
+                legacy.replace(new_path)
+            else:
+                legacy.unlink(missing_ok=True)
+            return new_path if new_path.exists() else None
+        except Exception:
+            return legacy
+
     def cached_image_path(self, url: str) -> Path | None:
         url = str(url or "").strip()
         if not url:
@@ -300,10 +415,13 @@ class EmpireCalcApp(App):
             except Exception:
                 return None
             return local if local.exists() else None
-        digest = hashlib.sha1(url.encode("utf-8")).hexdigest()
+        migrated = self.migrate_legacy_cached_image(url)
+        if migrated and migrated.exists():
+            return migrated
+        digest = self.image_cache_digest(url)
         suffix = Path(parsed.path).suffix
-        if not suffix or len(suffix) > 6:
-            suffix = ".img"
+        if suffix.lower() not in {".png", ".jpg", ".jpeg", ".webp", ".gif", ".bmp"}:
+            suffix = ".png"
         return self.image_cache_dir() / f"{digest}{suffix}"
 
     def resolve_image_source(self, url: str) -> str:
@@ -328,32 +446,40 @@ class EmpireCalcApp(App):
             try:
                 if not self.root:
                     return
-                if target.exists():
+                resolved_target = self.cached_image_path(url)
+                if resolved_target and resolved_target.exists():
                     unit_name = str(getattr(self, "_wall_selected_unit_name", "") or "").strip()
                     unit = self.unit_display_index.get(unit_name) or self.unit_index.get(unit_name)
                     if unit and str(unit.get("image_url") or "").strip() == str(url or "").strip():
-                        self.unit_picker_image_source = str(target)
+                        self.unit_picker_image_source = str(resolved_target)
                         if getattr(self, "_wall_add_preview_image", None) is not None:
-                            self._wall_add_preview_image.source = str(target)
+                            self._wall_add_preview_image.source = str(resolved_target)
 
                     attack_unit_name = str(self.root.ids.attack_unit_picker.text or "").strip() if "attack_unit_picker" in self.root.ids else ""
                     attack_unit = self.attack_unit_display_index.get(attack_unit_name) or self.attack_unit_index.get(attack_unit_name)
                     if attack_unit and str(attack_unit.get("image_url") or "").strip() == str(url or "").strip():
-                        self.attack_unit_picker_image_source = str(target)
+                        self.attack_unit_picker_image_source = str(resolved_target)
                     if getattr(self, "_wall_add_popup", None) is not None and self.wall_add_panel_open:
                         visible_units = getattr(self, "_wall_popup_visible_units", [])
                         if any(str(item.get("image_url") or "").strip() == str(url or "").strip() for item in visible_units):
                             self.refresh_wall_popup_ui()
+                    building = self.building_record()
+                    if building and str(building.get("image_url") or "").strip() == str(url or "").strip():
+                        self.upgrade_selected_building_image_source = str(resolved_target)
+                    self.refresh_upgrade_building_list()
             finally:
                 self._image_downloads.discard(key)
 
         def _download():
             try:
                 with urlopen(url, timeout=15) as resp:
+                    content_type = getattr(resp.headers, "get_content_type", lambda: "")()
                     content = resp.read()
+                suffix = self.image_suffix_from_content_type(content_type) if content_type else self.sniff_image_suffix(content)
+                final_target = target.with_suffix(suffix)
                 tmp = target.with_suffix(target.suffix + ".tmp")
                 tmp.write_bytes(content)
-                tmp.replace(target)
+                tmp.replace(final_target)
             except Exception:
                 Clock.schedule_once(_refresh_previews, 0)
                 return
@@ -379,7 +505,8 @@ class EmpireCalcApp(App):
 
     def safe_float(self, value: Any, default: float = 0.0) -> float:
         try:
-            return float(str(value).strip().replace(",", "."))
+            cleaned = str(value).strip().replace("\xa0", " ").replace(" ", "").replace(",", ".")
+            return float(cleaned)
         except (TypeError, ValueError):
             return default
 
@@ -422,6 +549,280 @@ class EmpireCalcApp(App):
         self.general_index_by_name = {str(item.get("name") or "").strip(): item for item in self.general_catalog if str(item.get("name") or "").strip()}
         self.general_index_by_id = {str(item.get("general_id") or "").strip(): item for item in self.general_catalog if str(item.get("general_id") or "").strip()}
         self.governor_general_values = [GOVERNOR_GENERAL_NONE] + [str(item.get("name") or "") for item in self.general_catalog if str(item.get("name") or "").strip()]
+
+    def load_building_catalog(self):
+        self.all_building_catalog = list(get_buildings_catalog())
+        self.refresh_available_building_catalog()
+
+    def castle_scope_key(self, castle_key: str | None = None) -> str:
+        value = str(castle_key or self.active_castle_name or "Основной замок").strip().lower()
+        if "аванпост" in value:
+            return "outpost"
+        if value == "основной замок":
+            return "main"
+        return "world"
+
+    def building_available_for_scope(self, building: dict[str, Any], scope: str) -> bool:
+        name = str(building.get("name") or "").strip()
+        resource_fields = {str(field).strip() for field in (building.get("resource_fields") or []) if str(field).strip()}
+        has_world_resources = bool(resource_fields & WORLD_RESOURCE_FIELDS)
+        is_world_only = bool(resource_fields) and resource_fields.issubset(WORLD_RESOURCE_FIELDS)
+        if scope == "outpost":
+            return name in OUTPOST_AVAILABLE_BUILDING_NAMES
+        if scope == "world":
+            return has_world_resources
+        return not is_world_only
+
+    def refresh_available_building_catalog(self):
+        scope = self.castle_scope_key()
+        self.building_catalog = [item for item in self.all_building_catalog if self.building_available_for_scope(item, scope)]
+        self.building_index_by_name = {}
+        for item in self.building_catalog:
+            name = str(item.get("name") or "").strip()
+            display_name = str(item.get("display_name") or name).strip()
+            if name:
+                self.building_index_by_name[name] = item
+            if display_name and display_name not in self.building_index_by_name:
+                self.building_index_by_name[display_name] = item
+        self.building_values = [str(item.get("display_name") or item.get("name") or "") for item in self.building_catalog if str(item.get("display_name") or item.get("name") or "").strip()]
+        if self.building_values and self.upgrade_selected_building_name not in self.building_index_by_name:
+            self.upgrade_selected_building_name = self.building_values[0]
+        if not self.building_values:
+            self.upgrade_selected_building_name = ""
+        self.refresh_upgrade_state()
+
+    def building_record(self, building_name: str | None = None) -> dict[str, Any] | None:
+        key = str(building_name or self.upgrade_selected_building_name or "").strip()
+        if not key:
+            return None
+        return self.building_index_by_name.get(key)
+
+    def building_progress_key(self, record: dict[str, Any] | None = None, building_name: str | None = None) -> str:
+        target = record or self.building_record(building_name)
+        return str((target or {}).get("name") or (target or {}).get("display_name") or building_name or "").strip()
+
+    def castle_building_levels(self, castle: dict[str, Any] | None = None) -> dict[str, Any]:
+        record = castle or self.current_castle_record()
+        if not record:
+            return {}
+        levels = record.get("building_levels")
+        if not isinstance(levels, dict):
+            levels = {}
+            record["building_levels"] = levels
+        return levels
+
+    def saved_building_level(self, record: dict[str, Any] | None = None, castle: dict[str, Any] | None = None) -> str:
+        key = self.building_progress_key(record)
+        if not key:
+            return ""
+        return str(self.castle_building_levels(castle).get(key) or "").strip()
+
+    def store_building_level(self, level_value: str, record: dict[str, Any] | None = None):
+        castle = self.current_castle_record()
+        if not castle:
+            return
+        key = self.building_progress_key(record)
+        if not key:
+            return
+        normalized = str(level_value or "").strip()
+        levels = self.castle_building_levels(castle)
+        if normalized:
+            levels[key] = normalized
+        else:
+            levels.pop(key, None)
+        account = self.current_account()
+        if account and self.active_castle_name:
+            account.setdefault("castles", {})[self.active_castle_name] = castle
+        self.save_profile_store()
+
+    def short_badge_text(self, value: str) -> str:
+        words = [part for part in str(value or "").replace("-", " ").split() if part]
+        if not words:
+            return "?"
+        if len(words) == 1:
+            return words[0][:2].upper()
+        return (words[0][:1] + words[1][:1]).upper()
+
+    def building_image_slug(self, value: str) -> str:
+        text = re.sub(r"[^a-z0-9]+", "_", str(value or "").strip().lower())
+        text = text.strip("_")
+        return text or "building"
+
+    def local_building_image_path(self, record: dict[str, Any] | None = None, building_name: str | None = None) -> Path | None:
+        target = record or self.building_record(building_name)
+        candidates = [
+            str((target or {}).get("display_name") or "").strip(),
+            str((target or {}).get("name") or "").strip(),
+            str(building_name or "").strip(),
+        ]
+        for candidate in candidates:
+            override = LOCAL_BUILDING_IMAGE_OVERRIDES.get(candidate)
+            if override and override.exists():
+                return override
+
+        slug_sources = [
+            str((target or {}).get("name") or "").strip(),
+            str((target or {}).get("display_name") or "").strip(),
+            str(building_name or "").strip(),
+        ]
+        for source in slug_sources:
+            if not source:
+                continue
+            slug = self.building_image_slug(source)
+            for extension in (".png", ".jpg", ".jpeg", ".webp", ".gif", ".bmp"):
+                local_path = LOCAL_BUILDING_IMAGE_DIR / f"{slug}{extension}"
+                if local_path.exists():
+                    return local_path
+        return None
+
+    def building_image_source(self, building_name: str) -> str:
+        name = str(building_name or "Здание").strip() or "Здание"
+        record = self.building_record(name)
+        local_path = self.local_building_image_path(record, name)
+        if local_path and local_path.exists():
+            return str(local_path)
+
+        image_url = str((record or {}).get("image_url") or "").strip()
+        if not image_url:
+            return ""
+        target = self.cached_image_path(image_url)
+        if target and target.exists():
+            return str(target)
+        self.resolve_image_source(image_url)
+        return ""
+
+    def building_resource_label(self, field_name: str) -> str:
+        return {
+            "build_tokens": "Молотки",
+            "upgrade_tokens": "Жетоны улучшения",
+            "talers": "Талеры",
+            "ducats": "Дукаты",
+            "plaster": "Гипс",
+            "dragon_scale_tiles": "Чешуя дракона",
+            "rubies": "Рубины",
+        }.get(str(field_name or ""), str(field_name or "Ресурс"))
+
+    def building_level_step_text(self, previous_level: str, row: dict[str, Any], resource_fields: list[str]) -> str:
+        next_level = str(row.get("level") or "?").strip() or "?"
+        resources: list[str] = []
+        for field in resource_fields:
+            value = row.get(field)
+            if value in {None, ""}:
+                continue
+            amount = self.safe_int(value, 0)
+            if amount <= 0:
+                continue
+            resources.append(f"{self.building_resource_label(field)}: {self.format_compact_number(amount)}")
+        resource_text = ", ".join(resources) if resources else "Без затрат"
+        return f"{previous_level} -> {next_level}  |  {resource_text}"
+
+    def upgrade_level_index(self, level_labels: list[str], value: str) -> int:
+        normalized = str(value or "").strip()
+        try:
+            return level_labels.index(normalized)
+        except ValueError:
+            return 0
+
+    def on_upgrade_current_level_changed(self, value: str):
+        self.upgrade_current_level_value = str(value or "").strip()
+        self.store_building_level(self.upgrade_current_level_value)
+        self.refresh_upgrade_state()
+
+    def on_upgrade_target_level_changed(self, value: str):
+        self.upgrade_target_level_value = str(value or "").strip()
+        self.refresh_upgrade_state()
+
+    def select_upgrade_building(self, building_name: str):
+        self.upgrade_selected_building_name = str(building_name or "").strip()
+        self.refresh_upgrade_state()
+
+    def open_upgrade_building_detail(self, building_name: str):
+        self.upgrade_selected_building_name = str(building_name or "").strip()
+        self.refresh_upgrade_state()
+        self.upgrade_view_mode = "detail"
+
+    def show_upgrade_building_list(self):
+        self.upgrade_view_mode = "list"
+
+    def refresh_upgrade_state(self):
+        record = self.building_record()
+        if not self.building_catalog:
+            self.upgrade_selected_building_name = ""
+            self.upgrade_selected_building_badge = ""
+            self.upgrade_level_values = []
+            self.upgrade_view_mode = "list"
+            self.upgrade_detail_title = "Профиль: —"
+            self.upgrade_selected_building_category = "Каталог не загружен"
+            self.upgrade_selected_building_description = "Не удалось загрузить каталог зданий. Проверь файл official_buildings_catalog.json."
+            self.upgrade_selected_building_summary = "Данные об улучшениях пока недоступны."
+            self.upgrade_selected_building_image_source = ""
+            self.upgrade_current_level_value = ""
+            self.upgrade_target_level_value = ""
+            self.upgrade_output = "Каталог зданий пуст. Сначала синхронизируй данные улучшений."
+            self.refresh_upgrade_building_list()
+            return
+        if record is None and self.building_catalog:
+            self.upgrade_selected_building_name = str(self.building_catalog[0].get("display_name") or self.building_catalog[0].get("name") or "")
+            record = self.building_record()
+        if record is None:
+            return
+        level_labels = [str(item) for item in (record.get("level_labels") or []) if str(item).strip()]
+        self.upgrade_level_values = level_labels
+        saved_level = self.saved_building_level(record)
+        if saved_level and saved_level in level_labels:
+            self.upgrade_current_level_value = saved_level
+        elif not self.upgrade_current_level_value or self.upgrade_current_level_value not in level_labels:
+            self.upgrade_current_level_value = level_labels[0] if level_labels else ""
+        if not self.upgrade_target_level_value or self.upgrade_target_level_value not in level_labels:
+            self.upgrade_target_level_value = level_labels[-1] if level_labels else self.upgrade_current_level_value
+        if level_labels:
+            current_index = self.upgrade_level_index(level_labels, self.upgrade_current_level_value)
+            target_index = self.upgrade_level_index(level_labels, self.upgrade_target_level_value)
+            if target_index < current_index:
+                self.upgrade_target_level_value = self.upgrade_current_level_value
+        self.upgrade_selected_building_name = str(record.get("display_name") or record.get("name") or "")
+        self.upgrade_selected_building_badge = self.short_badge_text(self.upgrade_selected_building_name)
+        self.upgrade_selected_building_category = str(record.get("category") or "Инфраструктура")
+        self.upgrade_selected_building_description = str(record.get("description") or "Описание здания пока не заполнено.")
+        resources_text = ", ".join(self.building_resource_label(field) for field in (record.get("resource_fields") or [])) or "Ресурсы не указаны"
+        castle_title = self.castle_display_name(self.active_castle_name or "Основной замок", self.current_castle_record())
+        self.upgrade_detail_title = f"Профиль: {castle_title}"
+        self.upgrade_selected_building_summary = (
+            f"Профиль: {castle_title}\n"
+            f"Доступные уровни: {level_labels[0] if level_labels else '—'} → {level_labels[-1] if level_labels else '—'}\n"
+            f"Отмеченный уровень: {self.upgrade_current_level_value or '—'}\n"
+            f"Ресурсы: {resources_text}"
+        )
+        self.upgrade_selected_building_image_source = self.building_image_source(self.upgrade_selected_building_name)
+        self.calculate_upgrade()
+        self.refresh_upgrade_building_list()
+
+    def refresh_upgrade_building_list(self):
+        if not self.root or "upgrade_building_list" not in self.root.ids:
+            return
+        container = self.root.ids.upgrade_building_list
+        container.clear_widgets()
+        if not self.building_catalog:
+            empty = Factory.BodyText(size_hint_y=None, height=dp(46))
+            empty.text = "Для текущего замка или мира нет подходящих зданий в каталоге."
+            container.add_widget(empty)
+            return
+        for building in self.building_catalog:
+            title = str(building.get("display_name") or building.get("name") or "Здание")
+            subtitle = str(building.get("category") or "Инфраструктура")
+            detail = str(building.get("description") or "")
+            current_level = self.saved_building_level(building)
+            row = WallUnitRow(
+                selected=title == self.upgrade_selected_building_name,
+                title_text=title,
+                subtitle_text=subtitle,
+                detail_text=detail,
+                stats_text=f"Текущий ур.: {current_level or 'не отмечен'}",
+                image_source=self.building_image_source(title),
+                fallback_text=self.short_badge_text(title),
+            )
+            row.bind(on_release=lambda _instance, value=title: self.open_upgrade_building_detail(value))
+            container.add_widget(row)
 
     def governor_general_record(self, governor: dict[str, Any] | None = None) -> dict[str, Any] | None:
         source = governor or self.governor_profile_from_form()
@@ -1090,10 +1491,12 @@ class EmpireCalcApp(App):
             castle = account.setdefault("castles", {}).setdefault(castle_name, default_castle_record(castle_name))
             castle.setdefault("name", castle_name)
             castle.setdefault("display_name", castle_name)
+            castle.setdefault("building_levels", {})
         for castle_name, castle in account.setdefault("castles", {}).items():
             if isinstance(castle, dict):
                 castle.setdefault("name", castle_name)
                 castle.setdefault("display_name", castle_name)
+                castle.setdefault("building_levels", {})
         return account
 
     def build_castle_values(self, account: dict[str, Any]) -> list[str]:
@@ -1536,7 +1939,8 @@ class EmpireCalcApp(App):
 
     def safe_int(self, value: Any, default: int = 0) -> int:
         try:
-            return int(float(str(value).strip().replace(",", ".")))
+            cleaned = str(value).strip().replace("\xa0", " ").replace(" ", "").replace(",", ".")
+            return int(float(cleaned))
         except (TypeError, ValueError):
             return default
 
@@ -2116,6 +2520,7 @@ class EmpireCalcApp(App):
             "defensive_resources_note": ids.defensive_resources_note.text,
             "governor": self.governor_profile_from_form(),
             "commander": self.commander_from_form(),
+            "building_levels": dict(current_castle.get("building_levels") or {}),
             "units_text": ids.unit_lines.text,
             "defensive_tools_text": ids.defensive_tools_lines.text,
         }
@@ -2198,6 +2603,8 @@ class EmpireCalcApp(App):
         if self.unit_values:
             self.update_unit_preview(self.unit_values[0])
         self.refresh_wall_scene()
+        self.refresh_profile_output()
+        self.refresh_available_building_catalog()
         self.refresh_profile_output()
 
     def update_unit_preview(self, unit_name: str):
@@ -2447,28 +2854,38 @@ class EmpireCalcApp(App):
         return rows
 
     def calculate_upgrade(self):
+        record = self.building_record()
+        if not record:
+            self.upgrade_output = "Сначала выбери здание из списка улучшений."
+            return
         payload = {
-            "building_name": self.root.ids.building_name.text,
-            "current_level": self.root.ids.current_level.text,
-            "target_level": self.root.ids.target_level.text,
-            "levels": self.parse_upgrade_lines(self.root.ids.upgrade_lines.text),
+            "building_name": record.get("display_name") or record.get("name") or "Здание",
+            "current_level": self.upgrade_current_level_value,
+            "target_level": self.upgrade_target_level_value,
+            "levels": record.get("levels") or [],
+            "resource_fields": record.get("resource_fields") or [],
         }
-        result = calculate_upgrade_plan(payload)
-        summary = result["summary"]
+        result = calculate_building_upgrade_plan(payload)
+        resource_fields = [str(field).strip() for field in (record.get("resource_fields") or []) if str(field).strip()]
         lines = [
             f"Здание: {result['building_name']}",
+            f"Категория: {self.upgrade_selected_building_category}",
             f"Уровни: {result['current_level']} -> {result['target_level']}",
-            f"Молотки: {summary['total_hammers']}",
-            f"Жетоны: {summary['total_tokens']}",
-            f"Учтено уровней: {summary['levels_counted']}",
+            "",
+            "Итого за диапазон:",
         ]
-        if result["used_levels"]:
+        for field in resource_fields:
+            lines.append(f"{self.building_resource_label(field)}: {self.format_compact_number(result['resource_totals'].get(field, 0))}")
+        lines.append(f"Учтено шагов улучшения: {len(result.get('used_levels') or [])}")
+        used_levels = result.get("used_levels") or []
+        if used_levels:
             lines.append("")
-            lines.append("Учтённые уровни:")
-            for row in result["used_levels"]:
-                note = f" ({row['note']})" if row["note"] else ""
-                lines.append(f"{row['level']}: {row['hammers']} молотков, {row['tokens']} жетонов{note}")
-        if result["warnings"]:
+            lines.append("По уровням:")
+            previous_level = str(result.get("current_level") or "").strip()
+            for row in used_levels:
+                lines.append(self.building_level_step_text(previous_level, row, resource_fields))
+                previous_level = str(row.get("level") or previous_level).strip() or previous_level
+        if result.get("warnings"):
             lines.append("")
             lines.append("Предупреждения:")
             lines.extend(result["warnings"])

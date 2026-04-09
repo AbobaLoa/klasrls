@@ -1,0 +1,518 @@
+{
+  "mode": "scout",
+  "window_title": "BlueStacks",
+  "dry_run": true,
+  "screen_size": {
+    "width": 1920,
+    "height": 1080
+  },
+  "search_bounds": {
+    "left": 96,
+    "top": 54,
+    "right": 1824,
+    "bottom": 1026
+  },
+  "steps": [
+    {
+      "index": 1,
+      "x": 1056,
+      "y": 822,
+      "visual_score": 5407.1119,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 2,
+      "x": 1152,
+      "y": 246,
+      "visual_score": 5014.8912,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 3,
+      "x": 1056,
+      "y": 726,
+      "visual_score": 4796.9746,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 4,
+      "x": 288,
+      "y": 342,
+      "visual_score": 4631.4124,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 5,
+      "x": 480,
+      "y": 342,
+      "visual_score": 4399.214,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 6,
+      "x": 1440,
+      "y": 246,
+      "visual_score": 4385.5649,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 7,
+      "x": 1056,
+      "y": 534,
+      "visual_score": 4367.6899,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 8,
+      "x": 1248,
+      "y": 918,
+      "visual_score": 4308.5318,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 9,
+      "x": 96,
+      "y": 1014,
+      "visual_score": 4111.5344,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 10,
+      "x": 576,
+      "y": 342,
+      "visual_score": 4104.9777,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 11,
+      "x": 384,
+      "y": 342,
+      "visual_score": 4099.6552,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 12,
+      "x": 96,
+      "y": 342,
+      "visual_score": 3987.5295,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 13,
+      "x": 1056,
+      "y": 630,
+      "visual_score": 3903.0703,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 14,
+      "x": 1536,
+      "y": 150,
+      "visual_score": 3850.9229,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 15,
+      "x": 1056,
+      "y": 918,
+      "visual_score": 3801.4408,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 16,
+      "x": 96,
+      "y": 246,
+      "visual_score": 3730.8656,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 17,
+      "x": 192,
+      "y": 438,
+      "visual_score": 3470.4574,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 18,
+      "x": 1152,
+      "y": 918,
+      "visual_score": 3441.2208,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 19,
+      "x": 96,
+      "y": 438,
+      "visual_score": 3310.9135,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 20,
+      "x": 1536,
+      "y": 534,
+      "visual_score": 3254.766,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 21,
+      "x": 288,
+      "y": 246,
+      "visual_score": 3103.6872,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 22,
+      "x": 1728,
+      "y": 630,
+      "visual_score": 3089.4644,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 23,
+      "x": 1344,
+      "y": 150,
+      "visual_score": 3007.4647,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 24,
+      "x": 576,
+      "y": 246,
+      "visual_score": 3000.4911,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 25,
+      "x": 1248,
+      "y": 822,
+      "visual_score": 2997.5806,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 26,
+      "x": 1248,
+      "y": 150,
+      "visual_score": 2911.6332,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 27,
+      "x": 480,
+      "y": 246,
+      "visual_score": 2907.598,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 28,
+      "x": 480,
+      "y": 726,
+      "visual_score": 2861.1316,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 29,
+      "x": 1248,
+      "y": 1014,
+      "visual_score": 2832.707,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 30,
+      "x": 1440,
+      "y": 1014,
+      "visual_score": 2813.8274,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 31,
+      "x": 96,
+      "y": 150,
+      "visual_score": 2804.8695,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 32,
+      "x": 576,
+      "y": 726,
+      "visual_score": 2710.8216,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 33,
+      "x": 1344,
+      "y": 822,
+      "visual_score": 2709.0365,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 34,
+      "x": 384,
+      "y": 246,
+      "visual_score": 2690.3773,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 35,
+      "x": 1152,
+      "y": 150,
+      "visual_score": 2682.1121,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 36,
+      "x": 1152,
+      "y": 822,
+      "visual_score": 2646.353,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 37,
+      "x": 1632,
+      "y": 1014,
+      "visual_score": 2634.8445,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 38,
+      "x": 1056,
+      "y": 342,
+      "visual_score": 2625.9239,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 39,
+      "x": 1536,
+      "y": 246,
+      "visual_score": 2611.5116,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 40,
+      "x": 1152,
+      "y": 342,
+      "visual_score": 2520.4927,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 41,
+      "x": 96,
+      "y": 54,
+      "visual_score": 2511.1301,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 42,
+      "x": 672,
+      "y": 342,
+      "visual_score": 2505.9392,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 43,
+      "x": 1344,
+      "y": 1014,
+      "visual_score": 2448.0196,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 44,
+      "x": 1728,
+      "y": 1014,
+      "visual_score": 2402.9292,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 45,
+      "x": 960,
+      "y": 1014,
+      "visual_score": 2385.2597,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 46,
+      "x": 1536,
+      "y": 1014,
+      "visual_score": 2366.0005,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 47,
+      "x": 1440,
+      "y": 342,
+      "visual_score": 2362.9656,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 48,
+      "x": 1440,
+      "y": 918,
+      "visual_score": 2342.1292,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 49,
+      "x": 1344,
+      "y": 534,
+      "visual_score": 2340.7935,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    },
+    {
+      "index": 50,
+      "x": 192,
+      "y": 1014,
+      "visual_score": 2310.5193,
+      "dry_run": true,
+      "change_score": 0.0,
+      "interactive": false,
+      "status": "planned"
+    }
+  ],
+  "interactive_points": []
+}

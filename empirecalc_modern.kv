@@ -8,6 +8,7 @@
     valign: 'middle'
     bold: True
     color: 0.98, 0.99, 1, 1
+    font_name: app.ui_font_name if app.ui_font_name else 'Roboto'
     font_size: dp(22)
 
 <SectionTitle@Label>:
@@ -18,6 +19,7 @@
     valign: 'middle'
     bold: True
     color: 0.96, 0.98, 1, 1
+    font_name: app.ui_font_name if app.ui_font_name else 'Roboto'
     font_size: dp(17)
 
 <BodyText@Label>:
@@ -26,8 +28,9 @@
     text_size: self.width, None
     halign: 'left'
     valign: 'top'
-    color: 0.69, 0.78, 0.9, 1
-    font_size: dp(13)
+    color: 0.82, 0.9, 0.98, 1
+    font_name: app.ui_font_name if app.ui_font_name else 'Roboto'
+    font_size: dp(15)
 
 <FieldName@Label>:
     size_hint_y: None
@@ -36,7 +39,8 @@
     halign: 'left'
     valign: 'middle'
     color: 0.88, 0.92, 0.99, 1
-    font_size: dp(13)
+    font_name: app.ui_font_name if app.ui_font_name else 'Roboto'
+    font_size: dp(14)
 
 <PanelCard@BoxLayout>:
     orientation: 'vertical'
@@ -59,7 +63,8 @@
     background_down: ''
     background_color: 0.2, 0.45, 0.88, 1
     color: 1, 1, 1, 1
-    font_size: dp(14)
+    font_name: app.ui_font_name if app.ui_font_name else 'Roboto'
+    font_size: dp(15)
 
 <SecondaryButton@AppButton>:
     background_color: 0.16, 0.23, 0.34, 1
@@ -77,6 +82,8 @@
     foreground_color: 0.96, 0.98, 1, 1
     cursor_color: 1, 1, 1, 1
     hint_text_color: 0.52, 0.62, 0.74, 1
+    font_name: app.ui_font_name if app.ui_font_name else 'Roboto'
+    font_size: dp(15)
     padding: [dp(12), dp(12), dp(12), dp(12)]
 
 <AppArea@TextInput>:
@@ -86,6 +93,8 @@
     foreground_color: 0.96, 0.98, 1, 1
     cursor_color: 1, 1, 1, 1
     hint_text_color: 0.52, 0.62, 0.74, 1
+    font_name: app.ui_font_name if app.ui_font_name else 'Roboto'
+    font_size: dp(15)
     padding: [dp(12), dp(12), dp(12), dp(12)]
 
 <OutputArea@TextInput>:
@@ -93,8 +102,10 @@
     background_normal: ''
     background_active: ''
     background_color: 0.07, 0.11, 0.18, 1
-    foreground_color: 0.92, 0.96, 1, 1
+    foreground_color: 0.98, 0.99, 1, 1
     cursor_color: 1, 1, 1, 1
+    font_name: app.ui_font_name if app.ui_font_name else 'Roboto'
+    font_size: dp(15)
     padding: [dp(12), dp(12), dp(12), dp(12)]
 
 <AppSpinner@Spinner>:
@@ -104,6 +115,8 @@
     background_down: ''
     background_color: 0.11, 0.17, 0.25, 1
     color: 0.96, 0.98, 1, 1
+    font_name: app.ui_font_name if app.ui_font_name else 'Roboto'
+    font_size: dp(15)
 
 <WallUnitRow>:
     orientation: 'horizontal'
@@ -124,11 +137,39 @@
             rounded_rectangle: [self.x, self.y, self.width, self.height, dp(14)]
             width: 1.2
 
-    AsyncImage:
-        source: root.image_source if root.image_source else ''
+    RelativeLayout:
         size_hint_x: None
         width: dp(58)
-        fit_mode: 'contain'
+
+        canvas.before:
+            Color:
+                rgba: (0.28, 0.38, 0.55, 1) if (not root.image_source and root.fallback_text) else (0, 0, 0, 0)
+            RoundedRectangle:
+                pos: self.pos
+                size: self.size
+                radius: [12,]
+            Color:
+                rgba: (0.92, 0.84, 0.58, 0.9) if (not root.image_source and root.fallback_text) else (0, 0, 0, 0)
+            Line:
+                rounded_rectangle: [self.x, self.y, self.width, self.height, dp(12)]
+                width: 1.2
+
+        Label:
+            text: root.fallback_text if (not root.image_source and root.fallback_text) else ''
+            pos: 0, 0
+            size_hint: 1, 1
+            text_size: self.size
+            halign: 'center'
+            valign: 'middle'
+            color: 1, 0.98, 0.92, 1
+            bold: True
+            font_size: dp(18)
+
+        AsyncImage:
+            source: root.image_source if root.image_source else ''
+            size_hint: 1, 1
+            fit_mode: 'contain'
+            opacity: 1 if root.image_source else 0
 
     BoxLayout:
         orientation: 'vertical'
@@ -1101,49 +1142,125 @@ BoxLayout:
                     padding: [0, 0, 0, dp(12)]
 
                     PanelCard:
+                        size_hint_y: None
+                        height: self.minimum_height if app.upgrade_view_mode == 'list' else 0
+                        opacity: 1 if app.upgrade_view_mode == 'list' else 0
+                        disabled: app.upgrade_view_mode != 'list'
+
                         SectionTitle:
-                            text: 'Калькулятор улучшения здания'
+                            text: 'Список зданий'
 
-                        FieldName:
-                            text: 'Название здания'
+                        BodyText:
+                            text: 'Нажми на здание, чтобы открыть отдельную страницу с подробной информацией и расчётом улучшения.'
 
-                        AppInput:
-                            id: building_name
-                            hint_text: 'Например: Госпиталь'
-
-                        FieldName:
-                            text: 'Текущий уровень'
-
-                        AppInput:
-                            id: current_level
-                            hint_text: 'Например: 8'
-                            input_filter: 'int'
-
-                        FieldName:
-                            text: 'Целевой уровень'
-
-                        AppInput:
-                            id: target_level
-                            hint_text: 'Например: 11'
-                            input_filter: 'int'
-
-                        FieldName:
-                            text: 'Строки затрат: уровень, молотки, жетоны, заметка'
-
-                        AppArea:
-                            id: upgrade_lines
-                            hint_text: '9,120,4,обычный ап\n10,180,6,\n11,240,8,под ивент'
+                        ScrollView:
+                            do_scroll_x: False
                             size_hint_y: None
-                            height: dp(156)
+                            height: dp(560)
 
-                        AppButton:
-                            text: 'Посчитать улучшение'
-                            on_release: app.calculate_upgrade()
+                            GridLayout:
+                                id: upgrade_building_list
+                                cols: 1
+                                size_hint_y: None
+                                height: self.minimum_height
+                                spacing: dp(8)
+                                padding: [0, 0, 0, dp(6)]
+
+                    PanelCard:
+                        size_hint_y: None
+                        height: self.minimum_height if app.upgrade_view_mode == 'detail' else 0
+                        opacity: 1 if app.upgrade_view_mode == 'detail' else 0
+                        disabled: app.upgrade_view_mode != 'detail'
+
+                        BoxLayout:
+                            size_hint_y: None
+                            height: dp(44)
+                            spacing: dp(8)
+
+                            SecondaryButton:
+                                text: 'Назад к списку'
+                                size_hint_x: None
+                                width: dp(170)
+                                on_release: app.show_upgrade_building_list()
+
+                            SectionTitle:
+                                text: app.upgrade_detail_title
+
+                        BoxLayout:
+                            orientation: 'horizontal' if self.width >= dp(760) else 'vertical'
+                            size_hint_y: None
+                            height: dp(180) if self.width >= dp(760) else dp(320)
+                            spacing: dp(12)
+
+                            RelativeLayout:
+                                size_hint_x: None
+                                width: dp(180) if self.parent.width >= dp(760) else self.parent.width
+                                size_hint_y: None
+                                height: dp(180)
+
+                                canvas.before:
+                                    Color:
+                                        rgba: (0.24, 0.34, 0.5, 1) if not app.upgrade_selected_building_image_source else (0, 0, 0, 0)
+                                    RoundedRectangle:
+                                        pos: self.pos
+                                        size: self.size
+                                        radius: [20,]
+                                    Color:
+                                        rgba: (0.93, 0.83, 0.58, 0.9) if not app.upgrade_selected_building_image_source else (0, 0, 0, 0)
+                                    Line:
+                                        rounded_rectangle: [self.x, self.y, self.width, self.height, dp(20)]
+                                        width: 1.4
+
+                                Label:
+                                    text: app.upgrade_selected_building_badge if not app.upgrade_selected_building_image_source else ''
+                                    pos: 0, 0
+                                    size_hint: 1, 1
+                                    text_size: self.size
+                                    halign: 'center'
+                                    valign: 'middle'
+                                    color: 1, 0.98, 0.92, 1
+                                    bold: True
+                                    font_size: dp(42)
+
+                                AsyncImage:
+                                    source: app.upgrade_selected_building_image_source if app.upgrade_selected_building_image_source else ''
+                                    size_hint: 1, 1
+                                    fit_mode: 'contain'
+                                    opacity: 1 if app.upgrade_selected_building_image_source else 0
+
+                            OutputArea:
+                                text: app.upgrade_selected_building_name + '\n' + app.upgrade_selected_building_category + '\n\n' + app.upgrade_selected_building_summary + '\n\n' + app.upgrade_selected_building_description
+                                font_size: dp(16)
+
+                        FieldName:
+                            text: 'Выбери текущий и желаемый уровень'
+
+                        BoxLayout:
+                            orientation: 'horizontal' if self.width >= dp(560) else 'vertical'
+                            size_hint_y: None
+                            height: dp(44) if self.width >= dp(560) else dp(96)
+                            spacing: dp(8)
+
+                            AppSpinner:
+                                id: upgrade_current_level_picker
+                                text: app.upgrade_current_level_value if app.upgrade_current_level_value else 'Текущий уровень'
+                                values: app.upgrade_level_values
+                                on_text: app.on_upgrade_current_level_changed(self.text)
+
+                            AppSpinner:
+                                id: upgrade_target_level_picker
+                                text: app.upgrade_target_level_value if app.upgrade_target_level_value else 'Желаемый уровень'
+                                values: app.upgrade_level_values
+                                on_text: app.on_upgrade_target_level_changed(self.text)
+
+                        BodyText:
+                            text: 'Расчёт выполняется автоматически, без отдельной кнопки.'
 
                         OutputArea:
                             text: app.upgrade_output
                             size_hint_y: None
-                            height: dp(240)
+                            height: dp(320)
+                            font_size: dp(16)
 
     BoxLayout:
         size_hint_y: None
