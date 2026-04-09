@@ -50,6 +50,16 @@ def build_parser() -> argparse.ArgumentParser:
     scout_parser.add_argument("--window-title", type=str, default="Goodgame Empire")
     scout_parser.add_argument("--real-run", action="store_true")
 
+    auto_parser = subparsers.add_parser("auto", help="Автономный режим: сам кликает и обучается интерактивным точкам")
+    auto_parser.add_argument("--steps", type=int, default=60)
+    auto_parser.add_argument("--profile-path", type=str, default=str(SCREEN_PROFILE_PATH))
+    auto_parser.add_argument("--report-path", type=str, default=str(SCOUT_REPORT_PATH))
+    auto_parser.add_argument("--grid-step", type=int, default=96)
+    auto_parser.add_argument("--settle-delay", type=float, default=1.2)
+    auto_parser.add_argument("--change-threshold", type=float, default=4.0)
+    auto_parser.add_argument("--window-title", type=str, default="Goodgame Empire")
+    auto_parser.add_argument("--real-run", action="store_true")
+
     subparsers.add_parser("ui", help="Открыть desktop UI")
 
     subparsers.add_parser("export", help="Собрать экспорт для калькулятора")
@@ -113,6 +123,21 @@ def main() -> None:
 
         result = run_auto_scout(
             AutoScoutConfig(
+                profile_path=Path(args.profile_path),
+                report_path=Path(args.report_path),
+                max_steps=args.steps,
+                grid_step=args.grid_step,
+                settle_delay_sec=args.settle_delay,
+                change_threshold=args.change_threshold,
+                dry_run=not bool(args.real_run),
+                game_window_title=args.window_title,
+            )
+        )
+    elif args.command == "auto":
+        from empire_ml_bot.auto_scout import AutoPilotConfig, run_auto_pilot
+
+        result = run_auto_pilot(
+            AutoPilotConfig(
                 profile_path=Path(args.profile_path),
                 report_path=Path(args.report_path),
                 max_steps=args.steps,

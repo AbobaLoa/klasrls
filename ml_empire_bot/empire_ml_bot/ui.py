@@ -76,11 +76,11 @@ class BotControlUi:
         self.log_text = Text(log_frame, wrap="word", yscrollcommand=scrollbar.set, height=20)
         self.log_text.pack(fill=BOTH, expand=True)
         scrollbar.config(command=self.log_text.yview)
-        self._log("UI готов. Можно запускать demo, live или scout.")
+        self._log("UI готов. Можно запускать demo, live, scout или auto.")
 
     def _mode_box(self, parent: ttk.Frame) -> ttk.Combobox:
         combo = ttk.Combobox(parent, textvariable=self.run_mode_var, width=20, state="readonly")
-        combo["values"] = ("live", "demo", "scout")
+        combo["values"] = ("live", "demo", "scout", "auto")
         return combo
 
     def _path_row(self, parent: ttk.Frame, variable: StringVar, filetypes: tuple[tuple[str, str], ...]) -> ttk.Frame:
@@ -177,6 +177,17 @@ class BotControlUi:
                     game_window_title=self.settings.game_window_title,
                 )
                 result = run_auto_scout(config=config, status_callback=self._emit_status, stop_event=self.stop_event)
+            elif self.settings.run_mode == "auto":
+                from .auto_scout import AutoPilotConfig, run_auto_pilot
+
+                config = AutoPilotConfig(
+                    profile_path=Path(self.settings.screen_profile_path),
+                    report_path=Path(self.settings.scout_report_path),
+                    max_steps=self.settings.steps,
+                    dry_run=self.settings.dry_run,
+                    game_window_title=self.settings.game_window_title,
+                )
+                result = run_auto_pilot(config=config, status_callback=self._emit_status, stop_event=self.stop_event)
             else:
                 from .live_bot import LiveRunConfig, run_live_bot
 
